@@ -7,4 +7,131 @@
   font-family: Verdana;
   list-style-type: none;
   padding: 0;
+  flex-wrap: nowrap;
 }
+
+.NavBar {
+  background-color: aqua;
+  padding: 1rem;
+}
+
+body {
+  margin: 0;
+}
+
+.Hero {
+  display: flex;
+  height: 100vh;
+}
+
+.HeroText, .HeroImage {
+  flex: 1;
+}
+
+.HeroText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem;
+  background-color: bisque;
+}
+
+.HeroImage {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.HeroImage img {
+  max-width: 80%;
+  height: 80%;
+}
+
+.QuickLinks {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}
+
+.SectionTitle {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 3rem;
+}
+
+.OtherProj {
+  text-align: center;
+  font-size: 1rem;
+}
+
+.FeaturedProj {
+  padding: 4rem 3rem;
+  background-color: #f5f5f5;
+}
+
+.ProjectGrid {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.ProjectCard {
+  flex: 1;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);   
+}
+
+.ProjectCard img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.ProjectCard h3 {
+  margin: 0.5rem 0;
+}
+
+.ProjectCard p {
+  color: #555;
+}
+
+.TechGrid {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+  background-color: #f5f5f5;
+}
+
+.TechCard {
+  flex: 1;
+  border-radius: 1rem;
+  text-align: center;
+}
+
+
+@media (max-width: 768px) {
+  .Hero {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .HeroText {
+    padding: 2rem;
+    text-align: center;
+     background-color: bisque;
+  }
+
+  .HeroImage {
+    padding: 2rem;
+  }
+
+  .HeroImage img {
+    max-width: 60%;
+  }
+}
+
