@@ -1,0 +1,10 @@
+.NavItems {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem;
+  justify-content: center;
+  font-family: Verdana;
+  list-style-type: none;
+  padding: 0;
+}
