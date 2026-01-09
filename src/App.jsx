@@ -62,7 +62,7 @@ function App() {
 
       <section className='TechSkills'>
         <h2>Technical Skills</h2>
-        <p>My expertise across various technology and tools</p>
+        <p className='TechSubtitle'>My expertise across various technology and tools</p>
         <div className='TechGrid'>
           <div className='TechCard'>
             <h3>Languages</h3>
@@ -85,31 +85,37 @@ function App() {
         </div>
       </section>
 
-      <section className='Footend'>
-        <div>
-          <h3>Megan Mae Jacob</h3>
-          <p>Aspiring Frontend Developer and UI & UX
+      <section className='Footer'>
+        <div className='FooterContent'>
+          <div className='FootIntro'>
+            <h3>Megan Mae Jacob</h3>
+            <p>Aspiring Frontend Developer and UI & UX
             Enthusiast based in Chicagoland, specialized
-              in making modern web applications.</p>
+             in making modern web applications.</p>
+          </div>
+
+          <div className='FootLinks'>
+            <h3>Quick Links</h3>
+            <ul>
+              <li>About Me</li>
+              <li>Projects</li>
+              <li>Blog</li>
+              <li>Resume</li>
+            </ul>
+          </div>
+
+          <div className='FootConnect'>
+            <h3>Connect</h3>
+            <ul>
+              <li>Github</li>
+              <li>Linkedin</li>
+              <li>Email</li>
+            </ul>
+          </div>
         </div>
 
-        <div>
-          <h3>Quick Links</h3>
-          <ul className='QuickLinks'>
-            <li>About Me</li>
-            <li>Projects</li>
-            <li>Blog</li>
-            <li>Resume</li>
-          </ul>
-        </div>
-
-        <div>
-          <h3>Connect</h3>
-          <ul className='ConnectLinks'>
-            <li>Github</li>
-            <li>Linkdin</li>
-            <li>Email</li>
-          </ul>
+        <div className='FooterBottom'>
+          <p>© 2026 Megan Jacob. All rights reserved.</p>
         </div>
       </section>
     </div>
