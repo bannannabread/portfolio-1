@@ -1,0 +1,100 @@
+.footer {
+    width: 100%;
+    background-color: var(--color-midnight);
+    padding: var(--space-2xl) 0 var(--space-md);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.footer-heading {
+    font-size: clamp(3rem, 6vw, 5rem);
+    margin-bottom: var(--space-xl);
+    max-width: 800px;
+}
+
+.email-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md) var(--space-xl);
+    border-radius: 100px;
+    background: var(--color-twilight);
+    border: 1px solid rgba(255, 107, 157, 0.2);
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-family: var(--font-display);
+    font-weight: 700;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: var(--space-2xl);
+}
+
+.email-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--gradient-sunset);
+    opacity: 0;
+    transition: opacity var(--duration-med) var(--ease-smooth);
+    z-index: 0;
+}
+
+.email-cta:hover::before {
+    opacity: 1;
+}
+
+.email-text,
+.email-arrow {
+    position: relative;
+    z-index: 1;
+    transition: color var(--duration-fast) ease;
+}
+
+.email-cta:hover .email-text,
+.email-cta:hover .email-arrow {
+    color: var(--color-midnight);
+}
+
+.footer-bottom {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: var(--space-md);
+}
+
+.social-links {
+    display: flex;
+    gap: var(--space-md);
+    font-size: 0.85rem;
+}
+
+.social-links a:hover {
+    color: var(--color-blush);
+}
+
+.copyright {
+    font-size: 0.8rem;
+    color: rgba(245, 230, 240, 0.5);
+    /* muted mist */
+}
+
+@media (max-width: 768px) {
+    .footer-bottom {
+        flex-direction: column;
+    }
+}

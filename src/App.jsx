@@ -1,125 +1,44 @@
-import './App.css'
+import React, { useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
+import './App.css';
+
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import CustomCursor from './components/CustomCursor';
+
+import Landing from './pages/Landing';
+import Projects from './pages/Projects';
+import Skills from './pages/Skills';
+import About from './pages/About';
 
 function App() {
+  const location = useLocation();
+
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   return (
-    <div>
-      <section className='NavBar'>
-        <ul className='NavItems'>
-          <li>Megan Jacob</li>
-          <li>About</li>
-          <li>Experience</li>
-          <li>Projects</li>
-          <li>Blog</li>
-          <li>Contact</li>
-        </ul>
-      </section>
+    <div className="app-container">
+      <CustomCursor />
+      <Navbar />
 
-      <section className='Hero'>
-        <div className='HeroText'>
-          <h1>Hi, my name is Megan Jacob</h1>
-          <h2>I am an aspiring Frontend Developer</h2>
-          <p>A passionate developer with expertise 
-            in Next.js and React. Currently pursuing
-            a bachelors in Computer Science and a
-            minor in Informatics at the University 
-            of Illinois Urbana-Champaign.
-          </p>
-          <ul className='QuickLinks'>
-            <li>View my work</li>
-            <li>Resume</li>
-          </ul>
-        </div>
+      <main className="main-content">
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<Landing />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/skills" element={<Skills />} />
+            <Route path="/about" element={<About />} />
+          </Routes>
+        </AnimatePresence>
+      </main>
 
-        <div className='HeroImage'>
-          <img src="/headshot.jpeg" alt="headshot" />
-        </div>
-      </section>
-
-      <section className='FeaturedProj'>
-        <h2 className='SectionTitle'>Featured Projects</h2>
-        <div className='ProjectGrid'>
-          <div className='ProjectCard'>
-            <img src="" alt="" />
-            <h3>Project One</h3>
-            <p>Short description of the project.</p>
-          </div>
-
-          <div className='ProjectCard'>
-            <img src="" alt="" />
-            <h3>Project Two</h3>
-            <p>Short description of the project.</p>
-          </div>
-
-          <div className='ProjectCard'>
-            <img src="" alt="" />
-            <h3>Project Three</h3>
-            <p>Short description of the project.</p>
-          </div>
-        </div>
-        <p className='OtherProj'>View Other Projects</p>
-      </section>
-
-      <section className='TechSkills'>
-        <h2>Technical Skills</h2>
-        <p className='TechSubtitle'>My expertise across various technology and tools</p>
-        <div className='TechGrid'>
-          <div className='TechCard'>
-            <h3>Languages</h3>
-          </div>
-
-          <div className='TechCard'>
-            <h3>Frameworks/Libraries</h3>
-          </div>
-
-          <div className='TechCard'>
-            <h3>ML/Data</h3>
-          </div>
-          <div className='TechCard'>
-            <h3>Cloud/DevOps</h3>
-          </div>
-
-          <div className='TechCard'>
-            <h3>Concepts</h3>
-          </div>
-        </div>
-      </section>
-
-      <section className='Footer'>
-        <div className='FooterContent'>
-          <div className='FootIntro'>
-            <h3>Megan Mae Jacob</h3>
-            <p>Aspiring Frontend Developer and UI & UX
-            Enthusiast based in Chicagoland, specialized
-             in making modern web applications.</p>
-          </div>
-
-          <div className='FootLinks'>
-            <h3>Quick Links</h3>
-            <ul>
-              <li>About Me</li>
-              <li>Projects</li>
-              <li>Blog</li>
-              <li>Resume</li>
-            </ul>
-          </div>
-
-          <div className='FootConnect'>
-            <h3>Connect</h3>
-            <ul>
-              <li>Github</li>
-              <li>Linkedin</li>
-              <li>Email</li>
-            </ul>
-          </div>
-        </div>
-
-        <div className='FooterBottom'>
-          <p>© 2026 Megan Jacob. All rights reserved.</p>
-        </div>
-      </section>
+      <Footer />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
