@@ -1,62 +1,36 @@
 export const projects = [
   {
     id: 1,
-    title: "MindFlow – Wellness App",
-    category: "Mobile",
-    tags: ["UX Research", "UI Design", "Prototyping"],
-    description: "A meditation and mental wellness app focused on reducing onboarding friction.",
+    title: "Discrete Structures Study Game",
+    category: "Web",
+    tags: ["UX Design", "C++", "SQL", "Game Design"],
+    description: "An interactive learning interface with 300+ question prompts to help students conquer logic, sets, proofs, and combinatorics through structured UX flows.",
     accentColor: "#FF6B9D",
-    year: "2024",
-    role: "Lead UI/UX Designer",
-    tools: ["Figma", "Principle", "Miro"],
-    outcome: "40% improvement in 7-day retention"
+    year: "2025–Present",
+    role: "Designer & Developer",
+    tools: ["C++", "SQL", "Figma"],
+    outcome: "20% increase in session retention via reward-driven progression system",
+    highlights: [
+      "300+ question prompts across logic, sets, proofs, combinatorics",
+      "SQL-backed question system with dynamic randomization by topic & difficulty",
+      "Reward-driven progression system built on user engagement patterns"
+    ]
   },
   {
     id: 2,
-    title: "Luma – Event Platform",
-    category: "Web",
-    tags: ["Interaction Design", "Design System", "Handoff"],
-    description: "Redesigned the event discovery and ticketing flow for a SaaS events platform.",
-    accentColor: "#FF8C69",
-    year: "2024",
-    role: "UI/UX Designer",
-    tools: ["Figma", "Storybook", "Zeplin"],
-    outcome: "32% increase in conversion rate"
-  },
-  {
-    id: 3,
-    title: "Brēd – Food Delivery Rebrand",
-    category: "Branding",
-    tags: ["Branding", "Visual Design", "Style Guide"],
-    description: "Complete visual identity redesign for a local artisan food delivery startup.",
-    accentColor: "#FFD166",
-    year: "2023",
-    role: "Brand & UI Designer",
-    tools: ["Illustrator", "Figma", "Photoshop"],
-    outcome: "Brand recognition up 60% post-launch"
-  },
-  {
-    id: 4,
-    title: "Vault – Finance Dashboard",
-    category: "Web",
-    tags: ["Data Viz", "UX Research", "Accessibility"],
-    description: "Designed a personal finance dashboard with WCAG 2.1 AA compliance.",
-    accentColor: "#C9184A",
-    year: "2023",
-    role: "UX/UI Designer",
-    tools: ["Figma", "Miro", "ProtoPie"],
-    outcome: "SUS score improved from 62 to 84"
-  },
-  {
-    id: 5,
-    title: "Canopy – Travel App",
+    title: "CAT Inspect — Caterpillar Technician App",
     category: "Mobile",
-    tags: ["Mobile Design", "User Testing", "Prototyping"],
-    description: "A trip planning app that turns itinerary chaos into calm, visual journeys.",
-    accentColor: "#FFAB76",
-    year: "2023",
-    role: "Product Designer",
-    tools: ["Figma", "Principle", "Notion"],
-    outcome: "4.8★ rating in beta testing cohort"
+    tags: ["Heuristic Evaluation", "AI UX", "Design Systems", "Enterprise"],
+    description: "UX overhaul of an enterprise inspection app for Caterpillar technicians — translating competitive research into a prioritized AI-integrated product roadmap.",
+    accentColor: "#FF8C69",
+    year: "March 2026",
+    role: "UX Designer",
+    tools: ["Figma", "JavaScript", "Component Libraries"],
+    outcome: "Cohesive design system applied across 6 screen surfaces",
+    highlights: [
+      "Heuristic evaluation + usability review of existing CAT Inspect app",
+      "Designed AI overview pipeline, voice note compilation architecture, real-time transcription review",
+      "Enforced design system consistency across 6 distinct screen surfaces"
+    ]
   }
 ];

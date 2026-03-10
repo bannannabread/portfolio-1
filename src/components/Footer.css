@@ -1,6 +1,6 @@
 .footer {
     width: 100%;
-    background-color: var(--color-midnight);
+    background-color: var(--color-bg);
     padding: var(--space-2xl) 0 var(--space-md);
     border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
@@ -27,7 +27,7 @@
     gap: var(--space-md);
     padding: var(--space-md) var(--space-xl);
     border-radius: 100px;
-    background: var(--color-twilight);
+    background: var(--color-bg-surface);
     border: 1px solid rgba(255, 107, 157, 0.2);
     font-size: clamp(1.5rem, 3vw, 2.5rem);
     font-family: var(--font-display);
@@ -63,7 +63,7 @@
 
 .email-cta:hover .email-text,
 .email-cta:hover .email-arrow {
-    color: var(--color-midnight);
+    color: var(--color-bg);
 }
 
 .footer-bottom {

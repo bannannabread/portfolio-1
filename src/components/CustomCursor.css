@@ -43,7 +43,7 @@
 
 .cursor-text {
     font-size: 0.6rem;
-    color: var(--color-mist);
+    color: var(--color-text-primary);
     opacity: 1;
 }
 

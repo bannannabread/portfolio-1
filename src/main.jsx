@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import Lenis from '@studio-freight/lenis';
 import gsap from 'gsap';
+import { ThemeProvider } from './context/ThemeContext';
 
 // Global Styles
 import './styles/variables.css';
@@ -32,7 +33,9 @@ requestAnimationFrame(raf);
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

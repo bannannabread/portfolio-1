@@ -1,24 +1,63 @@
+/* ============================================
+   DARK MODE (default) — deep plum / sunset
+   ============================================ */
+[data-theme="dark"],
 :root {
-  /* Core Sunset Palette */
-  --color-blush:       #FF6B9D;   /* Hot pink — primary accent */
-  --color-coral:       #FF8C69;   /* Warm coral — secondary accent */
-  --color-peach:       #FFAB76;   /* Soft peach — highlight */
-  --color-amber:       #FFD166;   /* Golden amber — tertiary */
-  --color-rose-deep:   #C9184A;   /* Deep rose — bold emphasis */
+  --color-bg:          #1A0A1E;
+  --color-bg-surface:  #2D1B33;
+  --color-bg-card:     #3A2040;
+  --color-text-primary:#FFF5EE;
+  --color-text-muted:  #B89AAA;
+  --color-text-subtle: #7A5F6E;
+  --color-border:      rgba(255, 107, 157, 0.15);
 
-  /* Background / Dark Tones */
-  --color-dusk:        #1A0A1E;   /* Near-black plum — main bg */
-  --color-midnight:    #120818;   /* Deepest background */
-  --color-twilight:    #2D1B33;   /* Card/surface backgrounds */
-  --color-mist:        #F5E6F0;   /* Off-white for light text */
+  --color-blush:       #FF6B9D;
+  --color-coral:       #FF8C69;
+  --color-peach:       #FFAB76;
+  --color-amber:       #FFD166;
+  --color-rose-deep:   #C9184A;
 
-  /* Gradients */
   --gradient-sunset:   linear-gradient(135deg, #FF6B9D 0%, #FF8C69 40%, #FFD166 100%);
-  --gradient-dusk:     linear-gradient(180deg, #1A0A1E 0%, #2D1B33 100%);
-  --gradient-glow:     radial-gradient(ellipse at center, rgba(255,107,157,0.15) 0%, transparent 70%);
+  --gradient-bg:       linear-gradient(180deg, #1A0A1E 0%, #2D1B33 100%);
 
+  --blob-opacity:      0.12;       /* Subtle in dark mode */
+  --blob-blur:         60px;
+
+  --nav-bg:            rgba(26, 10, 30, 0.8);
+  --card-shadow:       0 8px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* ============================================
+   LIGHT MODE — lava lamp / cream editorial
+   ============================================ */
+[data-theme="light"] {
+  --color-bg:          #FFF5EE;
+  --color-bg-surface:  #FFF0E6;
+  --color-bg-card:     #FFEADC;
+  --color-text-primary:#1A0A1E;
+  --color-text-muted:  #6B3F50;
+  --color-text-subtle: #A07080;
+  --color-border:      rgba(201, 24, 74, 0.15);
+
+  --color-blush:       #FF6B9D;
+  --color-coral:       #FF8C69;
+  --color-peach:       #FFAB76;
+  --color-amber:       #FFD166;
+  --color-rose-deep:   #C9184A;
+
+  --gradient-sunset:   linear-gradient(135deg, #FF6B9D 0%, #FF8C69 40%, #FFD166 100%);
+  --gradient-bg:       linear-gradient(180deg, #FFF5EE 0%, #FFF0E6 100%);
+
+  --blob-opacity:      0.22;       /* More visible in light mode — lava lamp feel */
+  --blob-blur:         50px;
+
+  --nav-bg:            rgba(255, 245, 238, 0.85);
+  --card-shadow:       0 8px 40px rgba(201, 24, 74, 0.08);
+}
+
+:root {
   /* Typography */
-  --font-display:      'Playfair Display', Georgia, serif;   /* Headlines */
+  --font-display:      'Fraunces', Georgia, serif;   /* Headlines */
   --font-body:         'DM Sans', sans-serif;                /* Body text */
   --font-mono:         'JetBrains Mono', monospace;          /* Labels, tags */
 

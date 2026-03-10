@@ -87,7 +87,7 @@
     font-size: 8rem;
     font-family: var(--font-display);
     font-weight: 700;
-    color: var(--color-mist);
+    color: var(--color-text-primary);
     opacity: 0.5;
     z-index: 1;
 }
@@ -96,7 +96,7 @@
     position: absolute;
     bottom: -20px;
     right: -20px;
-    background: var(--color-twilight);
+    background: var(--color-bg-surface);
     border: 1px solid rgba(255, 255, 255, 0.1);
     padding: var(--space-sm) var(--space-md);
     border-radius: 50px;
@@ -199,7 +199,7 @@
 .timeline-entity {
     font-size: 1.1rem;
     font-family: var(--font-body);
-    color: var(--color-mist);
+    color: var(--color-text-primary);
     opacity: 0.8;
     margin-bottom: var(--space-sm);
 }
@@ -252,7 +252,7 @@
 
 /* Currently block */
 .about-currently {
-    background: var(--color-twilight);
+    background: var(--color-bg-surface);
     border-radius: 30px;
     padding: var(--space-xl);
     margin-bottom: var(--space-2xl);

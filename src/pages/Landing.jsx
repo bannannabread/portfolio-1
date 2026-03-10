@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import PageTransition from '../components/PageTransition';
 import ScrollReveal from '../components/ScrollReveal';
+import TypewriterText from '../components/TypewriterText';
 import { projects } from '../data/projects';
 import './Landing.css';
 
@@ -32,24 +33,61 @@ const Landing = () => {
 
     return (
         <PageTransition>
-            <div className="landing">
+            <div className="landing page-wrapper">
                 {/* Section 1: Hero */}
-                <section className="hero">
+                <section className="hero" style={{ position: 'relative' }}>
                     <div className="hero-mesh"></div>
+                    
+                    {/* Status Badge */}
+                    <motion.div 
+                        initial={{ opacity: 0, scale: 0.9, rotate: 0 }}
+                        animate={{ opacity: 1, scale: 1, rotate: -3 }}
+                        transition={{ delay: 3, duration: 0.5 }}
+                        className="status-badge"
+                        style={{
+                            position: 'absolute',
+                            top: '10%',
+                            right: '5%',
+                            background: 'var(--color-text-primary)',
+                            color: 'var(--color-bg)',
+                            padding: '1rem',
+                            fontFamily: 'var(--font-body)',
+                            fontSize: '0.75rem',
+                            border: '1px solid rgba(0,0,0,0.1)',
+                            boxShadow: '4px 4px 15px rgba(0,0,0,0.2)',
+                            zIndex: 10,
+                            maxWidth: '200px'
+                        }}
+                    >
+                        <strong>📍 Champaign, IL</strong><br/>
+                        🎓 UIUC '28<br/>
+                        <span style={{ color: 'var(--color-rose-deep)' }}>✦ Open to internships</span>
+                    </motion.div>
+
                     <div className="hero-content">
                         <p className="hero-label mono">
-                            <span className="star">✦</span> UI/UX Designer & Creative Thinker
+                            <TypewriterText
+                                text="✦ CS Student · UI/UX Designer · Community Builder"
+                                speed={35}
+                                delay={200}
+                                triggerOnView={false}
+                            />
                         </p>
                         <h1 className="hero-title" ref={titleRef}>
-                            <div className="word-wrap"><span className="word">Jane</span></div>
-                            <div className="word-wrap"><span className="word italic text-gradient">Doe</span></div>
+                            <div className="word-wrap" style={{ fontSize: 'clamp(3rem, 10vw, 8rem)', fontWeight: 900 }}><span className="word italic">hi, i'm</span></div>
+                            <div className="word-wrap" style={{ fontSize: 'clamp(4rem, 13vw, 10rem)', fontWeight: 900 }}><span className="word italic text-gradient">Megan.</span></div>
                         </h1>
-                        <p className="hero-subtitle">
-                            Crafting digital experiences that feel<br />as beautiful as they function.
+                        <p className="hero-subtitle" style={{ maxWidth: '480px', margin: '0 auto 2rem', color: 'var(--color-text-muted)' }}>
+                            <TypewriterText
+                                text="I design things that feel human — then build them. Currently studying CS at UIUC and designing at the intersection of empathy and engineering."
+                                speed={30}
+                                delay={1800}
+                                triggerOnView={false}
+                            />
                         </p>
                         <div className="hero-ctas">
-                            <Link to="/projects" className="cta-button">View My Work →</Link>
-                            <a href="#work-teaser" className="cta-button secondary">Scroll to Explore ↓</a>
+                            <Link to="/projects" className="cta-button">→ See My Work</Link>
+                            <Link to="/about" className="cta-button secondary">↓ Read My Story</Link>
                         </div>
                     </div>
 
@@ -57,6 +95,18 @@ const Landing = () => {
                         <div className="scroll-dot"></div>
                     </div>
                 </section>
+
+                {/* Fun Fact Easter Egg */}
+                <div style={{ textAlign: 'center', width: '100%', marginBottom: '4rem' }}>
+                    <p className="mono" style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.4)', fontStyle: 'italic' }}>
+                        <TypewriterText
+                            text="// fun fact: i had a youtube channel at 11. design instincts run deep."
+                            speed={28}
+                            delay={0}
+                            cursorChar="_"
+                        />
+                    </p>
+                </div>
 
                 {/* Section 2: Selected Work Teaser */}
                 <section id="work-teaser" className="work-teaser">
@@ -68,10 +118,10 @@ const Landing = () => {
                     </ScrollReveal>
 
                     <div className="teaser-grid">
-                        {projects.slice(0, 3).map((project, i) => (
+                        {projects.map((project, i) => (
                             <ScrollReveal key={project.id} delay={i * 0.2} className="teaser-card-wrapper">
                                 <Link to="/projects" className="project-card hoverable">
-                                    <div className="card-thumb" style={{ background: `linear-gradient(135deg, ${project.accentColor}, var(--color-midnight))` }}></div>
+                                    <div className="card-thumb" style={{ background: `linear-gradient(135deg, ${project.accentColor}, var(--color-bg))` }}></div>
                                     <div className="card-info">
                                         <span className="card-tag mono">{project.category}</span>
                                         <h3 className="card-title">{project.title}</h3>

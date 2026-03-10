@@ -36,7 +36,7 @@
 .filter-btn {
     position: relative;
     padding: var(--space-xs) var(--space-sm);
-    color: var(--color-mist);
+    color: var(--color-text-primary);
     opacity: 0.6;
     font-size: 0.9rem;
     transition: opacity var(--duration-fast) var(--ease-smooth);
@@ -93,7 +93,7 @@
     top: var(--space-md);
     left: var(--space-md);
     font-size: 1.5rem;
-    color: var(--color-mist);
+    color: var(--color-text-primary);
     opacity: 0.5;
     z-index: 2;
 }
@@ -150,7 +150,7 @@
     padding: 4px 12px;
     border-radius: 50px;
     border: 1px solid rgba(255, 255, 255, 0.2);
-    color: var(--color-mist);
+    color: var(--color-text-primary);
 }
 
 .project-title {
@@ -171,7 +171,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: var(--color-midnight);
+    background: var(--color-bg);
     z-index: 200;
     overflow-y: auto;
     overflow-x: hidden;
@@ -188,7 +188,7 @@
 
 .close-btn {
     font-size: 2.5rem;
-    color: var(--color-mist);
+    color: var(--color-text-primary);
     background: rgba(0, 0, 0, 0.3);
     width: 60px;
     height: 60px;

@@ -1,34 +1,33 @@
 export const designSkills = [
-    { name: "UX Research", level: 90 },
-    { name: "Wireframing", level: 95 },
-    { name: "Prototyping", level: 88 },
-    { name: "Interaction Design", level: 85 },
-    { name: "Visual Design", level: 92 },
-    { name: "Design Systems", level: 80 }
+  { name: "Figma", level: 95 },
+  { name: "Prototyping", level: 90 },
+  { name: "User Research", level: 88 },
+  { name: "Usability Testing", level: 85 },
+  { name: "Heuristic Evaluation", level: 85 },
+  { name: "Design Systems", level: 82 },
+  { name: "Accessibility Design", level: 80 },
+  { name: "Competitive Analysis", level: 88 }
 ];
 
 export const devSkills = [
-    { name: "HTML / CSS", level: 85 },
-    { name: "React (basics)", level: 65 },
-    { name: "Tailwind CSS", level: 75 },
-    { name: "Git / GitHub", level: 70 },
-    { name: "Accessibility (WCAG)", level: 85 },
-    { name: "Handoff & Documentation", level: 90 }
+  { name: "JavaScript / TypeScript", level: 85 },
+  { name: "React.js / React Native", level: 82 },
+  { name: "Python", level: 88 },
+  { name: "C++", level: 78 },
+  { name: "HTML / CSS", level: 92 },
+  { name: "SQL", level: 80 },
+  { name: "Kotlin", level: 72 },
+  { name: "Node.js", level: 75 }
 ];
 
-export const toolsSkills = [
-    { name: "Figma", level: 95 },
-    { name: "Adobe XD", level: 80 },
-    { name: "Illustrator / Photoshop", level: 85 },
-    { name: "Principle / ProtoPie", level: 75 },
-    { name: "Notion / Miro", level: 90 },
-    { name: "Zeplin / Storybook", level: 80 }
+export const toolSkills = [
+  "Git & GitHub", "VS Code", "Android Studio", "Docker",
+  "Expo Router", "Jupyter Notebook", "Gemini Antigravity",
+  "PyCharm", "AsyncStorage", "Expo SDK"
 ];
 
 export const softSkills = [
-    "Empathy",
-    "Collaboration",
-    "Systems Thinking",
-    "Storytelling",
-    "Problem Solving"
+  "Empathy-Driven Design", "Cross-functional Collaboration",
+  "Systems Thinking", "Visual Storytelling",
+  "Rapid Iteration", "Community Leadership"
 ];

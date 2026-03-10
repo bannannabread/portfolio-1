@@ -1,12 +1,59 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTheme } from '../context/ThemeContext';
 import './Navbar.css';
+
+export function ThemeToggle() {
+    const { theme, toggle } = useTheme();
+    const isDark = theme === 'dark';
+  
+    return (
+      <motion.button
+        onClick={toggle}
+        aria-label="Toggle theme"
+        whileTap={{ scale: 0.92 }}
+        style={{
+          width: 52,
+          height: 28,
+          borderRadius: 99,
+          background: isDark
+            ? 'rgba(255,107,157,0.15)'
+            : 'linear-gradient(135deg, #FF6B9D, #FFD166)',
+          border: '1.5px solid var(--color-blush)',
+          position: 'relative',
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          padding: '3px',
+          transition: 'background 0.4s ease',
+        }}
+      >
+        <motion.div
+          animate={{ x: isDark ? 0 : 24 }}
+          transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+          style={{
+            width: 20,
+            height: 20,
+            borderRadius: '50%',
+            background: isDark ? '#FF6B9D' : '#FFF5EE',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: 11,
+          }}
+        >
+          {isDark ? '🌙' : '☀️'}
+        </motion.div>
+      </motion.button>
+    );
+}
 
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const location = useLocation();
+    const { theme, toggle } = useTheme();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -50,9 +97,12 @@ const Navbar = () => {
                             </li>
                         ))}
                     </ul>
-                    <a href="#contact" className="cta-button">
-                        Let's Talk
-                    </a>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                        <ThemeToggle />
+                        <a href="#contact" className="cta-button">
+                            Let's Talk
+                        </a>
+                    </div>
                 </nav>
 
                 {/* Mobile Hamburger Icon */}
