@@ -1,87 +1,85 @@
-import React, { useState, useEffect } from 'react';
-import { motion, useSpring } from 'framer-motion';
-import './CustomCursor.css';
+import { useEffect, useRef } from 'react'
+import { motion, useMotionValue, useSpring } from 'framer-motion'
 
-const CustomCursor = () => {
-    const [isHovered, setIsHovered] = useState(false);
-    const [hoverText, setHoverText] = useState('');
-    const [isDesktop, setIsDesktop] = useState(true);
+export default function CustomCursor() {
+  const mouseX = useMotionValue(-100)
+  const mouseY = useMotionValue(-100)
 
-    // Use spring physics for smooth trailing effect
-    const cursorX = useSpring(0, { stiffness: 150, damping: 15 });
-    const cursorY = useSpring(0, { stiffness: 150, damping: 15 });
-    const dotX = useSpring(0, { stiffness: 1000, damping: 30 });
-    const dotY = useSpring(0, { stiffness: 1000, damping: 30 });
+  // DOT — follows cursor with very minimal lag (almost instant)
+  const dotX = useSpring(mouseX, { stiffness: 800, damping: 50, mass: 0.3 })
+  const dotY = useSpring(mouseY, { stiffness: 800, damping: 50, mass: 0.3 })
 
-    useEffect(() => {
-        // Only show custom cursor on fine pointers (desktop)
-        const checkIsDesktop = () => {
-            setIsDesktop(window.matchMedia('(hover: hover) and (pointer: fine)').matches);
-        };
-        checkIsDesktop();
-        window.addEventListener('resize', checkIsDesktop);
+  // RING — follows with elegant, small lag (not bouncy, just slightly behind)
+  const ringX = useSpring(mouseX, { stiffness: 220, damping: 38, mass: 0.6 })
+  const ringY = useSpring(mouseY, { stiffness: 220, damping: 38, mass: 0.6 })
 
-        if (!isDesktop) return;
+  const isHoveringLink = useRef(false)
+  const ringRef = useRef(null)
+  const dotRef = useRef(null)
 
-        const moveCursor = (e) => {
-            cursorX.set(e.clientX - 20); // offset by half width of the ring (40/2)
-            cursorY.set(e.clientY - 20);
-            dotX.set(e.clientX - 4);   // offset by half width of dot (8/2)
-            dotY.set(e.clientY - 4);
-        };
+  useEffect(() => {
+    // Only enable on pointer devices — not touch
+    const mediaQuery = window.matchMedia('(hover: hover) and (pointer: fine)')
+    if (!mediaQuery.matches) return
 
-        window.addEventListener('mousemove', moveCursor);
+    const move = (e) => {
+      mouseX.set(e.clientX)
+      mouseY.set(e.clientY)
+    }
 
-        const handleMouseOver = (e) => {
-            // Check for interactive elements
-            const target = e.target.closest('a, button, .project-card, .hoverable');
-            if (target) {
-                setIsHovered(true);
-                if (target.classList.contains('project-card')) {
-                    setHoverText('View →');
-                } else {
-                    setHoverText('');
-                }
-            } else {
-                setIsHovered(false);
-                setHoverText('');
-            }
-        };
+    const handleEnter = (e) => {
+      const target = e.target.closest('a, button, [data-cursor="hover"]')
+      if (target && !isHoveringLink.current) {
+        isHoveringLink.current = true
+        ringRef.current?.classList.add('cursor-ring--hover')
+        dotRef.current?.classList.add('cursor-dot--hover')
+      }
+    }
 
-        window.addEventListener('mouseover', handleMouseOver);
+    const handleLeave = (e) => {
+      const target = e.target.closest('a, button, [data-cursor="hover"]')
+      if (target) {
+        isHoveringLink.current = false
+        ringRef.current?.classList.remove('cursor-ring--hover')
+        dotRef.current?.classList.remove('cursor-dot--hover')
+      }
+    }
 
-        return () => {
-            window.removeEventListener('mousemove', moveCursor);
-            window.removeEventListener('mouseover', handleMouseOver);
-            window.removeEventListener('resize', checkIsDesktop);
-        };
-    }, [cursorX, cursorY, dotX, dotY, isDesktop]);
+    window.addEventListener('mousemove', move)
+    document.addEventListener('mouseover', handleEnter)
+    document.addEventListener('mouseout', handleLeave)
 
-    if (!isDesktop) return null;
+    return () => {
+      window.removeEventListener('mousemove', move)
+      document.removeEventListener('mouseover', handleEnter)
+      document.removeEventListener('mouseout', handleLeave)
+    }
+  }, [mouseX, mouseY])
 
-    return (
-        <>
-            <motion.div
-                className={`cursor-ring ${isHovered ? 'hovered' : ''}`}
-                style={{
-                    x: cursorX,
-                    y: cursorY
-                }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-            >
-                {hoverText && <span className="cursor-text mono">{hoverText}</span>}
-            </motion.div>
-
-            <motion.div
-                className={`cursor-dot ${isHovered ? 'hidden' : ''}`}
-                style={{
-                    x: dotX,
-                    y: dotY
-                }}
-            />
-        </>
-    );
-};
-
-export default CustomCursor;
+  return (
+    <>
+      {/* Outer ring — slightly behind */}
+      <motion.div
+        ref={ringRef}
+        className="cursor-ring"
+        style={{
+          x: ringX,
+          y: ringY,
+          translateX: '-50%',
+          translateY: '-50%',
+        }}
+      />
+      {/* Inner dot — nearly instant */}
+      <motion.div
+        ref={dotRef}
+        className="cursor-dot"
+        style={{
+          x: dotX,
+          y: dotY,
+          translateX: '-50%',
+          translateY: '-50%',
+        }}
+      />
+    </>
+  )
+}

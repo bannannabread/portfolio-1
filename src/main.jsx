@@ -30,6 +30,14 @@ function raf(time) {
 }
 requestAnimationFrame(raf);
 
+// Accessibility - Keyboard Focus State
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Tab') document.body.classList.add('keyboard-nav');
+});
+window.addEventListener('mousedown', () => {
+  document.body.classList.remove('keyboard-nav');
+});
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>

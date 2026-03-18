@@ -3,7 +3,10 @@ import { motion, useInView } from 'framer-motion';
 import gsap from 'gsap';
 import PageTransition from '../components/PageTransition';
 import ScrollReveal from '../components/ScrollReveal';
+import ScrollRevealText from '../components/ScrollRevealText';
 import TypewriterText from '../components/TypewriterText';
+import LiveStatus from '../components/LiveStatus';
+import AnimatedTimeline from '../components/AnimatedTimeline';
 import './About.css';
 
 const scrambleText = (element, originalText) => {
@@ -40,13 +43,6 @@ const About = () => {
         }
     };
 
-    const timelineData = [
-        { year: '2023 - Present', role: 'Lead UI/UX Designer', entity: 'Studio Freight', desc: 'Leading design systems and brand identity projects.' },
-        { year: '2021 - 2023', role: 'Product Designer', entity: 'Fintech Startup XYZ', desc: 'Redesigned the core mobile application, improving SUS by 20%.' },
-        { year: '2019 - 2021', role: 'UX/UI Designer', entity: 'Creative Agency', desc: 'Delivered web experiences for e-commerce and lifestyle brands.' },
-        { year: '2018', role: 'BDes Interaction Design', entity: 'Design University', desc: 'Graduated with honors. Thesis on emotive micro-interactions.' },
-    ];
-
     return (
         <PageTransition>
             <div className="about-page page-wrapper">
@@ -54,6 +50,7 @@ const About = () => {
                 <section className="about-intro">
                     <div className="intro-text">
                         <ScrollReveal>
+                            <LiveStatus showClock={true} className="about-status" />
                             <h1 className="intro-title" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', lineHeight: 1.2 }}>
                                 <TypewriterText
                                   text="hi, i'm megan."
@@ -62,19 +59,30 @@ const About = () => {
                                   cursorChar="▌"
                                 />
                             </h1>
-                            <p className="intro-bio" style={{ fontSize: '1.1rem', marginTop: '1.5rem', maxWidth: '600px', lineHeight: 1.8 }}>
-                                I'm Megan — a Computer Science student at UIUC with a deep love for
-                                design that actually makes people's lives easier. I care about the
-                                space where code meets creativity: where a well-crafted interaction
-                                makes someone smile, or a cleaner layout makes something finally
-                                make sense.
-                                <br/><br/>
-                                When I'm not in Figma or debugging at 2am, you'll find me planning
-                                events for my community, chasing sunsets, or rearranging my notes
-                                app for the fifth time this week.
-                            </p>
+                            <ScrollRevealText
+                                as="p"
+                                className="srv-body-large intro-bio"
+                                text="I'm Megan — a Computer Science student at UIUC with a deep love for design that actually makes people's lives easier. I care about the space where code meets creativity: where a well-crafted interaction makes someone smile, or a cleaner layout makes something finally make sense."
+                                threshold={0.15}
+                            />
                             <div className="intro-ctas">
                                 <a href="mailto:meganmae.jacob@gmail.com" className="cta-button">Let's Talk →</a>
+                            </div>
+
+                            <div className="testimonial-block glass-2">
+                                <div className="testimonial-quote-mark">"</div>
+                                <blockquote className="testimonial-text">
+                                    Megan brings both creative instinct and technical precision to every project.
+                                    Her ability to translate user research into clean, buildable interfaces is
+                                    rare at any level — let alone as a sophomore.
+                                </blockquote>
+                                <div className="testimonial-attribution">
+                                    <div className="testimonial-avatar">P</div>
+                                    <div>
+                                        <p className="testimonial-name">Professor / Collaborator Name</p>
+                                        <p className="testimonial-role">Course / Organization · UIUC</p>
+                                    </div>
+                                </div>
                             </div>
                         </ScrollReveal>
                     </div>
@@ -123,23 +131,30 @@ const About = () => {
                 {/* Section 3: What I Value */}
                 <section className="about-values">
                     <ScrollReveal>
-                        <h2 className="section-title text-center">Design Philosophy</h2>
+                        <ScrollRevealText
+                            as="h2"
+                            className="srv-statement text-center"
+                            text="Design should feel inevitable. Like it could never have been any other way."
+                            threshold={0.10}
+                        />
                     </ScrollReveal>
+                    
+                    <AnimatedTimeline />
 
                     <div className="values-grid">
-                        <ScrollReveal delay={0.1} className="value-card hoverable">
+                        <ScrollReveal delay={0.1} className="value-card glass-2 glass-shimmer glass-interactive hoverable" style={{ borderRadius: 20 }}>
                             <div className="value-icon">👁️</div>
                             <h3 className="value-title">Design for Real People</h3>
                             <p className="value-desc">"The best UX is invisible. I design for the moments when someone just... gets it."</p>
                         </ScrollReveal>
 
-                        <ScrollReveal delay={0.2} className="value-card hoverable">
+                        <ScrollReveal delay={0.2} className="value-card glass-2 glass-shimmer glass-interactive hoverable" style={{ borderRadius: 20 }}>
                             <div className="value-icon">🤝</div>
                             <h3 className="value-title">Build With, Not For</h3>
                             <p className="value-desc">"Research isn't a phase — it's the whole foundation. I don't skip the sticky notes."</p>
                         </ScrollReveal>
 
-                        <ScrollReveal delay={0.3} className="value-card hoverable">
+                        <ScrollReveal delay={0.3} className="value-card glass-2 glass-shimmer glass-interactive hoverable" style={{ borderRadius: 20 }}>
                             <div className="value-icon">💻</div>
                             <h3 className="value-title">Code-Literate Design</h3>
                             <p className="value-desc">"I speak developer. That means my handoffs are clean, my components are realistic, and nothing breaks in production."</p>
@@ -150,29 +165,58 @@ const About = () => {
                 {/* Section 4: Currently / Interests */}
                 <section className="about-currently">
                     <ScrollReveal>
-                        <div className="currently-grid">
-                            <dl className="info-list">
-                                <div className="info-row">
-                                    <dt className="mono"><TypewriterText text="Currently studying:" speed={50} delay={0} cursor={false} /></dt>
-                                    <dd>B.S. CS + Info Sciences @ UIUC (Grad: 2028)</dd>
+                        <div className="currently-section">
+                          <span className="currently-label">/ currently</span>
+                          <div className="currently-grid">
+                            {[
+                              { emoji: '📖', category: 'Reading',    value: 'The Design of Everyday Things — Don Norman' },
+                              { emoji: '🎨', category: 'Designing',  value: 'CAT Inspect case study deep-dive'           },
+                              { emoji: '💻', category: 'Building',   value: 'This portfolio (always iterating)'           },
+                              { emoji: '🎵', category: 'Listening',  value: 'whatever the Spotify widget says'            },
+                              { emoji: '📍', category: 'Located',    value: 'Champaign, IL — open to relocate'            },
+                              { emoji: '🌱', category: 'Learning',   value: 'Three.js + WebGL shaders'                   },
+                            ].map(({ emoji, category, value }) => (
+                              <div key={category} className="currently-item">
+                                <span className="currently-emoji">{emoji}</span>
+                                <div>
+                                  <span className="currently-category">{category}</span>
+                                  <span className="currently-value">{value}</span>
                                 </div>
-                                <div className="info-row">
-                                    <dt className="mono"><TypewriterText text="Currently designing:" speed={50} delay={150} cursor={false} /></dt>
-                                    <dd>AI-integrated UX & Zero-Touch systems</dd>
-                                </div>
-                                <div className="info-row">
-                                    <dt className="mono"><TypewriterText text="Favorite tool:" speed={50} delay={300} cursor={false} /></dt>
-                                    <dd>Figma (obviously)</dd>
-                                </div>
-                                <div className="info-row">
-                                    <dt className="mono"><TypewriterText text="Known for:" speed={50} delay={450} cursor={false} /></dt>
-                                    <dd>Making devs actually understand my Figma files</dd>
-                                </div>
-                                <div className="info-row">
-                                    <dt className="mono"><TypewriterText text="Available for:" speed={50} delay={600} cursor={false} /></dt>
-                                    <dd className="text-gradient">Internships & freelance — let's talk</dd>
-                                </div>
-                            </dl>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Photo Collage / Mood Board */}
+                        <div className="collage-section">
+                          <span className="collage-label">life outside the screen</span>
+                          <div className="collage-grid">
+                            <div className="collage-item collage-item--1">
+                              <div className="collage-photo collage-photo--placeholder">
+                                <span>PSA Event 📸</span>
+                              </div>
+                            </div>
+                            <div className="collage-item collage-item--2">
+                              <div className="collage-photo collage-photo--placeholder">
+                                <span>Workspace ✨</span>
+                              </div>
+                            </div>
+                            <div className="collage-item collage-item--3">
+                              <div className="collage-photo collage-photo--placeholder">
+                                <span>Campus 🌿</span>
+                              </div>
+                            </div>
+                            <div className="collage-item collage-item--4">
+                              <div className="collage-photo collage-photo--placeholder">
+                                <span>FACT Conf 🎤</span>
+                              </div>
+                            </div>
+                            <div className="collage-item collage-item--5">
+                              <div className="collage-photo collage-photo--placeholder">
+                                <span>Figma work 🎨</span>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                     </ScrollReveal>
                 </section>

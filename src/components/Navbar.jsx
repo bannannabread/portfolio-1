@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../context/ThemeContext';
+import RollingText from './RollingText';
 import './Navbar.css';
 
 export function ThemeToggle() {
@@ -13,14 +14,11 @@ export function ThemeToggle() {
         onClick={toggle}
         aria-label="Toggle theme"
         whileTap={{ scale: 0.92 }}
+        className="glass-1 glass-interactive"
         style={{
           width: 52,
           height: 28,
           borderRadius: 99,
-          background: isDark
-            ? 'rgba(255,107,157,0.15)'
-            : 'linear-gradient(135deg, #FF6B9D, #FFD166)',
-          border: '1.5px solid var(--color-blush)',
           position: 'relative',
           cursor: 'pointer',
           display: 'flex',
@@ -52,6 +50,7 @@ export function ThemeToggle() {
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
+    const [moreOpen, setMoreOpen] = useState(false);
     const location = useLocation();
     const { theme, toggle } = useTheme();
 
@@ -75,7 +74,7 @@ const Navbar = () => {
     ];
 
     return (
-        <header className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+        <header className={`navbar glass-1 glass-shimmer ${scrolled ? 'scrolled' : ''}`} style={{ borderRadius: 0, borderTop: 'none', borderLeft: 'none', borderRight: 'none' }}>
             <div className="nav-container">
                 <NavLink to="/" className="nav-logo">
                     <div className="logo-badge">
@@ -88,17 +87,80 @@ const Navbar = () => {
                     <ul className="nav-links">
                         {navLinks.map((link) => (
                             <li key={link.name}>
-                                <NavLink
-                                    to={link.path}
-                                    className={({ isActive }) => (isActive ? 'nav-link active mono' : 'nav-link mono')}
-                                >
-                                    {link.name}
-                                </NavLink>
+                                <motion.div initial="rest" whileHover="hover" animate="rest" style={{ display: 'inline-block' }}>
+                                    <NavLink
+                                        to={link.path}
+                                        className={({ isActive }) => (isActive ? 'nav-link active mono' : 'nav-link mono')}
+                                    >
+                                        <RollingText label={link.name} />
+                                    </NavLink>
+                                </motion.div>
                             </li>
                         ))}
                     </ul>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                    <div
+                        className="nav-more-wrapper"
+                        onMouseEnter={() => setMoreOpen(true)}
+                        onMouseLeave={() => setMoreOpen(false)}
+                    >
+                        <motion.div initial="rest" whileHover="hover" animate="rest" style={{ display: 'inline-block' }}>
+                            <span className="nav-link mono" style={{ cursor: 'pointer' }}>
+                                <RollingText label="More ▾" />
+                            </span>
+                        </motion.div>
+                        <AnimatePresence>
+                            {moreOpen && (
+                                <motion.div
+                                    className="more-dropdown glass-2"
+                                    initial={{ opacity: 0, y: -8, scale: 0.97 }}
+                                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                                    exit={{ opacity: 0, y: -8, scale: 0.97 }}
+                                    transition={{ duration: 0.2 }}
+                                >
+                                    <motion.div initial="rest" whileHover="hover" animate="rest">
+                                        <Link to="/labs" className="dropdown-item">
+                                            <span className="dropdown-icon">✦</span>
+                                            <div className="dropdown-text">
+                                                <RollingText label="Labs" className="dropdown-label" />
+                                                <span className="dropdown-desc">Experiments & micro-projects</span>
+                                            </div>
+                                        </Link>
+                                    </motion.div>
+                                    <motion.div initial="rest" whileHover="hover" animate="rest">
+                                        <Link to="/uses" className="dropdown-item">
+                                            <span className="dropdown-icon">♡</span>
+                                            <div className="dropdown-text">
+                                                <RollingText label="Uses" className="dropdown-label" />
+                                                <span className="dropdown-desc">My tools & setup</span>
+                                            </div>
+                                        </Link>
+                                    </motion.div>
+                                    <motion.div initial="rest" whileHover="hover" animate="rest">
+                                        <Link to="/guestbook" className="dropdown-item">
+                                            <span className="dropdown-icon">✉</span>
+                                            <div className="dropdown-text">
+                                                <RollingText label="Guestbook" className="dropdown-label" />
+                                                <span className="dropdown-desc">Leave a note</span>
+                                            </div>
+                                        </Link>
+                                    </motion.div>
+                                    <motion.div initial="rest" whileHover="hover" animate="rest">
+                                        <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="dropdown-item">
+                                            <span className="dropdown-icon">📄</span>
+                                            <div className="dropdown-text">
+                                                <RollingText label="Resume" className="dropdown-label" />
+                                                <span className="dropdown-desc">Download PDF</span>
+                                            </div>
+                                        </a>
+                                    </motion.div>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </div>
+
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginLeft: '1rem' }}>
                         <ThemeToggle />
+                        <div className="cmd-k-hint glass-1 mono">⌘K</div>
                         <a href="#contact" className="cta-button">
                             Let's Talk
                         </a>

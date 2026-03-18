@@ -3,6 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import PageTransition from '../components/PageTransition';
 import ScrollReveal from '../components/ScrollReveal';
 import TypewriterText from '../components/TypewriterText';
+import ProjectCard from '../components/ProjectCard';
+import DeviceReveal from '../components/DeviceReveal';
+import PhysicsShowcase from '../components/PhysicsShowcase';
 import { projects } from '../data/projects';
 import './Projects.css';
 
@@ -11,6 +14,8 @@ const categories = ['All', 'Web', 'Mobile'];
 const Projects = () => {
     const [filter, setFilter] = useState('All');
     const [selectedProject, setSelectedProject] = useState(null);
+
+    const featuredProject = projects.find(p => p.id === 2);
 
     const filteredProjects = filter === 'All'
         ? projects
@@ -37,6 +42,8 @@ const Projects = () => {
                     </ScrollReveal>
                 </header>
 
+                <DeviceReveal project={featuredProject} />
+
                 {/* Filter Bar */}
                 <ScrollReveal delay={0.2}>
                     <div className="filter-bar">
@@ -59,6 +66,11 @@ const Projects = () => {
                     </div>
                 </ScrollReveal>
 
+                {/* Physics WebGL Interactive */}
+                <ScrollReveal delay={0.3}>
+                    <PhysicsShowcase />
+                </ScrollReveal>
+
                 {/* Project Grid */}
                 <div className="projects-grid">
                     <AnimatePresence mode="popLayout">
@@ -73,25 +85,7 @@ const Projects = () => {
                                 className={`grid-item ${index % 2 === 0 ? 'large' : 'small'}`}
                                 onClick={() => toggleModal(project)}
                             >
-                                <div className="project-card hoverable">
-                                    <div className="card-number mono">{(index + 1).toString().padStart(2, '0')}</div>
-                                    <div
-                                        className="card-bg"
-                                        style={{ background: `linear-gradient(135deg, ${project.accentColor}, var(--color-bg))` }}
-                                    />
-                                    <div className="card-overlay">
-                                        <div className="overlay-content">
-                                            <div className="tags">
-                                                {project.tags.map(tag => (
-                                                    <span key={tag} className="tag mono">{tag}</span>
-                                                ))}
-                                            </div>
-                                            <h3 className="project-title">{project.title}</h3>
-                                            <p className="project-desc">{project.description}</p>
-                                            <span className="view-case mono">→ View Case Study</span>
-                                        </div>
-                                    </div>
-                                </div>
+                                <ProjectCard project={project} />
                             </motion.div>
                         ))}
                     </AnimatePresence>
@@ -111,7 +105,7 @@ const Projects = () => {
                                 <button className="close-btn hoverable" onClick={() => toggleModal(null)}>✕</button>
                             </div>
 
-                            <div className="modal-content">
+                            <div className="modal-content glass-3" style={{ borderRadius: '24px 24px 0 0' }}>
                                 <div
                                     className="modal-hero"
                                     style={{ background: `linear-gradient(135deg, ${selectedProject.accentColor}, var(--color-bg))` }}

@@ -5,52 +5,6 @@
     min-height: 100vh;
 }
 
-.skills-columns {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--space-xl);
-    margin-top: var(--space-2xl);
-    margin-bottom: var(--space-2xl);
-}
-
-.skills-column h2 {
-    font-size: 2rem;
-    color: var(--color-peach);
-    margin-bottom: var(--space-lg);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: var(--space-sm);
-}
-
-.skill-row {
-    margin-bottom: var(--space-md);
-}
-
-.skill-labels {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: var(--space-xs);
-    font-size: 0.95rem;
-}
-
-.skill-percent {
-    color: var(--color-blush);
-    font-size: 0.85rem;
-}
-
-.skill-bar-bg {
-    width: 100%;
-    height: 4px;
-    background: var(--color-bg-surface);
-    border-radius: 2px;
-    overflow: hidden;
-}
-
-.skill-bar-fill {
-    height: 100%;
-    background: var(--gradient-sunset);
-    border-radius: 2px;
-}
-
 /* Soft Skills Strip */
 .soft-skills-section {
     margin-top: var(--space-2xl);
@@ -89,11 +43,5 @@
 
     100% {
         transform: translateY(-10px);
-    }
-}
-
-@media (max-width: 1024px) {
-    .skills-columns {
-        gap: var(--space-lg);
     }
 }

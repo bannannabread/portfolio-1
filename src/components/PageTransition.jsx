@@ -2,104 +2,131 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useLocation } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
 
-const TRANSITION_BALLS = [
-  { color: "var(--color-blush)", size: 110, y: "15vh",  delay: 0,    duration: 0.72 },
-  { color: "var(--color-coral)", size: 90,  y: "38vh",  delay: 0.06, duration: 0.68 },
-  { color: "var(--color-peach)", size: 130, y: "58vh",  delay: 0.03, duration: 0.80 },
-  { color: "var(--color-amber)", size: 75,  y: "75vh",  delay: 0.09, duration: 0.65 },
-  { color: "var(--color-rose-deep)", size: 95,  y: "28vh",  delay: 0.12, duration: 0.75 },
-  { color: "var(--color-blush)", size: 60,  y: "85vh",  delay: 0.05, duration: 0.60 },
-  { color: "var(--color-coral)", size: 150, y: "50vh",  delay: 0.01, duration: 0.88 },
+// Number of bars and their stagger
+const BAR_COUNT   = 7
+const STAGGER     = 0.055    // seconds between each bar's start
+const BAR_DURATION = 0.38    // seconds for one bar to travel across
+
+// Each bar gets a slightly different color — gradient across the set
+// Goes from left (deep rose) to right (amber) — sunset sweep
+const BAR_COLORS = [
+  'rgba(201,  24,  74, 0.95)',   // deep rose
+  'rgba(255, 107, 157, 0.95)',   // blush
+  'rgba(255, 107, 157, 0.90)',   // blush lighter
+  'rgba(255, 140, 105, 0.92)',   // coral
+  'rgba(255, 171, 118, 0.92)',   // peach
+  'rgba(255, 209, 102, 0.90)',   // amber
+  'rgba(255, 209, 102, 0.85)',   // amber lighter
 ]
 
+// Total time until screen fully covered:
+// last bar starts at (BAR_COUNT-1) * STAGGER = 6 * 0.055 = 0.33s
+// last bar finishes: 0.33 + BAR_DURATION = 0.71s
+// Swap content at 0.55s (screen is fully black, before bars start leaving)
+// Bars exit: start at 0.60s, finish at 0.60 + 0.33 + 0.38 = 1.31s
+
+const CONTENT_SWAP_MS = 550
+const TRANSITION_END_MS = 1350
+
 export default function PageTransition({ children }) {
-  const location = useLocation()
-  const [isTransitioning, setIsTransitioning] = useState(false)
+  const location  = useLocation()
+  const [phase, setPhase] = useState('idle')   // 'idle' | 'enter' | 'exit'
   const [displayChildren, setDisplayChildren] = useState(children)
-  const prevPath = useRef(location.pathname)
-  const directionRef = useRef(1) // 1 = left→right, -1 = right→left
+  const prevPath  = useRef(location.pathname)
+  const timers    = useRef([])
+
+  const clearTimers = () => timers.current.forEach(clearTimeout)
 
   useEffect(() => {
-    if (location.pathname !== prevPath.current) {
-      // Alternate direction each navigation
-      directionRef.current *= -1
-      setIsTransitioning(true)
-
-      // After balls fully pass (~900ms), swap content
-      const swapTimer = setTimeout(() => {
-        setDisplayChildren(children)
-      }, 500)
-
-      // After balls fully exit, end transition
-      const endTimer = setTimeout(() => {
-        setIsTransitioning(false)
-        prevPath.current = location.pathname
-      }, 950)
-
-      return () => { clearTimeout(swapTimer); clearTimeout(endTimer) }
-    } else {
+    if (location.pathname === prevPath.current) {
       setDisplayChildren(children)
+      return
     }
-  }, [location.pathname, children])
 
-  const dir = directionRef.current
-  const startX = dir === 1 ? '-160px' : 'calc(100vw + 160px)'
-  const endX   = dir === 1 ? 'calc(100vw + 160px)' : '-160px'
+    clearTimers()
+
+    // Phase 1: bars slide IN (cover screen)
+    setPhase('enter')
+
+    // Phase 2: swap content (bars covering — invisible)
+    timers.current[0] = setTimeout(() => {
+      setDisplayChildren(children)
+      window.scrollTo({ top: 0, behavior: 'instant' })
+      // Phase 3: bars slide OUT (reveal new page)
+      setPhase('exit')
+    }, CONTENT_SWAP_MS)
+
+    // Phase 4: done
+    timers.current[1] = setTimeout(() => {
+      setPhase('idle')
+      prevPath.current = location.pathname
+    }, TRANSITION_END_MS)
+
+    return clearTimers
+  }, [location.pathname])
 
   return (
-    <div style={{ position: 'relative', overflow: 'hidden' }}>
-      {displayChildren}
+    <>
+      <div style={{ position: 'relative', zIndex: 1 }}>
+        {displayChildren}
+      </div>
 
+      {/* Bars overlay */}
       <AnimatePresence>
-        {isTransitioning && (
-          <motion.div
-            key="transition-overlay"
+        {phase !== 'idle' && (
+          <div
+            key="bars-overlay"
             style={{
               position: 'fixed',
               inset: 0,
-              pointerEvents: 'none',
               zIndex: 99999,
+              display: 'flex',
+              pointerEvents: 'none',
             }}
+            aria-hidden="true"
           >
-            {TRANSITION_BALLS.map((ball, i) => (
-              <motion.div
-                key={i}
-                initial={{ x: startX, y: 0 }}
-                animate={{
-                  x: endX,
-                  // Subtle bounce: y oscillates up and down as ball rolls
-                  y: [0, -18, 0, -10, 0, -6, 0],
-                }}
-                transition={{
-                  x: {
-                    duration: ball.duration,
-                    delay: ball.delay,
-                    ease: [0.25, 0.46, 0.45, 0.94],
-                  },
-                  y: {
-                    duration: ball.duration,
-                    delay: ball.delay,
-                    times: [0, 0.2, 0.4, 0.55, 0.7, 0.85, 1],
-                    ease: 'easeInOut',
-                  },
-                }}
-                style={{
-                  position: 'absolute',
-                  top: ball.y,
-                  left: 0,
-                  width: ball.size,
-                  height: ball.size,
-                  borderRadius: '50%',
-                  background: ball.color,
-                  filter: 'blur(8px)',
-                  // Rotation gives a rolling feel
-                  rotate: dir === 1 ? 360 : -360,
-                }}
-              />
-            ))}
-          </motion.div>
+            {Array.from({ length: BAR_COUNT }).map((_, i) => {
+              const isEnter = phase === 'enter'
+
+              return (
+                <motion.div
+                  key={i}
+                  style={{
+                    flex: 1,
+                    height: '100%',
+                    background: BAR_COLORS[i] ?? BAR_COLORS[BAR_COLORS.length - 1],
+                    transformOrigin: 'left center',
+                    willChange: 'transform',
+                  }}
+                  initial={{
+                    scaleX: isEnter ? 0 : 1,
+                    opacity: isEnter ? 0.6 : 1,
+                  }}
+                  animate={{
+                    scaleX: isEnter ? 1 : 0,
+                    opacity: isEnter ? 1 : 0,
+                  }}
+                  transition={{
+                    scaleX: {
+                      duration: BAR_DURATION,
+                      // Entering bars stagger left → right (i=0 first)
+                      // Exiting bars stagger left → right too (curtain opens L→R)
+                      delay: i * STAGGER,
+                      ease: isEnter
+                        ? [0.4, 0, 0.2, 1]    // ease in-out for coverage
+                        : [0.16, 1, 0.3, 1],  // spring-ease out for reveal
+                    },
+                    opacity: {
+                      duration: isEnter ? 0.15 : 0.25,
+                      delay: isEnter ? i * STAGGER : i * STAGGER + BAR_DURATION * 0.6,
+                    },
+                  }}
+                />
+              )
+            })}
+          </div>
         )}
       </AnimatePresence>
-    </div>
+    </>
   )
 }

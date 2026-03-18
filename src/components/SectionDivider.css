@@ -1,0 +1,19 @@
+.section-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 4rem 0 2rem;
+}
+.divider-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--color-text-subtle);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+}
