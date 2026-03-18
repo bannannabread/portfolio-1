@@ -1,9 +1,23 @@
 import { useRef } from 'react'
 import { motion } from 'framer-motion'
 
+const accentRgbMap = {
+  '#FF6B9D': '255, 107, 157',
+  '#FF8C69': '255, 140, 105',
+  '#FFD166': '255, 209, 102',
+}
+
 export default function ProjectCard({ project }) {
   return (
-    <div className="pcard">
+    <div 
+      className="pcard" 
+      role="article" 
+      aria-label={`Project: ${project.title}`}
+      style={{
+        '--pcard-accent':     project.accentColor,
+        '--pcard-accent-rgb': accentRgbMap[project.accentColor] ?? '255, 107, 157',
+      }}
+    >
 
       {/* ── Icon badge (top-left) ── */}
       <span className="pcard-icon">

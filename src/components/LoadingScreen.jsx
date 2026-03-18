@@ -24,6 +24,8 @@ export default function LoadingScreen({ onComplete }) {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, scale: 1.03 }}
           transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+          role="status"
+          aria-label="Loading portfolio"
         >
           {/* Gooey container — blur+contrast applied here */}
           <div className="loader-gooey-wrap">

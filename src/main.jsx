@@ -10,6 +10,12 @@ import { ThemeProvider } from './context/ThemeContext';
 import './styles/variables.css';
 import './styles/globals.css';
 
+// Reduced motion detection
+const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (prefersReduced) {
+    document.documentElement.setAttribute('data-reduced-motion', 'true');
+}
+
 // Initialize Lenis for smooth scrolling
 const lenis = new Lenis({
   duration: 1.2,

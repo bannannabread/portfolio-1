@@ -30,6 +30,8 @@ const skillPills = [
   { label: 'React Native',       icon: '📱', category: 'dev'     },
   { label: 'Node.js',            icon: '🟢', category: 'dev'     },
   { label: 'SQL',                icon: '🗄️', category: 'dev'     },
+  { label: 'FastAPI',            icon: '⚡', category: 'dev'     },
+  { label: 'REST APIs',          icon: '🔗', category: 'dev'     },
   { label: 'HTML / CSS',         icon: '🌐', category: 'dev'     },
   { label: 'Kotlin',             icon: '🎯', category: 'dev'     },
 
@@ -43,6 +45,8 @@ const skillPills = [
   { label: 'Gemini Antigravity', icon: '✨', category: 'tools'   },
   { label: 'ProtoPie',           icon: '🔮', category: 'tools'   },
   { label: 'Miro',               icon: '🗂️', category: 'tools'   },
+  { label: 'SQLite',             icon: '🗄️', category: 'tools'   },
+  { label: 'PokéAPI',            icon: '🔴', category: 'tools'   },
 ]
 
 // Category filter tabs

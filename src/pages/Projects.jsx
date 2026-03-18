@@ -42,7 +42,10 @@ const Projects = () => {
                     </ScrollReveal>
                 </header>
 
-                <DeviceReveal project={featuredProject} />
+                <DeviceReveal 
+                    project={featuredProject} 
+                    frameType={featuredProject?.id === 3 ? 'browser' : 'phone'} 
+                />
 
                 {/* Filter Bar */}
                 <ScrollReveal delay={0.2}>

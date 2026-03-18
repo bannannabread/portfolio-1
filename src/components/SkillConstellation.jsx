@@ -20,6 +20,8 @@ const NODES = [
   { id: 'C++',               pos: [ 3.0,  0.5, -1.0], category: 'dev' },
   { id: 'React Native',      pos: [ 2.2, -1.5,  0.5], category: 'dev' },
   { id: 'Node.js',           pos: [ 1.5,  0.8,  1.8], category: 'dev' },
+  { id: 'FastAPI',           pos: [ 2.0, -0.5,  1.5], category: 'dev' },
+  { id: 'REST APIs',         pos: [ 2.5,  2.0,  1.0], category: 'dev' },
 
   // Tools — center/front
   { id: 'Git & GitHub',      pos: [ 0.2,  2.5,  0.5], category: 'tools' },
@@ -38,6 +40,7 @@ const EDGES = [
   ['Git & GitHub', 'React.js'], ['Git & GitHub', 'Figma'],
   ['Figma', 'User Research'], ['Python', 'Jupyter'],
   ['Docker', 'VS Code'], ['Design Systems', 'Accessibility'],
+  ['FastAPI', 'Python'], ['REST APIs', 'FastAPI'], ['React.js', 'REST APIs'],
 ]
 
 const CATEGORY_COLORS = {

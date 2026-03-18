@@ -8,6 +8,8 @@ const IMAGES = [
   'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=400'
 ]
 
+import { projects } from '../data/projects'
+
 export default function PhysicsShowcase() {
   const containerRef = useRef(null)
   const engineRef    = useRef(null)
@@ -20,7 +22,7 @@ export default function PhysicsShowcase() {
 
     // Setup Engine & Render
     const winW = container.clientWidth
-    const winH = 400 // Fixed height for the showcase section
+    const winH = 420 // Fixed height for the showcase section
 
     const engine = Matter.Engine.create()
     const render = Matter.Render.create({
@@ -42,11 +44,12 @@ export default function PhysicsShowcase() {
 
     // Create cards (compound bodies or rectangles rounded via texturing)
     const cardScale = winW < 600 ? 0.6 : 1
-    const cards = IMAGES.map((src, i) => {
+    const cards = projects.map((p, i) => {
+      const src = IMAGES[i] || IMAGES[0]
       const w = 240 * cardScale
       const h = 320 * cardScale
-      const x = (winW / 5) * (i + 1) + (Math.random() * 40 - 20)
-      const y = -100 - (i * 150) // staggered fall
+      const x = 100 + i * 240 + (Math.random() - 0.5) * 30  // was 260 spacing
+      const y = 60  + (Math.random() - 0.5) * 30
 
       return Matter.Bodies.rectangle(x, y, w, h, {
         restitution: 0.7,

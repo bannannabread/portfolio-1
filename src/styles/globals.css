@@ -153,6 +153,7 @@ button {
   /* NO transition here — Framer Motion spring handles all movement */
 }
 
+
 /* Hover states — smooth CSS transitions ONLY for size/opacity, not position */
 .cursor-ring--hover {
   width: 54px;
@@ -1215,9 +1216,9 @@ html.lenis {
   letter-spacing: 0.05em;
   padding: 0.2rem 0.55rem;
   border-radius: 99px;
-  background: rgba(255, 107, 157, 0.08);
-  color: var(--color-blush);
-  border: 1px solid rgba(255, 107, 157, 0.14);
+  background: rgba(var(--pcard-accent-rgb, 255, 107, 157), 0.08);
+  color: var(--pcard-accent, var(--color-blush));
+  border: 1px solid rgba(var(--pcard-accent-rgb, 255, 107, 157), 0.14);
   white-space: nowrap;
 }
 
@@ -1254,7 +1255,7 @@ html.lenis {
 .pcard-link {
   font-family: var(--font-mono);
   font-size: 0.65rem;
-  color: var(--color-blush);
+  color: var(--pcard-accent, var(--color-blush));
   cursor: pointer;
   letter-spacing: 0.04em;
   transition: opacity 0.2s;
@@ -1288,7 +1289,13 @@ html.lenis {
   filter: blur(35px);
   opacity: var(--pcard-shine-opacity);
   transform: translateX(-50%);
-  background-image: var(--pcard-shine-gradient);
+  background-image: conic-gradient(
+    from 205deg at 50% 50%,
+    rgba(var(--pcard-accent-rgb, 255, 107, 157), 0)    0deg,
+    var(--pcard-accent, #FF6B9D)                        25deg,
+    rgba(var(--pcard-accent-rgb, 255, 171, 118), 0.18) 295deg,
+    rgba(var(--pcard-accent-rgb, 255, 107, 157), 0)    360deg
+  );
 }
 
 /* ══════════════════════════════════════════
@@ -1533,10 +1540,12 @@ html.lenis {
   padding-bottom: 0;
 }
 
-/* Gap between cards in the project grid */
+/* Landing selected works grid — 3 columns */
 .projects-showcase-grid,
 .projects-grid {
-  gap: 1.5rem !important;            /* was likely 2–3rem */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem !important;
   margin-top: 0 !important;
 }
 
@@ -2311,10 +2320,43 @@ html.lenis {
 /* ═══════════════════════════════════════════════════════════
    ACCESSIBILITY & REDUCED MOTION - V11
    ═══════════════════════════════════════════════════════════ */
-.keyboard-nav *:focus-visible {
-  outline: 2px solid var(--color-blush) !important;
-  outline-offset: 4px !important;
+/* Remove browser default — we provide our own */
+*:focus { outline: none; }
+
+/* Show only on keyboard nav (not mouse click) */
+*:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-blush) !important;
   border-radius: 4px;
+}
+
+/* Larger focus ring for interactive cards */
+.pcard:focus-visible,
+.project-card:focus-visible,
+.physics-card:focus-visible,
+.now-playing:focus-visible {
+  box-shadow: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-blush),
+              0 20px 40px rgba(255,107,157,0.15) !important;
+}
+
+/* Navbar links */
+nav a:focus-visible,
+nav button:focus-visible {
+  box-shadow: 0 0 0 2px var(--color-bg), 0 0 0 3px var(--color-blush) !important;
+  border-radius: 6px;
+}
+
+/* CTA buttons */
+.btn-primary:focus-visible,
+.btn-ghost:focus-visible,
+.cta-button:focus-visible,
+.mobile-cta-button:focus-visible {
+  box-shadow: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-blush) !important;
+}
+
+/* Light mode focus ring */
+[data-theme="light"] *:focus-visible {
+  box-shadow: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-rose-deep) !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2324,6 +2366,15 @@ html.lenis {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+[data-reduced-motion="true"] *,
+[data-reduced-motion="true"] *::before,
+[data-reduced-motion="true"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
 }
 
 /* ── Skills hero ── */

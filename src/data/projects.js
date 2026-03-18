@@ -33,6 +33,31 @@ export const projects = [
       "Designed AI overview pipeline, voice note compilation architecture, real-time transcription review",
       "Enforced design system consistency across 6 distinct screen surfaces"
     ],
-    iconPath: "M12 18h.01M8 21h8a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2z"
+    outcomes: [
+      { stat: '6',   desc: 'Screen surfaces unified'          },
+      { stat: '23',  desc: 'UX gaps identified and addressed' },
+      { stat: '3',   desc: 'AI features designed and specced' },
+    ],
+    reflection: 'Enterprise UX design taught me that consistency is a form of respect for the user\'s time. Every inconsistency in an interface is a micro-tax on the person using it.',
+  },
+  {
+    id: 3,
+    title: "Studymon — Gamified Study Tracker",
+    category: "Full-Stack",
+    tags: ["React", "Python", "FastAPI", "Game Design", "API Integration"],
+    accentColor: "#FFD166",
+    year: "2025",
+    role: "Designer & Full-Stack Developer",
+    tools: ["React", "Python", "FastAPI", "SQLite", "PokéAPI"],
+    outcome: "50 EXP/min system with evolution detection across 100+ Pokémon",
+    highlights: [
+      "Safari Zone random encounter mechanic",
+      "Real-time study timer with pause/resume",
+      "Animated evolution sequences (3-stage)",
+      "Statistics dashboard with 7-day trend charts",
+    ],
+    description: "A full-stack productivity app that pairs each study subject with a Pokémon companion — the more you study, the stronger your Pokémon becomes.",
+    iconPath: "M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zM2 12h20M12 2a10 10 0 0 1 0 20M12 2a10 10 0 0 0 0 20",
+    slug: "studymon",
   }
 ];

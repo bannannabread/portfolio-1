@@ -15,6 +15,7 @@ const CommandPalette = ({ isOpen, setIsOpen }) => {
     { type: 'heading', label: 'NAVIGATE' },
     { id: 'nav-home', icon: '🏠', label: 'Home', action: () => navigate('/') },
     { id: 'nav-work', icon: '💼', label: 'Projects', action: () => navigate('/projects') },
+    { id: 'nav-studymon', icon: '⚡', label: 'Studymon Case Study', action: () => navigate('/projects/studymon') },
     { id: 'nav-skills', icon: '🛠', label: 'Skills', action: () => navigate('/skills') },
     { id: 'nav-about', icon: '👤', label: 'About', action: () => navigate('/about') },
     { id: 'nav-uses', icon: '♡', label: 'Uses', action: () => navigate('/uses') },
@@ -102,6 +103,9 @@ const CommandPalette = ({ isOpen, setIsOpen }) => {
           exit={{ opacity: 0, scale: 0.95, y: -20 }}
           transition={{ duration: 0.2, ease: "easeOut" }}
           onClick={e => e.stopPropagation()}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Command palette"
         >
           <div className="cmd-header">
             <span className="cmd-search-icon">🔍</span>

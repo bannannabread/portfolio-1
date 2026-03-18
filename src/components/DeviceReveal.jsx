@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
-export default function DeviceReveal({ project }) {
+export default function DeviceReveal({ project, frameType = 'phone' }) {
   const sectionRef = useRef(null)
   const deviceRef  = useRef(null)
   const screenRef  = useRef(null)
@@ -79,34 +79,62 @@ export default function DeviceReveal({ project }) {
         <h3 className="device-reveal-title">{project?.title}</h3>
         <p className="device-reveal-desc">{project?.description}</p>
         <div className="device-reveal-links">
-          <span className="pcard-link hoverable" style={{ color: 'var(--color-blush)', fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>Live Demo ↗</span>
-          <span className="pcard-link hoverable" style={{ color: 'var(--color-blush)', fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>View Case Study ↗</span>
+          <span className="pcard-link hoverable" style={{ color: project?.accentColor || 'var(--color-blush)', fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>Live Demo ↗</span>
+          <span className="pcard-link hoverable" style={{ color: project?.accentColor || 'var(--color-blush)', fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>View Case Study ↗</span>
         </div>
       </div>
 
-      {/* Right: 3D phone */}
       <div className="device-reveal-stage">
-        <div ref={deviceRef} className="device-phone-3d">
-          {/* Phone frame */}
-          <div className="phone-frame">
-            {/* Notch */}
-            <div className="phone-notch" />
+        <div ref={deviceRef} className={`device-3d ${frameType === 'browser' ? 'device-browser-3d' : 'device-phone-3d'}`}>
+          {/* Frame */}
+          <div className={frameType === 'browser' ? 'browser-frame' : 'phone-frame'} style={frameType === 'browser' ? {
+              width: '100%',
+              aspectRatio: '16/10',
+              background: 'var(--color-bg-surface)',
+              borderRadius: '12px',
+              border: '1px solid rgba(255,255,255,0.1)',
+              overflow: 'hidden',
+              boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)',
+              display: 'flex',
+              flexDirection: 'column'
+          } : undefined}>
+            
+            {frameType === 'phone' && <div className="phone-notch" />}
+            
+            {frameType === 'browser' && (
+              <div className="browser-chrome" style={{ height: '32px', background: 'rgba(255,255,255,0.03)', display: 'flex', alignItems: 'center', padding: '0 16px', gap: '8px', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#ff5f56' }} />
+                <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#ffbd2e' }} />
+                <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#27c93f' }} />
+              </div>
+            )}
+            
             {/* Screen — project color fill or screenshot */}
             <div
               ref={screenRef}
-              className="phone-screen"
-              style={{
+              className={frameType === 'browser' ? 'browser-screen' : 'phone-screen'}
+              style={frameType === 'browser' ? {
+                  flex: 1,
+                  background: project?.accentColor
+                    ? `linear-gradient(160deg, ${project.accentColor}88, ${project.accentColor}22)`
+                    : 'linear-gradient(160deg, #FF6B9D44, #FFD16622)',
+                  position: 'relative',
+                  overflow: 'hidden'
+              } : {
                 background: project?.accentColor
                   ? `linear-gradient(160deg, ${project.accentColor}88, ${project.accentColor}22)`
                   : 'linear-gradient(160deg, #FF6B9D44, #FFD16622)',
               }}
             >
               {/* App UI placeholder — grid of rounded rects */}
-              <div className="phone-ui-mockup">
-                <div className="phone-ui-bar" />
-                <div className="phone-ui-bar phone-ui-bar--short" />
-                <div className="phone-ui-card" />
-                <div className="phone-ui-card" />
+              <div className="phone-ui-mockup" style={frameType === 'browser' ? { padding: '24px', gap: '16px' } : undefined}>
+                <div className="phone-ui-bar" style={frameType === 'browser' ? { height: '16px', marginBottom: '16px', borderRadius: '8px' } : undefined} />
+                <div className="phone-ui-bar phone-ui-bar--short" style={frameType === 'browser' ? { height: '16px', width: '30%', marginBottom: '24px', borderRadius: '8px' } : undefined} />
+                <div style={frameType === 'browser' ? { display: 'flex', gap: '16px', height: '120px' } : undefined}>
+                  <div className="phone-ui-card" style={frameType === 'browser' ? { flex: 1, height: '100%', marginBottom: 0 } : undefined} />
+                  <div className="phone-ui-card" style={frameType === 'browser' ? { flex: 1, height: '100%', marginBottom: 0 } : undefined} />
+                  {frameType === 'browser' && <div className="phone-ui-card" style={{ flex: 1, height: '100%', marginBottom: 0 }} />}
+                </div>
               </div>
             </div>
           </div>

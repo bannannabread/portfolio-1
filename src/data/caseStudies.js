@@ -44,7 +44,7 @@ export const caseStudies = [
     subtitle:    'Redesigning an enterprise inspection tool with AI-integrated experiences for field technicians.',
     category:    'Mobile · Enterprise UX',
     accentColor: '#FF8C69',
-    nextSlug:    null,
+    nextSlug:    'studymon',
     meta: [
       { label: 'Role',      value: 'UX Designer'             },
       { label: 'Timeline',  value: 'March 2026'              },
@@ -76,5 +76,70 @@ export const caseStudies = [
       { stat: '3',   desc: 'AI features designed and specced' },
     ],
     reflection: 'Enterprise UX design taught me that consistency is a form of respect for the user\'s time. Every inconsistency in an interface is a micro-tax on the person using it.',
+  },
+  {
+    slug:        'studymon',
+    title:       'Studymon — Gamified Study Tracker',
+    subtitle:    'What if studying felt like playing Pokémon? A full-stack productivity app that makes consistency rewarding.',
+    category:    'Full-Stack · Game Design',
+    accentColor: '#FFD166',
+    nextSlug:    null,
+    meta: [
+      { label: 'Role',      value: 'Designer & Full-Stack Developer'      },
+      { label: 'Timeline',  value: '2025'                                 },
+      { label: 'Stack',     value: 'React, Python, FastAPI, SQLite'       },
+      { label: 'Outcome',   value: '100+ Pokémon evolutions, 3-stage anim'},
+    ],
+    overview: {
+      headline: 'Students don\'t lack discipline — they lack a reason to keep going. Studymon gives them one.',
+      body: 'Studymon is a full-stack web application that turns study sessions into an RPG experience. Each subject gets a Pokémon companion. Study time earns EXP. EXP levels up your Pokémon. Level up enough and they evolve — with a full animated evolution sequence. The more you study, the stronger your team gets. It\'s a simple loop, but it\'s extraordinarily effective at making people want to open their textbooks.',
+    },
+    problems: [
+      {
+        title: 'Study apps are boring',
+        desc: 'Existing tools (Toggl, Forest, Notion timers) have no feedback loop that makes you want to return. They track time, but they don\'t reward it.',
+      },
+      {
+        title: 'Progress is invisible',
+        desc: 'When you study for an hour, nothing changes. There\'s no visible accumulation. Studymon makes every minute of effort tangibly visible as Pokémon growth.',
+      },
+      {
+        title: 'Subject-level accountability',
+        desc: 'Most trackers show total time but don\'t break it down in a way that feels personal. Pairing a Pokémon to each subject creates an emotional investment per topic.',
+      },
+    ],
+    process: [
+      {
+        phase: 'System Design',
+        desc: 'Designed the core EXP economy first: 50 EXP per minute, level-up formula using level³ progression (matching Pokémon game math), and evolution triggers mapped to real Gen 1 evolution levels.',
+        tools: ['Figma', 'FigJam', 'Mathematical Modeling'],
+      },
+      {
+        phase: 'Backend (FastAPI)',
+        desc: 'Built three API routers: /topics for CRUD + Pokémon assignment, /sessions for timer start/end with automatic EXP calculation and evolution detection, /pokemon for PokéAPI integration and Safari Zone random encounters.',
+        tools: ['Python', 'FastAPI', 'SQLModel', 'SQLite', 'PokéAPI'],
+      },
+      {
+        phase: 'Frontend (React)',
+        desc: 'Built 4-tab app: Subjects (card grid), Timer (real-time session tracker with pause/resume), History (filterable session log), Statistics (analytics dashboard with 7-day trend chart). Evolution notification is a 3-stage animated sequence.',
+        tools: ['React', 'useState', 'useEffect', 'Custom CSS Animations'],
+      },
+      {
+        phase: 'UX & Animation',
+        desc: 'Designed card-based layout inspired by Pokémon game UI. Added EXP bar shine effects, sprite hover animations, staggered card entrances, and a 3-stage evolution modal ("What\'s happening?!" → "EVOLVING!" → "Congratulations!").',
+        tools: ['CSS Animations', 'Figma', 'PokéAPI Sprites'],
+      },
+    ],
+    beforeAfter: {
+      before: 'A plain study timer. Start. Stop. Time logged. No incentive to return, no visible progress, no emotional connection to the material being studied.',
+      after:  'Each subject has a living Pokémon companion. Every minute studied visibly fills an EXP bar. Level milestones trigger evolution animations. Your "Ace Pokémon" — your highest-level companion — is permanently displayed in the nav bar.',
+    },
+    outcomes: [
+      { stat: '100+',    desc: 'Gen 1 Pokémon evolution chains supported'   },
+      { stat: '50 EXP',  desc: 'earned per minute studied'                  },
+      { stat: '3-stage', desc: 'animated evolution notification sequence'    },
+      { stat: '4 tabs',  desc: 'Subjects · Timer · History · Statistics'    },
+    ],
+    reflection: 'Studymon taught me that the most powerful UX pattern is a feedback loop that makes invisible effort visible. The Pokémon mechanic isn\'t a gimmick — it\'s a well-designed progress system that creates genuine emotional investment in a task people would otherwise avoid.',
   },
 ]
