@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-08T00:00:00Z",
+  "title": "Design System: Megan — Product Designer Who Engineers",
+  "extensions": {
+    "colorMeta": {
+      "accent": { "role": "primary", "displayName": "Terracotta", "canonical": "#a8431f", "tonalRamp": ["#3a170a", "#5c2410", "#7e3116", "#a8431f", "#c66741", "#e0906c", "#eeb99b", "#f9e2d3"] },
+      "accent-soft": { "role": "primary", "displayName": "Soft Apricot", "canonical": "#e8926b", "tonalRamp": ["#4a2211", "#6f3419", "#9a4a26", "#c5673c", "#e8926b", "#efaf90", "#f5ccb8", "#faeadf"] },
+      "accent-tint": { "role": "primary", "displayName": "Pale Apricot Tint", "canonical": "#f6ddc9", "tonalRamp": ["#5a3a20", "#84582f", "#ad7a45", "#cfa06e", "#e8c39c", "#f6ddc9", "#faeade", "#fdf6ef"] },
+      "card-peach": { "role": "secondary", "displayName": "Peach", "canonical": "#ffd9b3", "tonalRamp": ["#5c3e14", "#8a5c1e", "#b87f2e", "#e0a659", "#ffcb8f", "#ffd9b3", "#ffe8d1", "#fff5ea"] },
+      "card-coral": { "role": "secondary", "displayName": "Coral", "canonical": "#f3a38a", "tonalRamp": ["#571f10", "#7f2f19", "#a84327", "#cf6142", "#eb8465", "#f3a38a", "#f8c3b1", "#fce3d9"] },
+      "card-rose": { "role": "secondary", "displayName": "Dusty Rose", "canonical": "#e38aa0", "tonalRamp": ["#511527", "#752038", "#9a2f4b", "#c34868", "#dd6a86", "#e38aa0", "#eeb0c0", "#f7d8e0" ] },
+      "card-violet": { "role": "secondary", "displayName": "Dusty Violet", "canonical": "#d9a3c2", "tonalRamp": ["#4c2340", "#6d345c", "#8f4a79", "#b0679b", "#c987b4", "#d9a3c2", "#e9c5da", "#f6e5ee"] },
+      "ground": { "role": "neutral", "displayName": "Warm Cream", "canonical": "#fbf5ee", "tonalRamp": ["#241c17", "#5b4c41", "#8a7666", "#b6a08b", "#d9c7b4", "#fbf5ee", "#fdf9f4", "#fffdfa"] },
+      "ground-alt": { "role": "neutral", "displayName": "Warm Cream Alt", "canonical": "#f5ebdf", "tonalRamp": ["#241c17", "#5b4c41", "#8a7666", "#b6a08b", "#d9c1a5", "#f5ebdf", "#f9f1e8", "#fdf8f3"] },
+      "ground-deep": { "role": "neutral", "displayName": "Warm Cream Deep", "canonical": "#efe1d1", "tonalRamp": ["#241c17", "#5b4c41", "#8a7666", "#b09876", "#d3b998", "#efe1d1", "#f5ebe0", "#faf4ec"] },
+      "ink": { "role": "neutral", "displayName": "Umber Ink", "canonical": "#241c17", "tonalRamp": ["#0f0b08", "#241c17", "#3a2e26", "#5b4c41", "#8a7666", "#b6a08b", "#d9c7b4", "#f2e9de"] },
+      "ink-soft": { "role": "neutral", "displayName": "Soft Umber", "canonical": "#5b4c41", "tonalRamp": ["#1a140f", "#332821", "#4a3b32", "#5b4c41", "#7c6b5c", "#a0917f", "#c6bba9", "#e9e2d6"] },
+      "ink-faint": { "role": "neutral", "displayName": "Faint Umber", "canonical": "#6b5847", "tonalRamp": ["#241c17", "#3d3226", "#54452f6", "#6b5847", "#8a7562", "#ab9a86", "#cec2b1", "#eee7db"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero name/positioning, case-study titles (h1)." },
+      "headline": { "displayName": "Headline", "purpose": "Case-study section headings, written as full sentences, never a kicker+heading pair (h2)." },
+      "title": { "displayName": "Title", "purpose": "About-page principle headings (h3)." },
+      "body": { "displayName": "Body", "purpose": "Default paragraph copy, capped at 68ch measure." },
+      "caption-italic": { "displayName": "Italic Serif Caption", "purpose": "First-person project captions, pull-quotes, empty-state coming-soon text." },
+      "label": { "displayName": "Label / Tag Row", "purpose": "Project metadata tags, dt labels, footer credit — sentence-case, never uppercase eyebrow style." }
+    },
+    "shadows": [
+      { "name": "shadow-card", "value": "0 1.5rem 3rem -1.25rem rgba(88, 51, 30, 0.35)", "purpose": "Primary lifted-surface shadow for hero panels and project cards." },
+      { "name": "shadow-lift", "value": "0 0.75rem 1.75rem -0.75rem rgba(88, 51, 30, 0.28)", "purpose": "Smaller-scale lift shadow." },
+      { "name": "device-shadow", "value": "0 1.25rem 1.5rem -0.75rem rgba(36, 28, 23, 0.35)", "purpose": "Floating-device face shadow, distinct from card-panel shadow." }
+    ],
+    "motion": [
+      { "name": "ease-out", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Default easing for all transitions and the hero entrance animation." },
+      { "name": "hero-rise-in", "value": "0.7s var(--ease-out) both, translateY(0.75rem) to 0 with opacity 0 to 1", "purpose": "One authored entrance moment for the hero only, staggered per element; respects prefers-reduced-motion." }
+    ],
+    "breakpoints": [
+      { "name": "mobile", "value": "640px" },
+      { "name": "case-study-stack", "value": "800px" },
+      { "name": "nav-compact", "value": "560px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Pill CTA used for the site's primary actions (See the work, Get in touch).",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">Get in touch</a>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; padding: 0.85rem 1.5rem; border-radius: 999px; background: #a8431f; color: #fbf5ee; text-decoration: none; font-family: 'Inter Variable', ui-sans-serif, system-ui, sans-serif; font-size: 0.9375rem; transition: background 0.2s cubic-bezier(0.16,1,0.3,1), transform 0.2s cubic-bezier(0.16,1,0.3,1); } .ds-btn-primary:hover { background: #241c17; transform: translateY(-0.1rem); } .ds-btn-primary:focus-visible { outline: 2px solid #a8431f; outline-offset: 3px; border-radius: 0.2em; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary CTA — transparent fill, thin border, used alongside the primary CTA.",
+      "html": "<a class=\"ds-btn-ghost\" href=\"#\">See the work</a>",
+      "css": ".ds-btn-ghost { display: inline-flex; align-items: center; padding: 0.85rem 1.5rem; border-radius: 999px; background: transparent; color: #241c17; text-decoration: none; font-family: 'Inter Variable', ui-sans-serif, system-ui, sans-serif; font-size: 0.9375rem; border: 1px solid #efe1d1; transition: border-color 0.2s cubic-bezier(0.16,1,0.3,1); } .ds-btn-ghost:hover { border-color: #241c17; } .ds-btn-ghost:focus-visible { outline: 2px solid #a8431f; outline-offset: 3px; }"
+    },
+    {
+      "name": "Floating Device",
+      "kind": "custom",
+      "refersTo": "project-card",
+      "description": "The system's signature material: a gradient device face with a genuine masked, flipped reflection beneath it. No fake screen content.",
+      "html": "<div class=\"ds-device\"><div class=\"ds-device-face\"></div><div class=\"ds-device-face ds-device-reflection\"></div></div>",
+      "css": ".ds-device { display: flex; flex-direction: column; align-items: center; pointer-events: none; } .ds-device-face { width: 150px; height: 260px; border-radius: 1.35rem; background: linear-gradient(155deg, #fffaf4 0%, #f6ddc9 100%); border: 1px solid rgba(36,28,23,0.14); box-shadow: 0 1.25rem 1.5rem -0.75rem rgba(36,28,23,0.35); } .ds-device-reflection { margin-top: 0.4rem; height: 143px; transform: scaleY(-1); box-shadow: none; -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.32), transparent 85%); mask-image: linear-gradient(to bottom, rgba(0,0,0,0.32), transparent 85%); opacity: 0.7; }"
+    },
+    {
+      "name": "Project Card (real)",
+      "kind": "card",
+      "refersTo": "project-card",
+      "description": "Warm gradient-field card holding a floating device, italic caption, tag row, and view link.",
+      "html": "<div class=\"ds-card\"><div class=\"ds-card-device\"></div><p class=\"ds-card-caption\">I redesigned the checkout flow to cut drop-off.</p><p class=\"ds-card-tags\">Enterprise / SaaS · Interaction Design · Shipped</p><a class=\"ds-card-link\" href=\"#\">View case study →</a></div>",
+      "css": ".ds-card { border-radius: 1.75rem; padding: 3.25rem 2rem; min-height: 22rem; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 1.5rem 3rem -1.25rem rgba(88,51,30,0.35); background: radial-gradient(120% 100% at 25% 10%, #f3a38a, #e38aa0 70%, #d9a3c2 100%); position: relative; overflow: hidden; } .ds-card-caption { font-family: 'Fraunces Variable', serif; font-style: italic; font-weight: 420; font-size: 1.25rem; color: #241c17; max-width: 32ch; margin-top: 2rem; } .ds-card-tags { font-family: 'Inter Variable', sans-serif; font-size: 0.8125rem; letter-spacing: 0.02em; color: #6b5847; margin-top: 0.5rem; } .ds-card-link { display: inline-block; margin-top: 0.75rem; font-family: 'Inter Variable', sans-serif; font-size: 0.9375rem; color: #a8431f; text-decoration: none; border-bottom: 1px solid #f6ddc9; } .ds-card-link:hover { color: #241c17; border-color: #241c17; }"
+    },
+    {
+      "name": "Project Card (empty / coming soon)",
+      "kind": "card",
+      "refersTo": "project-card",
+      "description": "Honest placeholder state — dashed device silhouette, muted italic caption, no fabricated content or CTA.",
+      "html": "<div class=\"ds-card-empty\"><svg class=\"ds-device-ghost\" width=\"96\" height=\"165\" viewBox=\"0 0 128 220\" fill=\"none\"><rect x=\"4\" y=\"4\" width=\"120\" height=\"212\" rx=\"20\" stroke=\"currentColor\" stroke-width=\"2\" stroke-dasharray=\"4 6\" /></svg><p class=\"ds-card-empty-caption\">New case study — coming soon.</p></div>",
+      "css": ".ds-card-empty { border-radius: 1.75rem; padding: 3.25rem 2rem; min-height: 22rem; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid #efe1d1; background: linear-gradient(160deg, color-mix(in srgb, #ffd9b3 20%, #f5ebdf), color-mix(in srgb, #e38aa0 16%, #f5ebdf)); } .ds-device-ghost { color: #6b5847; } .ds-card-empty-caption { font-family: 'Fraunces Variable', serif; font-style: italic; font-weight: 420; font-size: 1.25rem; color: #6b5847; margin-top: 2rem; }"
+    },
+    {
+      "name": "Primary Nav",
+      "kind": "nav",
+      "refersTo": "button-ghost",
+      "description": "Site header nav: display-serif wordmark left, flat text links right with accent underline on active page.",
+      "html": "<header class=\"ds-nav\"><a class=\"ds-nav-mark\" href=\"#\">Megan</a><nav><ul><li><a href=\"#\" aria-current=\"page\" class=\"ds-nav-active\">Home</a></li><li><a href=\"#\">Work</a></li><li><a href=\"#\">About</a></li><li><a href=\"#\">Contact</a></li></ul></nav></header>",
+      "css": ".ds-nav { display: flex; align-items: center; justify-content: space-between; gap: 1.25rem; padding-block: 1.25rem; } .ds-nav-mark { font-family: 'Fraunces Variable', serif; font-size: 1.25rem; color: #241c17; text-decoration: none; } .ds-nav-mark:hover { color: #a8431f; } .ds-nav ul { list-style: none; display: flex; gap: 2rem; margin: 0; padding: 0; } .ds-nav a { color: #5b4c41; text-decoration: none; font-family: 'Inter Variable', sans-serif; font-size: 0.9375rem; padding-block: 0.2rem; border-bottom: 1px solid transparent; transition: color 0.2s, border-color 0.2s; } .ds-nav a:hover { color: #241c17; } .ds-nav-active { color: #a8431f !important; border-color: #a8431f !important; }"
+    },
+    {
+      "name": "Case-Study Section Nav",
+      "kind": "nav",
+      "refersTo": "button-ghost",
+      "description": "Sticky in-page wayfinding rail for case-study sections. Functional navigation, not a decorative kicker — exempt from the No-Kicker Rule.",
+      "html": "<nav class=\"ds-section-nav\" aria-label=\"Case study sections\"><ul><li><a href=\"#challenge\">Challenge</a></li><li><a href=\"#process\">Process</a></li><li><a href=\"#decision\">Decision</a></li><li><a href=\"#outcome\">Outcome</a></li></ul></nav>",
+      "css": ".ds-section-nav ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; border-left: 1px solid #efe1d1; } .ds-section-nav a { display: block; padding: 0.3rem 0 0.3rem 0.75rem; font-family: 'Inter Variable', sans-serif; font-size: 0.875rem; color: #6b5847; text-decoration: none; } .ds-section-nav a:hover { color: #a8431f; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Warm Evidence Room",
+    "overview": "A cream-ground, editorial portfolio in the classy structural register of Rachel Chen and Sanvithi — generous whitespace, elegant serif display type, sentence-case (never label-and-heading) framing — with warmth carried by a single recurring device: a floating gradient-field card holding a soft device mockup and its own genuine reflection. That warmth is deliberately confined to card and hero-panel fields (peach to coral to dusty rose to violet radial gradients); the page ground itself stays a flat warm cream, never gradient. The system reads as restrained and evidentiary: one carried terracotta accent, one signature material (the floating device), full-sentence section headings instead of label+heading pairs, and an honest placeholder state for unfinished project slots rather than fabricated content. The build deliberately rejected two things its own references model: the small-caps eyebrow label sitting directly above a heading (used by the pinned reference, Rachel Chen), and the Hi, I'm X greeting-frame hero opener. Both were caught at the craft floor and resolved without losing the underlying structure — sticky in-page section navigation stayed, the framing folded into the heading sentence instead of sitting above it as a separate label.",
+    "keyCharacteristics": [
+      "Warm cream ground (#fbf5ee) throughout; gradient warmth confined to card/hero-panel fields only",
+      "One carrying accent (terracotta #a8431f), used sparingly — links, focus rings, CTAs, active nav state",
+      "Fraunces Variable (serif, optical-size axis) for display type and italic first-person captions; Inter Variable for body/UI/metadata",
+      "Signature component: the floating device — gradient-fill card face plus a real scaleY(-1) masked reflection, never fake screen content",
+      "Full-sentence section headings; no kicker/eyebrow labels anywhere in the system",
+      "Honest empty state for placeholder projects: dashed-outline device ghost, muted italic coming-soon caption, no invented content"
+    ],
+    "rules": [
+      { "name": "The One Accent Rule", "body": "Terracotta (accent) is the only saturated color allowed outside the card/hero gradient fields. It never appears as a page background or large fill — only as text, border, focus, or small CTA surfaces.", "section": "colors" },
+      { "name": "The Confined Gradient Rule", "body": "The four-stop warm gradient family is a card-and-hero-panel material, never a page background. If a surface needs warmth outside a card or hero panel, use the accent color on cream, not the gradient.", "section": "colors" },
+      { "name": "The Contrast Floor Rule", "body": "ink-faint (#6b5847) was tuned to clear 4.5:1 against both ground and ground-alt. Do not re-lighten this token without re-verifying contrast on both grounds.", "section": "colors" },
+      { "name": "The No-Kicker Rule", "body": "Never place a small-caps/eyebrow label directly above a heading, even when a pinned visual reference (Rachel Chen) uses one. Fold the section's framing into the heading itself as a full sentence. Functional navigation labels (the sticky in-page section-nav links) are exempt — they are wayfinding, not a kicker sitting on a heading.", "section": "typography" },
+      { "name": "The Italic-Voice Rule", "body": "Italic Fraunces is reserved for first-person, quote-register text (captions, pull-quotes) — never used for structural headings or UI labels.", "section": "typography" },
+      { "name": "The Warm-Shadow Rule", "body": "All elevation shadows are tinted warm umber, never neutral gray or black — shadow color follows the palette, not a generic gray.", "section": "elevation" },
+      { "name": "The Hairline-Not-Shadow Rule", "body": "Flat content dividers use 1px ground-deep borders, not shadows. Shadows are reserved for the gradient-field surfaces (hero panels, cards, the device).", "section": "elevation" }
+    ],
+    "dos": [
+      "Do keep the page ground flat warm cream (--ground) everywhere, including the hero — reserve the warm gradient family strictly for card/hero-panel fields.",
+      "Do write case-study section headings as full sentences that carry their own framing.",
+      "Do use the floating-device pattern (face + real mirrored reflection) as the system's one signature material rather than inventing new hero devices.",
+      "Do keep placeholder project cards honest: dashed silhouette, muted italic coming-soon caption, no invented titles/tags/metrics/clients.",
+      "Do tint all shadows warm umber, never neutral gray/black."
+    ],
+    "donts": [
+      "Don't add a kicker/eyebrow label (small-caps line sitting directly above a heading) anywhere in the system, even to match a pinned reference screenshot that uses one — fold that framing into the heading sentence instead.",
+      "Don't open the hero (or any page) with a Hi, I'm X greeting-frame line — the hero states name + positioning directly, no greeting scaffold.",
+      "Don't spread the warm gradient family across a full-page background — it is a confined card/hero-panel device, not a page treatment.",
+      "Don't re-lighten --ink-faint without re-checking 4.5:1 contrast against both --ground and --ground-alt.",
+      "Don't fabricate case-study content (metrics, client names, outcomes) for comingSoon project slots — the empty state is the honest answer until real content exists."
+    ]
+  }
+}

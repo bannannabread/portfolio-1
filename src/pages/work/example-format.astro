@@ -1,0 +1,53 @@
+---
+import CaseStudy from '../../layouts/CaseStudy.astro';
+
+// Not a real project — not linked from nav or the work index. This page exists
+// only to prove the case-study template at production fidelity before real
+// project content is available. Replace with a real project write-up, then
+// delete this file (or keep it as a private reference).
+const sections = [
+  {
+    id: 'challenge',
+    navLabel: 'Challenge',
+    heading: 'This is where the real problem statement goes.',
+    body: [
+      'Each section heading should say something specific — not "Challenge" as a label, but the actual sentence a reader needs. Swap this paragraph for the real framing: who had the problem, and why it mattered enough to work on.',
+    ],
+  },
+  {
+    id: 'process',
+    navLabel: 'Process',
+    heading: 'How the real investigation actually went.',
+    body: [
+      'This is where research, constraints, and the options that got ruled out live. Specifics beat summary: what you tried, what you learned, what changed your mind.',
+    ],
+    pullQuote: '“A pull quote can carry one sharp insight or a real quote from research here.”',
+  },
+  {
+    id: 'decision',
+    navLabel: 'Decision',
+    heading: 'What got built, and why this over the alternatives.',
+    body: [
+      'Name the decision plainly and say what it cost to make. This is the section recruiters actually read closely — it is proof of judgment, not just taste.',
+    ],
+  },
+  {
+    id: 'outcome',
+    navLabel: 'Outcome',
+    heading: 'What shipped, and what happened after.',
+    body: [
+      'Real, verifiable outcomes only — a metric, a quote, a launch. If the result is still unknown, say that honestly rather than inventing a number.',
+    ],
+  },
+];
+---
+
+<CaseStudy
+  title="Example Case Study"
+  dek="This page is a template, not a real project — it exists to prove the case-study format before real content is ready."
+  role="Template"
+  timeline="—"
+  skills="Format reference"
+  gradient="coral"
+  sections={sections}
+/>

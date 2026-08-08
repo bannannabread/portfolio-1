@@ -1,0 +1,273 @@
+---
+import Layout from './Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import FloatingDevice from '../components/FloatingDevice.astro';
+
+export interface CaseStudySection {
+  id: string;
+  navLabel: string;
+  heading: string;
+  body: string[];
+  pullQuote?: string;
+}
+
+interface Props {
+  title: string;
+  dek: string;
+  role: string;
+  timeline: string;
+  team?: string;
+  skills: string;
+  gradient?: 'peach' | 'coral' | 'rose' | 'violet';
+  sections: CaseStudySection[];
+  prev?: { slug: string; title: string };
+  next?: { slug: string; title: string };
+}
+
+const { title, dek, role, timeline, team, skills, gradient = 'coral', sections, prev, next } = Astro.props;
+
+const meta = [
+  { label: 'Role', value: role },
+  { label: 'Timeline', value: timeline },
+  ...(team ? [{ label: 'Team', value: team }] : []),
+  { label: 'Skills', value: skills },
+];
+---
+
+<Layout title={`${title} — Megan`} description={dek}>
+  <SiteNav />
+
+  <main>
+    <header class="case-header">
+      <div class="wrap">
+        <a class="back-link" href="/work">&larr; All work</a>
+        <h1>{title}</h1>
+        <p class="dek">{dek}</p>
+        <dl class="meta">
+          {
+            meta.map((item) => (
+              <div class="meta-item">
+                <dt>{item.label}</dt>
+                <dd>{item.value}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </header>
+
+    <div class={`hero-panel hero-panel--${gradient}`}>
+      <div class="wrap hero-panel__inner">
+        <FloatingDevice width={200} height={320} />
+      </div>
+    </div>
+
+    <div class="wrap body-grid">
+      <nav class="section-nav" aria-label="Case study sections">
+        <ul>
+          {
+            sections.map((section) => (
+              <li>
+                <a href={`#${section.id}`}>{section.navLabel}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <div class="sections">
+        {
+          sections.map((section) => (
+            <section id={section.id} class="case-section">
+              <h2>{section.heading}</h2>
+              {section.body.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+              {section.pullQuote && <p class="pull-quote italic-serif">{section.pullQuote}</p>}
+            </section>
+          ))
+        }
+      </div>
+    </div>
+
+    <nav class="project-pagination" aria-label="Other projects">
+      <div class="wrap pagination-row">
+        {prev ? <a href={`/work/${prev.slug}`}>&larr; {prev.title}</a> : <span />}
+        {next ? <a href={`/work/${next.slug}`}>{next.title} &rarr;</a> : <span />}
+      </div>
+    </nav>
+  </main>
+
+  <SiteFooter />
+</Layout>
+
+<style>
+  .case-header {
+    padding-block: var(--space-6) var(--space-4);
+  }
+
+  .back-link {
+    display: inline-block;
+    font-size: 0.875rem;
+    color: var(--ink-soft);
+    text-decoration: none;
+    margin-bottom: var(--space-3);
+  }
+
+  .back-link:hover {
+    color: var(--accent);
+  }
+
+  .dek {
+    margin-top: var(--space-2);
+    font-size: 1.1875rem;
+    color: var(--ink-soft);
+    max-width: 54ch;
+  }
+
+  .meta {
+    margin: var(--space-4) 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+
+  .meta-item {
+    min-width: 8rem;
+  }
+
+  .meta dt {
+    font-size: 0.8125rem;
+    color: var(--ink-faint);
+  }
+
+  .meta dd {
+    margin: 0.2rem 0 0;
+    font-size: 0.9375rem;
+    color: var(--ink);
+  }
+
+  .hero-panel {
+    border-radius: var(--radius-card);
+    margin-inline: max(1.5rem, calc((100% - 74rem) / 2));
+    box-shadow: var(--shadow-card);
+    padding: var(--space-5) var(--space-3);
+  }
+
+  .hero-panel__inner {
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero-panel--peach {
+    background: radial-gradient(120% 100% at 20% 15%, var(--card-peach), var(--card-coral) 65%, var(--card-rose) 100%);
+  }
+  .hero-panel--coral {
+    background: radial-gradient(120% 100% at 25% 10%, var(--card-coral), var(--card-rose) 70%, var(--card-violet) 100%);
+  }
+  .hero-panel--rose {
+    background: radial-gradient(120% 100% at 20% 10%, var(--card-rose), var(--card-violet) 75%);
+  }
+  .hero-panel--violet {
+    background: radial-gradient(120% 100% at 25% 10%, var(--card-violet), var(--card-rose) 70%, var(--card-coral) 100%);
+  }
+
+  .body-grid {
+    display: grid;
+    grid-template-columns: 12rem 1fr;
+    gap: var(--space-5);
+    padding-block: var(--space-6);
+  }
+
+  .section-nav {
+    position: sticky;
+    top: var(--space-3);
+    align-self: start;
+  }
+
+  .section-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-1);
+    border-left: 1px solid var(--ground-deep);
+  }
+
+  .section-nav a {
+    display: block;
+    padding: 0.3rem 0 0.3rem var(--space-2);
+    font-size: 0.875rem;
+    color: var(--ink-faint);
+    text-decoration: none;
+  }
+
+  .section-nav a:hover {
+    color: var(--accent);
+  }
+
+  .sections {
+    display: grid;
+    gap: var(--space-6);
+    max-width: 44rem;
+  }
+
+  .case-section p {
+    margin-top: var(--space-2);
+    color: var(--ink-soft);
+  }
+
+  .pull-quote {
+    font-size: 1.5rem;
+    color: var(--ink);
+    margin-top: var(--space-3);
+    padding-top: var(--space-2);
+    border-top: 1px solid var(--ground-deep);
+  }
+
+  .project-pagination {
+    border-top: 1px solid var(--ground-deep);
+    padding-block: var(--space-4);
+  }
+
+  .pagination-row {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+
+  .pagination-row a {
+    color: var(--ink);
+    text-decoration: none;
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-variation-settings: 'opsz' 30, 'SOFT' 35;
+  }
+
+  .pagination-row a:hover {
+    color: var(--accent);
+  }
+
+  @media (max-width: 800px) {
+    .body-grid {
+      grid-template-columns: 1fr;
+    }
+    .section-nav {
+      position: static;
+      margin-bottom: var(--space-3);
+    }
+    .section-nav ul {
+      display: flex;
+      flex-wrap: wrap;
+      border-left: none;
+      border-top: 1px solid var(--ground-deep);
+      padding-top: var(--space-2);
+      gap: var(--space-3);
+    }
+    .section-nav a {
+      padding-left: 0;
+    }
+  }
+</style>

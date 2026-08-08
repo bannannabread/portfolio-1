@@ -1,0 +1,156 @@
+---
+import FloatingDevice from './FloatingDevice.astro';
+
+interface Props {
+  href?: string;
+  gradient?: 'peach' | 'coral' | 'rose' | 'violet';
+  caption?: string;
+  tags?: string[];
+  comingSoon?: boolean;
+}
+
+const { href, gradient = 'coral', caption, tags = [], comingSoon = false } = Astro.props;
+---
+
+<li class="card-item">
+  <div class={`panel panel--${gradient} ${comingSoon ? 'panel--empty' : ''}`}>
+    {
+      comingSoon ? (
+        <svg class="device-ghost" width="128" height="220" viewBox="0 0 128 220" fill="none" aria-hidden="true">
+          <rect x="4" y="4" width="120" height="212" rx="20" stroke="currentColor" stroke-width="2" stroke-dasharray="4 6" />
+        </svg>
+      ) : (
+        <div class="device-wrap">
+          <FloatingDevice width={150} height={260} />
+        </div>
+      )
+    }
+  </div>
+
+  {
+    comingSoon ? (
+      <p class="caption caption--muted italic-serif">New case study — coming soon.</p>
+    ) : (
+      <p class="caption italic-serif">{caption}</p>
+    )
+  }
+
+  {
+    !comingSoon && tags.length > 0 && (
+      <p class="tag-row">{tags.join(' · ')}</p>
+    )
+  }
+
+  {
+    !comingSoon && href && (
+      <a class="view-link" href={href}>
+        View case study <span aria-hidden="true">&rarr;</span>
+      </a>
+    )
+  }
+</li>
+
+<style>
+  .card-item {
+    list-style: none;
+  }
+
+  .panel {
+    border-radius: var(--radius-card);
+    padding: var(--space-5) var(--space-4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 22rem;
+    box-shadow: var(--shadow-card);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: var(--space-3);
+  }
+
+  .panel::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 45%;
+    background: linear-gradient(to top, rgba(36, 28, 23, 0.14), transparent);
+    pointer-events: none;
+  }
+
+  .panel--peach {
+    background: radial-gradient(120% 100% at 20% 15%, var(--card-peach), var(--card-coral) 65%, var(--card-rose) 100%);
+  }
+  .panel--coral {
+    background: radial-gradient(120% 100% at 25% 10%, var(--card-coral), var(--card-rose) 70%, var(--card-violet) 100%);
+  }
+  .panel--rose {
+    background: radial-gradient(120% 100% at 20% 10%, var(--card-rose), var(--card-violet) 75%);
+  }
+  .panel--violet {
+    background: radial-gradient(120% 100% at 25% 10%, var(--card-violet), var(--card-rose) 70%, var(--card-coral) 100%);
+  }
+
+  .device-wrap {
+    transition: transform 0.4s var(--ease-out);
+  }
+
+  .card-item:hover .device-wrap {
+    transform: translateY(-0.35rem);
+  }
+
+  .panel--empty {
+    background: linear-gradient(
+      160deg,
+      color-mix(in srgb, var(--card-peach) 20%, var(--ground-alt)),
+      color-mix(in srgb, var(--card-rose) 16%, var(--ground-alt))
+    );
+    box-shadow: none;
+    border: 1px solid var(--ground-deep);
+  }
+
+  .panel--empty::after {
+    display: none;
+  }
+
+  .device-ghost {
+    color: var(--ink-faint);
+  }
+
+  .caption {
+    font-size: 1.25rem;
+    max-width: 32ch;
+    color: var(--ink);
+  }
+
+  .caption--muted {
+    color: var(--ink-faint);
+  }
+
+  .tag-row {
+    margin-top: var(--space-1);
+  }
+
+  .view-link {
+    display: inline-block;
+    margin-top: var(--space-2);
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent-tint);
+  }
+
+  .view-link:hover {
+    color: var(--ink);
+    border-color: var(--ink);
+  }
+
+  .view-link span {
+    display: inline-block;
+    transition: transform 0.2s var(--ease-out);
+  }
+
+  .view-link:hover span {
+    transform: translateX(0.2em);
+  }
+</style>

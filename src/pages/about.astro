@@ -1,0 +1,135 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+---
+
+<Layout
+  title="About — Megan"
+  description="How Megan approaches product design, from research through shipped code."
+>
+  <SiteNav />
+
+  <main>
+    <section class="intro">
+      <div class="wrap">
+        <h1>I design the whole path from problem to shipped product.</h1>
+        <p class="lede">
+          I'm a product designer who also writes the code that ships my
+          designs. That means every decision I make already has to survive
+          contact with a real interface, real data, and real constraints
+          &mdash; not just a comp.
+        </p>
+      </div>
+    </section>
+
+    <section class="principles">
+      <div class="wrap">
+        <ol class="principle-list">
+          <li>
+            <h3>Start from the reasoning, not the layout.</h3>
+            <p>
+              A screen is the last artifact of a decision, not the decision
+              itself. I'd rather show the messy middle &mdash; the constraint
+              that ruled something out, the option that lost on evidence
+              &mdash; than only the polished result.
+            </p>
+          </li>
+          <li>
+            <h3>Ship it, don't just spec it.</h3>
+            <p>
+              Being able to build what I design keeps my ideas honest. It
+              also means handoff isn't a translation step where nuance gets
+              lost.
+            </p>
+          </li>
+          <li>
+            <h3>Evidence over opinion.</h3>
+            <p>
+              Research and real usage settle arguments that taste
+              can't. When I don't have evidence yet, I say so.
+            </p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="wrap">
+        <p class="italic-serif">Want the full story &mdash; background, tools, résumé?</p>
+        <a class="cta" href="/contact">Get in touch</a>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</Layout>
+
+<style>
+  .intro {
+    padding-block: var(--space-6) var(--space-5);
+  }
+
+  .lede {
+    margin-top: var(--space-3);
+    font-size: 1.1875rem;
+    color: var(--ink-soft);
+    max-width: 56ch;
+  }
+
+  .principles {
+    padding-block: var(--space-5);
+  }
+
+  .principle-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .principle-list li {
+    max-width: 52rem;
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--ground-deep);
+  }
+
+  .principle-list p {
+    margin-top: var(--space-1);
+    color: var(--ink-soft);
+  }
+
+  .cta-band {
+    background: var(--ground-alt);
+    padding-block: var(--space-5);
+    margin-top: var(--space-5);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  .cta-band p {
+    font-size: 1.375rem;
+  }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.85rem 1.5rem;
+    border-radius: 999px;
+    background: var(--accent);
+    color: var(--ground);
+    text-decoration: none;
+    font-size: 0.9375rem;
+    white-space: nowrap;
+    transition: background 0.2s var(--ease-out), transform 0.2s var(--ease-out);
+  }
+
+  .cta:hover {
+    background: var(--ink);
+    transform: translateY(-0.1rem);
+  }
+</style>

@@ -1,0 +1,46 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <!--
+      THESIS: A product portfolio is evidence, not a resume restated — every
+      page shows the reasoning trail (problem, process, decision, outcome),
+      refusing the rounded-card grid + "Hi, I'm X" hero the category defaults to.
+      OWN-WORLD: warm cream ground (#fbf5ee); one carried terracotta accent;
+      project + hero fields sit inside a soft warm "aura" gradient (peach to
+      coral to dusty rose), never spread across the whole page; elegant
+      Fraunces display serif for headlines and italic first-person captions,
+      Inter for body/UI/metadata tags.
+      STORY: a recruiter arrives, reads Megan's name and hybrid design+
+      engineering identity, sees real project evidence with process depth,
+      and leaves knowing whether to reach out for an interview.
+      FIRST VIEWPORT: name + positioning line set in display serif on the
+      plain warm-cream ground (Rachel Chen / Sanvithi register, no hero
+      illustration); the aura-gradient warmth is reserved for the project
+      card fields just below, not spread across the hero itself.
+      FORM: user-pinned direction (Rachel Chen + Sanvithi structural/tonal
+      register, warmth carried via Sanvithi's gradient-card pattern rendered
+      warm) — pinned directly from real references, not the concept-seed roll.
+      FINISH: unreviewed and undocumented is unfinished; this build ends with
+      the finish review, the verdict, and DESIGN.md.
+    -->
+    <slot />
+  </body>
+</html>

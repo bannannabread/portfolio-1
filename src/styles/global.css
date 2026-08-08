@@ -1,0 +1,206 @@
+@import '@fontsource-variable/fraunces/opsz.css';
+@import '@fontsource-variable/fraunces/opsz-italic.css';
+@import '@fontsource-variable/inter/wght.css';
+
+:root {
+  /* Warm neutral ground */
+  --ground: #fbf5ee;
+  --ground-alt: #f5ebdf;
+  --ground-deep: #efe1d1;
+
+  /* Ink */
+  --ink: #241c17;
+  --ink-soft: #5b4c41;
+  --ink-faint: #6b5847;
+
+  /* Warm accent (single carrying accent, per Restrained/Committed strategy) */
+  --accent: #a8431f;
+  --accent-soft: #e8926b;
+  --accent-tint: #f6ddc9;
+
+  /* Card gradient family — warm aura, confined to hero + project cards */
+  --card-peach: #ffd9b3;
+  --card-coral: #f3a38a;
+  --card-rose: #e38aa0;
+  --card-violet: #d9a3c2;
+
+  /* Type */
+  --font-display: 'Fraunces Variable', ui-serif, Georgia, serif;
+  --font-body: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+
+  /* Spacing scale */
+  --space-1: 0.5rem;
+  --space-2: 0.75rem;
+  --space-3: 1.25rem;
+  --space-4: 2rem;
+  --space-5: 3.25rem;
+  --space-6: 5.25rem;
+  --space-7: 8.5rem;
+
+  /* Shadow — offset + soft blur, warm-tinted, never a zero-offset halo */
+  --shadow-card: 0 1.5rem 3rem -1.25rem rgba(88, 51, 30, 0.35);
+  --shadow-lift: 0 0.75rem 1.75rem -0.75rem rgba(88, 51, 30, 0.28);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --measure: 68ch;
+
+  --radius-card: 1.75rem;
+  --radius-control: 0.6rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--ground);
+  color-scheme: light;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-variant-numeric: tabular-nums;
+}
+
+img,
+picture,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  color: var(--ink);
+}
+
+input,
+textarea {
+  caret-color: var(--accent);
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--ground);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 0.2em;
+}
+
+/* Custom scrollbar, themed from the palette */
+html {
+  scrollbar-color: var(--accent-soft) var(--ground-alt);
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+  width: 0.7rem;
+  height: 0.7rem;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--ground-alt);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-soft);
+  border-radius: 999px;
+  border: 2px solid var(--ground-alt);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 480;
+  font-variation-settings: 'opsz' 72, 'SOFT' 40;
+  letter-spacing: -0.01em;
+  line-height: 1.08;
+  margin: 0;
+  max-width: 22ch;
+}
+
+h1 {
+  font-size: clamp(2.75rem, 2rem + 3vw, 5.5rem);
+}
+
+h2 {
+  font-size: clamp(2rem, 1.6rem + 1.6vw, 3.25rem);
+}
+
+h3 {
+  font-size: clamp(1.375rem, 1.2rem + 0.7vw, 1.875rem);
+}
+
+p {
+  margin: 0;
+  max-width: var(--measure);
+}
+
+.italic-serif {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-variation-settings: 'opsz' 30, 'SOFT' 25;
+  font-weight: 420;
+}
+
+.tag-row {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  color: var(--ink-faint);
+  text-transform: none;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.wrap {
+  width: min(100% - 3rem, 74rem);
+  margin-inline: auto;
+}
+
+@media (max-width: 640px) {
+  .wrap {
+    width: min(100% - 2.5rem, 74rem);
+  }
+}

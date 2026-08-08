@@ -1,0 +1,83 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SiteNav from '../../components/SiteNav.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { projects } from '../../data/projects';
+---
+
+<Layout
+  title="Work — Megan"
+  description="Case studies from Megan's product design work, problem through shipped outcome."
+>
+  <SiteNav />
+
+  <main>
+    <section class="intro">
+      <div class="wrap">
+        <h1>Work</h1>
+        <p class="lede">
+          A few projects, shown the way I actually worked through them:
+          problem, process, the decisions that mattered, and what shipped.
+        </p>
+      </div>
+    </section>
+
+    <section class="work-index">
+      <div class="wrap">
+        <ul class="grid">
+          {
+            projects.map((project) => (
+              <ProjectCard
+                href={project.comingSoon ? undefined : `/work/${project.slug}`}
+                gradient={project.gradient}
+                caption={project.caption}
+                tags={project.tags}
+                comingSoon={project.comingSoon}
+              />
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</Layout>
+
+<style>
+  .intro {
+    padding-block: var(--space-6) var(--space-5);
+  }
+
+  .lede {
+    margin-top: var(--space-3);
+    font-size: 1.1875rem;
+    color: var(--ink-soft);
+    max-width: 52ch;
+  }
+
+  .work-index {
+    padding-block: var(--space-4) var(--space-6);
+  }
+
+  .grid {
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+  }
+
+  @media (max-width: 900px) {
+    .grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
