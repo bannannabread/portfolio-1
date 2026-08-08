@@ -3,6 +3,13 @@ import '@fontsource/homemade-apple';
 import Layout from '../layouts/Layout.astro';
 import SiteNav from '../components/SiteNav.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+
+const funCategories = [
+  { label: 'Art', slots: 3 },
+  { label: 'Mentorship & Teaching', slots: 3 },
+  { label: 'Sports & Weightlifting', slots: 3 },
+  { label: 'Travel', slots: 3 },
+];
 ---
 
 <Layout
@@ -23,6 +30,10 @@ import SiteFooter from '../components/SiteFooter.astro';
           designs. That means every decision I make already has to survive
           contact with a real interface, real data, and real constraints
           &mdash; not just a comp.
+        </p>
+        <p class="status">
+          <span class="status__dot" aria-hidden="true"></span>
+          Currently a Student Ambassador for Google, working to bring Gemini to campus.
         </p>
       </div>
     </section>
@@ -56,6 +67,31 @@ import SiteFooter from '../components/SiteFooter.astro';
             </p>
           </li>
         </ol>
+      </div>
+    </section>
+
+    <section class="fun">
+      <div class="wrap">
+        <h2>Outside of code</h2>
+        <p class="fun-lede italic-serif">
+          I make art, mentor and teach, lift and play sports, and travel
+          whenever I can. Real photos going here as I add them &mdash; for
+          now, these are the slots waiting to be filled.
+        </p>
+        <div class="fun-grid">
+          {
+            funCategories.map((category) => (
+              <div class="fun-category">
+                <h3>{category.label}</h3>
+                <div class="fun-slots">
+                  {Array.from({ length: category.slots }).map(() => (
+                    <div class="fun-slot" aria-hidden="true" />
+                  ))}
+                </div>
+              </div>
+            ))
+          }
+        </div>
       </div>
     </section>
 
@@ -103,6 +139,23 @@ import SiteFooter from '../components/SiteFooter.astro';
     max-width: 56ch;
   }
 
+  .status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: var(--space-3);
+    font-size: 0.9375rem;
+    color: var(--ink-soft);
+  }
+
+  .status__dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 999px;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
   .principles {
     padding-block: var(--space-5);
   }
@@ -127,6 +180,43 @@ import SiteFooter from '../components/SiteFooter.astro';
   .principle-list p {
     margin-top: var(--space-2);
     color: var(--ink-soft);
+  }
+
+  .fun {
+    padding-block: var(--space-5);
+    border-top: 1px solid var(--ground-deep);
+  }
+
+  .fun-lede {
+    margin-top: var(--space-2);
+    font-size: 1.0625rem;
+    color: var(--ink-soft);
+    max-width: 56ch;
+  }
+
+  .fun-grid {
+    margin-top: var(--space-5);
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .fun-category h3 {
+    max-width: none;
+  }
+
+  .fun-slots {
+    margin-top: var(--space-2);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-2);
+  }
+
+  .fun-slot {
+    aspect-ratio: 1;
+    border-radius: 0.75rem;
+    border: 1.5px dashed var(--ink-faint);
+    background: transparent;
+    opacity: 0.55;
   }
 
   .cta-band {
@@ -169,6 +259,11 @@ import SiteFooter from '../components/SiteFooter.astro';
     .principle-list {
       grid-template-columns: repeat(3, 1fr);
       gap: var(--space-5);
+    }
+
+    .fun-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-5) var(--space-5);
     }
   }
 </style>

@@ -30,6 +30,8 @@ Reviewed by recruiters/hiring managers during candidate screening — likely a f
 
 - Some real projects are ready to include now; other project slots still need content and will use placeholders until the owner supplies real details.
 - Placeholder project entries must be visually honest about being placeholders — not fabricated case studies, fake metrics, or invented client names.
+- The About page's "Outside of code" section (Art, Mentorship & Teaching, Sports & Weightlifting, Travel) has real category labels but no real photos yet — empty slots render as honest dashed placeholders, never stock or fabricated images, until real photos are supplied.
+- Currently a Student Ambassador for Google, working to bring Gemini to campus — a real, current credential shown on the About page.
 
 ## Brand Commitments
 
