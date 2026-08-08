@@ -28,3 +28,6 @@ graphify-out/
 
 # raw asset drop folders — organized copies live under src/assets/work/<slug>/
 *-photos/
+
+# reference/inspiration screenshots — not site assets, never shipped
+aboutme/

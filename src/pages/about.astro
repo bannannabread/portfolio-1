@@ -1,4 +1,5 @@
 ---
+import '@fontsource/homemade-apple';
 import Layout from '../layouts/Layout.astro';
 import SiteNav from '../components/SiteNav.astro';
 import SiteFooter from '../components/SiteFooter.astro';
@@ -13,7 +14,10 @@ import SiteFooter from '../components/SiteFooter.astro';
   <main>
     <section class="intro">
       <div class="wrap">
-        <h1>I design the whole path from problem to shipped product.</h1>
+        <h1>
+          I design the whole path from problem to shipped product<span class="period">.</span>
+          <span class="hand" aria-hidden="true">for real</span>
+        </h1>
         <p class="lede">
           I'm a product designer who also writes the code that ships my
           designs. That means every decision I make already has to survive
@@ -56,7 +60,7 @@ import SiteFooter from '../components/SiteFooter.astro';
     </section>
 
     <section class="cta-band">
-      <div class="wrap">
+      <div class="wrap cta-band__inner">
         <p class="italic-serif">Want the full story &mdash; background, tools, résumé?</p>
         <a class="cta" href="/contact">Get in touch</a>
       </div>
@@ -69,6 +73,27 @@ import SiteFooter from '../components/SiteFooter.astro';
 <style>
   .intro {
     padding-block: var(--space-6) var(--space-5);
+  }
+
+  h1 {
+    position: relative;
+    max-width: 26ch;
+  }
+
+  .period {
+    color: var(--accent);
+  }
+
+  .hand {
+    display: block;
+    font-family: 'Homemade Apple', cursive;
+    font-size: 1.5rem;
+    line-height: 1.6;
+    color: var(--accent);
+    transform: rotate(-4deg);
+    margin-top: 0.75rem;
+    margin-left: 0.25rem;
+    padding-bottom: 2rem;
   }
 
   .lede {
@@ -91,13 +116,16 @@ import SiteFooter from '../components/SiteFooter.astro';
   }
 
   .principle-list li {
-    max-width: 52rem;
     padding-top: var(--space-3);
     border-top: 1px solid var(--ground-deep);
   }
 
+  .principle-list h3 {
+    max-width: none;
+  }
+
   .principle-list p {
-    margin-top: var(--space-1);
+    margin-top: var(--space-2);
     color: var(--ink-soft);
   }
 
@@ -105,6 +133,9 @@ import SiteFooter from '../components/SiteFooter.astro';
     background: var(--ground-alt);
     padding-block: var(--space-5);
     margin-top: var(--space-5);
+  }
+
+  .cta-band__inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -132,5 +163,12 @@ import SiteFooter from '../components/SiteFooter.astro';
   .cta:hover {
     background: var(--ink);
     transform: translateY(-0.1rem);
+  }
+
+  @media (min-width: 900px) {
+    .principle-list {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-5);
+    }
   }
 </style>
