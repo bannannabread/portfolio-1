@@ -47,7 +47,7 @@ Structural cues to carry into the build:
 
 ## Evidence on Hand
 
-Some real project content exists but specifics have not yet been provided to this assistant. Remaining project slots have no real content yet — do not invent case studies, testimonials, clients, or outcomes for them.
+Two real case studies are built: **I-Study** (peer study matchmaking, coursework, April 2026) and **Cat Inspect** (Caterpillar equipment inspection app redesign, HackIllinois 2026, 3-person team, design led by the owner — a rebuild of the owner's own earlier design, not presented at the event, no judge/user feedback to report). One project slot remains a placeholder — do not invent case studies, testimonials, clients, or outcomes for it.
 
 ## Product Principles
 

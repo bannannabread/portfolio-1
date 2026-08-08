@@ -1,5 +1,6 @@
 import type { ImageMetadata } from 'astro';
 import iStudyHomepage from '../assets/work/i-study/homepage-hifi.png';
+import catInspectWalkaround from '../assets/work/cat-inspect/walkaround-hifi.png';
 
 export interface Project {
   slug: string;
@@ -25,6 +26,15 @@ export const projects: Project[] = [
     image: iStudyHomepage,
     imageAlt: 'I-Study home screen showing a quick-match action and suggested study partners',
   },
-  { slug: 'project-two', title: '', caption: '', tags: [], gradient: 'rose', comingSoon: true },
+  {
+    slug: 'cat-inspect',
+    title: 'Cat Inspect',
+    caption:
+      'I rebuilt my own earlier equipment-inspection app concept with AI-assisted, glove-friendly workflows for field technicians.',
+    tags: ['Industrial UX', 'AI-Integrated Design', 'HackIllinois 2026', 'Figma'],
+    gradient: 'coral',
+    image: catInspectWalkaround,
+    imageAlt: 'Guided walk-around inspection step for a CAT D8T Dozer with a color-coded status selector',
+  },
   { slug: 'project-three', title: '', caption: '', tags: [], gradient: 'peach', comingSoon: true },
 ];
