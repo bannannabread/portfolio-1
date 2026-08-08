@@ -7,11 +7,17 @@ export interface Project {
   comingSoon?: boolean;
 }
 
-// Real project content has not been supplied yet. Per PRODUCT.md, placeholder
-// slots must stay honest — no invented clients, metrics, or outcomes — until
-// real case studies replace them.
+// Remaining placeholder slots stay honest — no invented clients, metrics, or
+// outcomes — until real case studies replace them. See PRODUCT.md.
 export const projects: Project[] = [
-  { slug: 'project-one', title: '', caption: '', tags: [], gradient: 'coral', comingSoon: true },
+  {
+    slug: 'i-study',
+    title: 'I-Study',
+    caption:
+      'I designed a peer study matchmaking platform to eliminate social friction and level the academic playing field for college students.',
+    tags: ['EdTech', 'UI/UX Design', 'Mobile App', 'Figma'],
+    gradient: 'violet',
+  },
   { slug: 'project-two', title: '', caption: '', tags: [], gradient: 'rose', comingSoon: true },
   { slug: 'project-three', title: '', caption: '', tags: [], gradient: 'peach', comingSoon: true },
 ];

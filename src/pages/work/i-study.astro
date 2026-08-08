@@ -1,0 +1,56 @@
+---
+import CaseStudy from '../../layouts/CaseStudy.astro';
+
+const sections = [
+  {
+    id: 'problem',
+    navLabel: 'Problem',
+    heading:
+      'Traditional campus study groups rely on existing social networks, leaving transfer and commuter students behind.',
+    body: [
+      'Finding effective study partners in higher education often depends on pre-existing social ties or awkward, unstructured group chats. For transfer, commuter, and underrepresented students who lack built-in campus networks, finding compatible peers for academic support creates significant social friction and isolation. Existing tools or class forums prioritize academic metrics like GPA or leave partner matching entirely random, failing to account for how and when students actually learn best together.',
+    ],
+    pullQuote:
+      '“Finding a study partner shouldn’t depend on who you already know in class or who posts first on a 300-person discussion board.”',
+  },
+  {
+    id: 'process',
+    navLabel: 'Process',
+    heading: 'Grounding the user experience in qualitative research, storyboards, and iterative wireframing.',
+    body: [
+      'To design an equitable solution, I conducted user research with undergraduate students to identify the key friction points in peer collaboration. The synthesis revealed that scheduling alignment and study habits (e.g., quiet focus vs. active dialogue) were far more critical to successful collaboration than academic standing. I translated these insights into user flows and storyboards to map out intuitive onboarding and matchmaking interactions. From there, I developed low-fidelity wireframes in Figma to test core layouts before establishing component specifications and interactive high-fidelity prototypes.',
+    ],
+    pullQuote:
+      '“Students don’t fail to study together because of skill gaps—they fail because of scheduling clashes and mismatched working styles.”',
+  },
+  {
+    id: 'decision',
+    navLabel: 'Decision',
+    heading: 'Matching by schedule and learning preferences rather than GPA or social status.',
+    body: [
+      'A pivotal design decision was shifting the matching criteria entirely toward logistically and behaviorally compatible attributes: recurring schedule availability and preferred study styles (such as silent focus, practice problem solving, or concept discussion). By removing GPA, profile ranks, and popularity signals from the primary matchmaking interface, the platform reduces social anxiety and prevents academic elitism while facilitating fast, high-confidence study pairing.',
+    ],
+    pullQuote: '“Stripping away academic ego signals transformed matchmaking into an approachable, utility-first experience.”',
+  },
+  {
+    id: 'outcome',
+    navLabel: 'Outcome',
+    heading: 'Delivering a complete end-to-end design system and interactive prototype for student connection.',
+    body: [
+      'I delivered a comprehensive high-fidelity Figma prototype and UI component specification for I-Study, establishing a structured problem brief, validated user flows, and a complete design rationale for peer academic matchmaking.',
+      'Course project completed in April 2026; validated through qualitative student usability walkthroughs and peer review. Interactive prototype and UI specifications ready for engineering handoff (quantitative production metrics not yet measured).',
+    ],
+  },
+];
+---
+
+<CaseStudy
+  title="I-Study"
+  dek="An end-to-end mobile matchmaking platform connecting college students for peer academic support based on schedule availability and learning styles."
+  role="Lead Product Designer"
+  timeline="April 2026 (4 weeks)"
+  team="Solo project (coursework)"
+  skills="User Research · User Flows & Storyboarding · Wireframing · High-Fidelity Prototyping · Component Specifications"
+  gradient="violet"
+  sections={sections}
+/>
