@@ -1,5 +1,9 @@
 ---
 import CaseStudy from '../../layouts/CaseStudy.astro';
+import homepageHifi from '../../assets/work/i-study/homepage-hifi.png';
+import matchHifi from '../../assets/work/i-study/match-hifi.png';
+import matchLofi from '../../assets/work/i-study/match-lofi.png';
+import storyboard from '../../assets/work/i-study/storyboard.png';
 
 const sections = [
   {
@@ -22,6 +26,18 @@ const sections = [
     ],
     pullQuote:
       '“Students don’t fail to study together because of skill gaps—they fail because of scheduling clashes and mismatched working styles.”',
+    images: [
+      {
+        src: storyboard,
+        alt: 'Six-panel storyboard of a student discovering the app, setting availability, matching with a peer, and confirming a study session',
+        caption: 'Early storyboard mapping the end-to-end user journey, from frustration to a booked study session.',
+      },
+      {
+        src: matchLofi,
+        alt: 'Pencil sketch wireframe of the match profile screen, showing name, tags, shared classes, and study style',
+        caption: 'Low-fidelity wireframe of the match profile screen, before visual design.',
+      },
+    ],
   },
   {
     id: 'decision',
@@ -31,6 +47,13 @@ const sections = [
       'A pivotal design decision was shifting the matching criteria entirely toward logistically and behaviorally compatible attributes: recurring schedule availability and preferred study styles (such as silent focus, practice problem solving, or concept discussion). By removing GPA, profile ranks, and popularity signals from the primary matchmaking interface, the platform reduces social anxiety and prevents academic elitism while facilitating fast, high-confidence study pairing.',
     ],
     pullQuote: '“Stripping away academic ego signals transformed matchmaking into an approachable, utility-first experience.”',
+    images: [
+      {
+        src: matchHifi,
+        alt: 'High-fidelity match profile screen for Ava Smith showing 87% schedule overlap, 3 shared classes, and a Request Session action',
+        caption: 'The finished match screen — schedule overlap and shared classes lead, GPA and rank are gone.',
+      },
+    ],
   },
   {
     id: 'outcome',
@@ -52,5 +75,7 @@ const sections = [
   team="Solo project (coursework)"
   skills="User Research · User Flows & Storyboarding · Wireframing · High-Fidelity Prototyping · Component Specifications"
   gradient="violet"
+  heroImage={homepageHifi}
+  heroImageAlt="I-Study home screen showing a quick-match action, next study session, and suggested study partners"
   sections={sections}
 />

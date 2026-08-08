@@ -1,5 +1,6 @@
 ---
 import FloatingDevice from './FloatingDevice.astro';
+import type { ImageMetadata } from 'astro';
 
 interface Props {
   href?: string;
@@ -7,9 +8,11 @@ interface Props {
   caption?: string;
   tags?: string[];
   comingSoon?: boolean;
+  image?: ImageMetadata;
+  imageAlt?: string;
 }
 
-const { href, gradient = 'coral', caption, tags = [], comingSoon = false } = Astro.props;
+const { href, gradient = 'coral', caption, tags = [], comingSoon = false, image, imageAlt = '' } = Astro.props;
 ---
 
 <li class="card-item">
@@ -21,7 +24,7 @@ const { href, gradient = 'coral', caption, tags = [], comingSoon = false } = Ast
         </svg>
       ) : (
         <div class="device-wrap">
-          <FloatingDevice width={150} height={260} />
+          <FloatingDevice width={150} height={260} image={image} alt={imageAlt} />
         </div>
       )
     }

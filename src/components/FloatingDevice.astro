@@ -1,15 +1,24 @@
 ---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
 interface Props {
   width?: number;
   height?: number;
+  image?: ImageMetadata;
+  alt?: string;
 }
 
-const { width = 150, height = 260 } = Astro.props;
+const { width = 150, height = 260, image, alt = '' } = Astro.props;
 ---
 
 <div class="floating-device" style={`--w:${width}px; --h:${height}px`}>
-  <div class="device-face" aria-hidden="true"></div>
-  <div class="device-face reflection" aria-hidden="true"></div>
+  <div class="device-face" aria-hidden={!image}>
+    {image && <Image src={image} alt={alt} width={width * 2} class="device-img" />}
+  </div>
+  <div class="device-face reflection" aria-hidden="true">
+    {image && <Image src={image} alt="" width={width * 2} class="device-img" />}
+  </div>
 </div>
 
 <style>
@@ -27,6 +36,14 @@ const { width = 150, height = 260 } = Astro.props;
     background: linear-gradient(155deg, #fffaf4 0%, var(--accent-tint) 100%);
     border: 1px solid rgba(36, 28, 23, 0.14);
     box-shadow: 0 1.25rem 1.5rem -0.75rem rgba(36, 28, 23, 0.35);
+    overflow: hidden;
+  }
+
+  .device-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
   }
 
   .reflection {

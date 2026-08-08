@@ -3,6 +3,14 @@ import Layout from './Layout.astro';
 import SiteNav from '../components/SiteNav.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import FloatingDevice from '../components/FloatingDevice.astro';
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+export interface CaseStudyImage {
+  src: ImageMetadata;
+  alt: string;
+  caption?: string;
+}
 
 export interface CaseStudySection {
   id: string;
@@ -10,6 +18,7 @@ export interface CaseStudySection {
   heading: string;
   body: string[];
   pullQuote?: string;
+  images?: CaseStudyImage[];
 }
 
 interface Props {
@@ -20,12 +29,27 @@ interface Props {
   team?: string;
   skills: string;
   gradient?: 'peach' | 'coral' | 'rose' | 'violet';
+  heroImage?: ImageMetadata;
+  heroImageAlt?: string;
   sections: CaseStudySection[];
   prev?: { slug: string; title: string };
   next?: { slug: string; title: string };
 }
 
-const { title, dek, role, timeline, team, skills, gradient = 'coral', sections, prev, next } = Astro.props;
+const {
+  title,
+  dek,
+  role,
+  timeline,
+  team,
+  skills,
+  gradient = 'coral',
+  heroImage,
+  heroImageAlt = '',
+  sections,
+  prev,
+  next,
+} = Astro.props;
 
 const meta = [
   { label: 'Role', value: role },
@@ -59,7 +83,7 @@ const meta = [
 
     <div class={`hero-panel hero-panel--${gradient}`}>
       <div class="wrap hero-panel__inner">
-        <FloatingDevice width={200} height={320} />
+        <FloatingDevice width={200} height={320} image={heroImage} alt={heroImageAlt} />
       </div>
     </div>
 
@@ -85,6 +109,16 @@ const meta = [
                 <p>{paragraph}</p>
               ))}
               {section.pullQuote && <p class="pull-quote italic-serif">{section.pullQuote}</p>}
+              {section.images && section.images.length > 0 && (
+                <div class="evidence-figures">
+                  {section.images.map((img) => (
+                    <figure class="evidence-figure">
+                      <Image src={img.src} alt={img.alt} width={1200} />
+                      {img.caption && <figcaption class="italic-serif">{img.caption}</figcaption>}
+                    </figure>
+                  ))}
+                </div>
+              )}
             </section>
           ))
         }
@@ -224,6 +258,31 @@ const meta = [
     margin-top: var(--space-3);
     padding-top: var(--space-2);
     border-top: 1px solid var(--ground-deep);
+  }
+
+  .evidence-figures {
+    display: grid;
+    gap: var(--space-4);
+    margin-top: var(--space-4);
+  }
+
+  .evidence-figure {
+    margin: 0;
+  }
+
+  .evidence-figure :global(img) {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 1rem;
+    border: 1px solid var(--ground-deep);
+    box-shadow: var(--shadow-lift);
+  }
+
+  .evidence-figure figcaption {
+    margin-top: var(--space-1);
+    font-size: 0.9375rem;
+    color: var(--ink-faint);
   }
 
   .project-pagination {

@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # graphify tool state (machine-specific paths, not part of the site)
 graphify-out/
+
+# raw asset drop folders — organized copies live under src/assets/work/<slug>/
+*-photos/
