@@ -5,6 +5,7 @@ import type { ImageMetadata } from 'astro';
 interface Props {
   href?: string;
   gradient?: 'peach' | 'coral' | 'rose' | 'violet';
+  title?: string;
   caption?: string;
   tags?: string[];
   comingSoon?: boolean;
@@ -16,6 +17,7 @@ interface Props {
 const {
   href,
   gradient = 'coral',
+  title,
   caption,
   tags = [],
   comingSoon = false,
@@ -23,6 +25,8 @@ const {
   imageAlt = '',
   priority = false,
 } = Astro.props;
+
+const comingSoonText = title ? `${title} — coming soon.` : 'New case study — coming soon.';
 ---
 
 <li class="card-item">
@@ -42,7 +46,7 @@ const {
 
   {
     comingSoon ? (
-      <p class="caption caption--muted italic-serif">New case study — coming soon.</p>
+      <p class="caption caption--muted italic-serif">{comingSoonText}</p>
     ) : (
       <p class="caption italic-serif">{caption}</p>
     )

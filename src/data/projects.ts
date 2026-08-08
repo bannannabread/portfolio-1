@@ -36,5 +36,12 @@ export const projects: Project[] = [
     image: catInspectWalkaround,
     imageAlt: 'Guided walk-around inspection step for a CAT D8T Dozer with a color-coded status selector',
   },
-  { slug: 'project-three', title: '', caption: '', tags: [], gradient: 'peach', comingSoon: true },
+  {
+    slug: 'fact-conference',
+    title: 'FACT Conference Website',
+    caption: '',
+    tags: [],
+    gradient: 'peach',
+    comingSoon: true,
+  },
 ];

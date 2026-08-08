@@ -47,7 +47,7 @@ Structural cues to carry into the build:
 
 ## Evidence on Hand
 
-Two real case studies are built: **I-Study** (peer study matchmaking, coursework, April 2026) and **Cat Inspect** (Caterpillar equipment inspection app redesign, HackIllinois 2026, 3-person team, design led by the owner — a rebuild of the owner's own earlier design, not presented at the event, no judge/user feedback to report). One project slot remains a placeholder — do not invent case studies, testimonials, clients, or outcomes for it.
+Two real case studies are built: **I-Study** (peer study matchmaking, coursework, April 2026) and **Cat Inspect** (Caterpillar equipment inspection app redesign, HackIllinois 2026, 3-person team, design led by the owner — a rebuild of the owner's own earlier design, not presented at the event, no judge/user feedback to report). The third project slot is named — **FACT Conference Website** — but has no case study content yet; it renders as an honest "coming soon" card naming the project, not an anonymous placeholder. Do not invent case studies, testimonials, clients, or outcomes for it.
 
 ## Product Principles
 

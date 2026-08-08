@@ -25,6 +25,7 @@ import { projects } from '../data/projects';
               <ProjectCard
                 href={project.comingSoon ? undefined : `/work/${project.slug}`}
                 gradient={project.gradient}
+                title={project.title}
                 caption={project.caption}
                 tags={project.tags}
                 comingSoon={project.comingSoon}
