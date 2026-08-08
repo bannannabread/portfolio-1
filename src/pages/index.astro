@@ -12,39 +12,43 @@ import { projects } from '../data/projects';
   description="Product design portfolio: case studies from research through shipped code."
 >
   <SiteNav />
-  <Hero />
 
-  <section class="work-index">
-    <div class="wrap">
-      <h2>Selected work</h2>
-      <ul class="grid">
-        {
-          projects.map((project) => (
-            <ProjectCard
-              href={project.comingSoon ? undefined : `/work/${project.slug}`}
-              gradient={project.gradient}
-              caption={project.caption}
-              tags={project.tags}
-              comingSoon={project.comingSoon}
-              image={project.image}
-              imageAlt={project.imageAlt}
-            />
-          ))
-        }
-      </ul>
-    </div>
-  </section>
+  <main>
+    <Hero />
 
-  <section class="about-teaser">
-    <div class="wrap about-teaser__inner">
-      <p class="italic-serif">
-        I care most about the decisions behind the pixels &mdash; why a flow
-        works, what it costs to build, and whether it actually helps the
-        person using it.
-      </p>
-      <a class="view-link" href="/about">More about how I work &rarr;</a>
-    </div>
-  </section>
+    <section class="work-index">
+      <div class="wrap">
+        <h2>Selected work</h2>
+        <ul class="grid">
+          {
+            projects.map((project, index) => (
+              <ProjectCard
+                href={project.comingSoon ? undefined : `/work/${project.slug}`}
+                gradient={project.gradient}
+                caption={project.caption}
+                tags={project.tags}
+                comingSoon={project.comingSoon}
+                image={project.image}
+                imageAlt={project.imageAlt}
+                priority={index === 0}
+              />
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <section class="about-teaser">
+      <div class="wrap about-teaser__inner">
+        <p class="italic-serif">
+          I care most about the decisions behind the pixels &mdash; why a flow
+          works, what it costs to build, and whether it actually helps the
+          person using it.
+        </p>
+        <a class="view-link" href="/about">More about how I work &rarr;</a>
+      </div>
+    </section>
+  </main>
 
   <SiteFooter />
 </Layout>

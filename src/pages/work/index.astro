@@ -27,7 +27,7 @@ import { projects } from '../../data/projects';
       <div class="wrap">
         <ul class="grid">
           {
-            projects.map((project) => (
+            projects.map((project, index) => (
               <ProjectCard
                 href={project.comingSoon ? undefined : `/work/${project.slug}`}
                 gradient={project.gradient}
@@ -36,6 +36,7 @@ import { projects } from '../../data/projects';
                 comingSoon={project.comingSoon}
                 image={project.image}
                 imageAlt={project.imageAlt}
+                priority={index === 0}
               />
             ))
           }

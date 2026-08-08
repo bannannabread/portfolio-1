@@ -10,9 +10,19 @@ interface Props {
   comingSoon?: boolean;
   image?: ImageMetadata;
   imageAlt?: string;
+  priority?: boolean;
 }
 
-const { href, gradient = 'coral', caption, tags = [], comingSoon = false, image, imageAlt = '' } = Astro.props;
+const {
+  href,
+  gradient = 'coral',
+  caption,
+  tags = [],
+  comingSoon = false,
+  image,
+  imageAlt = '',
+  priority = false,
+} = Astro.props;
 ---
 
 <li class="card-item">
@@ -24,7 +34,7 @@ const { href, gradient = 'coral', caption, tags = [], comingSoon = false, image,
         </svg>
       ) : (
         <div class="device-wrap">
-          <FloatingDevice width={150} height={260} image={image} alt={imageAlt} />
+          <FloatingDevice width={150} height={260} image={image} alt={imageAlt} priority={priority} />
         </div>
       )
     }

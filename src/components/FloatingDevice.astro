@@ -7,17 +7,20 @@ interface Props {
   height?: number;
   image?: ImageMetadata;
   alt?: string;
+  priority?: boolean;
 }
 
-const { width = 150, height = 260, image, alt = '' } = Astro.props;
+const { width = 150, height = 260, image, alt = '', priority = false } = Astro.props;
+const loading = priority ? 'eager' : 'lazy';
+const fetchpriority = priority ? 'high' : 'auto';
 ---
 
 <div class="floating-device" style={`--w:${width}px; --h:${height}px`}>
   <div class="device-face" aria-hidden={!image}>
-    {image && <Image src={image} alt={alt} width={width * 2} class="device-img" />}
+    {image && <Image src={image} alt={alt} width={width * 2} loading={loading} fetchpriority={fetchpriority} class="device-img" />}
   </div>
   <div class="device-face reflection" aria-hidden="true">
-    {image && <Image src={image} alt="" width={width * 2} class="device-img" />}
+    {image && <Image src={image} alt="" width={width * 2} loading={loading} fetchpriority={fetchpriority} class="device-img" />}
   </div>
 </div>
 

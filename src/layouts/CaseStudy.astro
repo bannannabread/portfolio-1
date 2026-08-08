@@ -83,7 +83,7 @@ const meta = [
 
     <div class={`hero-panel hero-panel--${gradient}`}>
       <div class="wrap hero-panel__inner">
-        <FloatingDevice width={200} height={320} image={heroImage} alt={heroImageAlt} />
+        <FloatingDevice width={200} height={320} image={heroImage} alt={heroImageAlt} priority />
       </div>
     </div>
 
@@ -125,12 +125,16 @@ const meta = [
       </div>
     </div>
 
-    <nav class="project-pagination" aria-label="Other projects">
-      <div class="wrap pagination-row">
-        {prev ? <a href={`/work/${prev.slug}`}>&larr; {prev.title}</a> : <span />}
-        {next ? <a href={`/work/${next.slug}`}>{next.title} &rarr;</a> : <span />}
-      </div>
-    </nav>
+    {
+      (prev || next) && (
+        <nav class="project-pagination" aria-label="Other projects">
+          <div class="wrap pagination-row">
+            {prev ? <a href={`/work/${prev.slug}`}>&larr; {prev.title}</a> : <span />}
+            {next ? <a href={`/work/${next.slug}`}>{next.title} &rarr;</a> : <span />}
+          </div>
+        </nav>
+      )
+    }
   </main>
 
   <SiteFooter />
@@ -225,13 +229,12 @@ const meta = [
     margin: 0;
     padding: 0;
     display: grid;
-    gap: var(--space-1);
     border-left: 1px solid var(--ground-deep);
   }
 
   .section-nav a {
     display: block;
-    padding: 0.3rem 0 0.3rem var(--space-2);
+    padding: 0.7rem 0 0.7rem var(--space-2);
     font-size: 0.875rem;
     color: var(--ink-faint);
     text-decoration: none;

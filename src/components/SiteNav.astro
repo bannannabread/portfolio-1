@@ -64,10 +64,12 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
   }
 
   nav a {
+    display: inline-block;
     color: var(--ink-soft);
     text-decoration: none;
     font-size: 0.9375rem;
-    padding-block: 0.2rem;
+    padding-block: 0.7rem;
+    margin-block: -0.7rem;
     border-bottom: 1px solid transparent;
     transition: color 0.2s var(--ease-out), border-color 0.2s var(--ease-out);
   }

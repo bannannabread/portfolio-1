@@ -7,8 +7,10 @@ const year = new Date().getFullYear();
     <p class="credit">Designed by Megan &middot; {year}</p>
     <ul class="links">
       <li><a href="mailto:megan@example.com">Email</a></li>
-      <li><a href="https://linkedin.com" rel="me noopener" target="_blank">LinkedIn</a></li>
-      <li><a href="https://github.com" rel="me noopener" target="_blank">GitHub</a></li>
+      <li>
+        <a href="https://www.linkedin.com/in/meganmaejacob/" rel="me noopener" target="_blank">LinkedIn</a>
+      </li>
+      <li><a href="https://github.com/bannannabread" rel="me noopener" target="_blank">GitHub</a></li>
     </ul>
   </div>
 </footer>
@@ -43,9 +45,12 @@ const year = new Date().getFullYear();
   }
 
   .links a {
+    display: inline-block;
     font-size: 0.875rem;
     color: var(--ink-soft);
     text-decoration: none;
+    padding-block: 0.7rem;
+    margin-block: -0.7rem;
     border-bottom: 1px solid var(--ground-deep);
     transition: color 0.2s var(--ease-out), border-color 0.2s var(--ease-out);
   }
