@@ -46,9 +46,17 @@ typography:
     fontFamily: "'Inter Variable', ui-sans-serif, system-ui, sans-serif"
     fontSize: "0.8125rem"
     letterSpacing: "0.02em"
+  scale:
+    nav-small: "0.875rem"
+    lede: "1.1875rem"
+    meta-value: "0.9375rem"
+    channel-label: "1.375rem"
+    pull-quote: "1.5rem"
 rounded:
   control: "0.6rem"
   card: "1.75rem"
+  media: "1rem"
+  device-face: "1.35rem"
   pill: "999px"
 spacing:
   1: "0.5rem"
@@ -75,7 +83,7 @@ components:
   project-card:
     backgroundColor: "{colors.card-coral}"
     rounded: "{rounded.card}"
-    padding: "3.25rem 2rem"
+    padding: "3.25rem 1.25rem"
 ---
 
 # Design System: Megan — Product Designer Who Engineers
@@ -84,7 +92,7 @@ components:
 
 **Creative North Star: "The Warm Evidence Room"**
 
-A cream-ground, editorial portfolio in the classy structural register of Rachel Chen and Sanvithi — generous whitespace, elegant serif display type, sentence-case (never label-and-heading) framing — with warmth carried by a single recurring device: a floating gradient-field card holding a soft device mockup and its own genuine reflection. That warmth is deliberately confined to card and hero-panel fields (peach → coral → dusty rose → violet radial gradients); the page ground itself stays a flat warm cream, never gradient. The system reads as restrained and evidentiary: one carried terracotta accent, one signature material (the floating device), full-sentence section headings instead of label+heading pairs, and an honest placeholder state for unfinished project slots rather than fabricated content.
+A cream-ground, editorial portfolio in the classy structural register of Rachel Chen and Sanvithi — generous whitespace, elegant serif display type, sentence-case (never label-and-heading) framing — with warmth carried by a single recurring device: a floating gradient-field card holding a large device mockup photo. That warmth is deliberately confined to card and hero-panel fields (peach → coral → dusty rose → violet radial gradients); the page ground itself stays a flat warm cream, never gradient. The system reads as restrained and evidentiary: one carried terracotta accent, one signature material (the floating device), full-sentence section headings instead of label+heading pairs, and an honest placeholder state for unfinished project slots rather than fabricated content.
 
 The build deliberately rejected two things its own references model: the small-caps "eyebrow" label sitting directly above a heading (used by the pinned reference, Rachel Chen), and the "Hi, I'm X" greeting-frame hero opener. Both were caught at the craft floor and resolved without losing the underlying structure — sticky in-page section navigation stayed, the framing folded into the heading sentence instead of sitting above it as a separate label.
 
@@ -138,6 +146,14 @@ A warm, low-saturation neutral field (cream ground, umber ink) carries one terra
 - **Italic Serif Caption** (420 weight, italic, `'opsz' 30, 'SOFT' 25`): first-person project captions ("I designed…"), pull-quotes, empty-state "coming soon" text.
 - **Label/Tag Row** (Inter, 0.8125rem, 0.02em tracking, `--ink-faint`, sentence-case not uppercase): project metadata tags, `dt` labels, footer credit line.
 
+### Meta & UI Scale
+Below Label sits a second, smaller ramp for recurring UI microcopy — not a fifth heading level, just the sizes that keep showing up between Body and Label. Documented here so repeated, intentional use stops reading as drift:
+- **`nav-small`** (0.875rem): case-study back-link, sticky section-nav links.
+- **`lede`** (1.1875rem): the standfirst paragraph directly under any page's `h1` (About, Contact) or under a case-study `h1` (the `dek`).
+- **`meta-value`** (0.9375rem): case-study role/timeline/team `dd` values, contact channel values, evidence-figure captions.
+- **`channel-label`** (1.375rem): Contact page channel labels (Email/LinkedIn/GitHub).
+- **`pull-quote`** (1.5rem): case-study pull-quotes, paired with the Italic Serif Caption voice.
+
 ### Named Rules
 **The No-Kicker Rule.** Never place a small-caps/eyebrow label directly above a heading, even when a pinned visual reference (Rachel Chen) uses one. Fold the section's framing into the heading itself as a full sentence. Functional navigation labels (the sticky in-page section-nav links) are exempt — they are wayfinding, not a kicker sitting on a heading.
 **The Italic-Voice Rule.** Italic Fraunces is reserved for first-person, quote-register text (captions, pull-quotes) — never used for structural headings or UI labels.
@@ -163,7 +179,7 @@ Hybrid: the page body is flat (no shadow on nav, footer, or text blocks — divi
 
 ## Shapes
 
-Two radius scales: a large `--radius-card` (1.75rem) for gradient-field surfaces (hero panel, project-card panels, floating-device face at 1.35rem), and a small `--radius-control` (0.6rem) reserved for compact controls. CTA buttons use full pill radius (999px), distinct from both card and control scale. No sharp corners anywhere in the system; no clipped/angled geometry. Borders are thin (1px) and low-contrast (`--ground-deep` or `rgba(36,28,23,0.14)`), used for hairline dividers and the device-face edge, never as a heavy structural line.
+Three radius scales: a large `--radius-card` (1.75rem) for gradient-field surfaces (hero panel, project-card panels, floating-device face at 1.35rem), a small `--radius-control` (0.6rem) reserved for compact controls, and `--radius-media` (1rem) for inline content photography (case-study evidence figures) — smaller than a card surface since these are documentary screenshots inside the reading column, not a gradient/hero material. CTA buttons use full pill radius (999px), distinct from all three. No sharp corners anywhere in the system; no clipped/angled geometry. Borders are thin (1px) and low-contrast (`--ground-deep` or `rgba(36,28,23,0.14)`), used for hairline dividers and the device-face edge, never as a heavy structural line.
 
 ## Components
 
@@ -176,13 +192,14 @@ Two radius scales: a large `--radius-card` (1.75rem) for gradient-field surfaces
 ### Cards / Containers — Project Card
 - **Corner Style:** `--radius-card` (1.75rem).
 - **Background:** one of four radial warm-aura gradients (`peach`/`coral`/`rose`/`violet`), each with a bottom scrim (`linear-gradient(to top, rgba(36,28,23,0.14), transparent)`) for the device to sit against.
+- **Tag reveal:** the project's tags render as small pills tucked behind the device photo (`z-index: 1`, under the device's `z-index: 2`), pulled toward center and scaled down (`--tuck-x`/`--tuck-y` per pill) so the device's own opaque silhouette hides them at rest. On card hover they pop out to tilted corner positions (translate to `0,0`, scale to 1, rotate to `--rest-rotate`) with a staggered (`50ms` per pill) confident-arrival transition; on unhover they pop back in faster, unstaggered. `prefers-reduced-motion` disables the transform choreography.
 - **Shadow Strategy:** `--shadow-card` at rest; device inside lifts an extra `-0.35rem` on card hover (`0.4s var(--ease-out)`).
 - **Border:** none on real cards.
-- **Internal Padding:** `--space-5` block, `--space-4` inline; minimum height 22rem.
-- **Caption:** italic serif, ≤32ch; tag row beneath in Inter label style; "View case study →" link with arrow micro-animation on hover.
+- **Internal Padding:** `--space-4` block, `--space-3` inline; minimum height 33rem, sized for the current 254×460 device mockup.
+- **Caption:** italic serif, ≤32ch; tag row beneath in Inter label style (still shown even though the same tags also pop out on hover — the plain-text row is the always-visible, non-hover-dependent source); "View case study →" link with arrow micro-animation on hover.
 
 ### Empty / Placeholder State (honest empty-state, not a generic loading skeleton)
-- **Background:** the same gradient family desaturated via `color-mix(in srgb, <card-color> 16-20%, var(--ground-alt))` — a muted echo of the real card, not a different material.
+- **Background:** the same gradient family desaturated via `color-mix(in srgb, <card-color> 16-20%, var(--ground-alt))` — a muted echo of the real card, not a different material. No tag pills (comingSoon has no tags to show).
 - **Shadow/Border:** no shadow; a plain `1px solid var(--ground-deep)` border instead — visually quieter than a real card.
 - **Content:** a dashed-outline (`stroke-dasharray: 4 6`) device silhouette in `--ink-faint`, plus muted italic caption "New case study — coming soon." Never a title, tags, metrics, or CTA link.
 
@@ -191,12 +208,20 @@ Two radius scales: a large `--radius-card` (1.75rem) for gradient-field surfaces
 - **Case-study section nav:** sticky rail (12rem, `top: var(--space-3)`), left-bordered list of plain-text links in `--ink-faint`, hover shifts to `--accent`. Collapses to a horizontal top-bordered strip under 800px. This is functional wayfinding tied to real in-page anchors — not decorative labeling, and exempt from the No-Kicker Rule for that reason.
 
 ### Floating Device (signature component)
-The system's single most distinctive material: a device-face rectangle (`linear-gradient(155deg, #fffaf4, var(--accent-tint))`, 1.35rem radius, thin dark-tinted border, own drop shadow) paired directly beneath with a genuine mirrored reflection — the same face `scaleY(-1)`'d, masked to a top-fading gradient, and set to 0.7 opacity. No fake screen content, icons, or UI chrome is drawn inside the face; it is a pure abstracted material object. Used at large scale (200×320) in case-study hero panels and smaller (150×260) inside project cards. Reused verbatim as the honest empty-state silhouette (dashed outline, no fill) when a project has no content yet.
+The system's single most distinctive material, with two modes sharing one component (`FloatingDevice.astro`):
+
+- **Framed mode** (default; case-study hero panels, 200×320): a device-face rectangle (`linear-gradient(155deg, #fffaf4, var(--accent-tint))`, 1.35rem radius, thin dark-tinted border, own drop shadow) paired directly beneath with a genuine mirrored reflection — the same face `scaleY(-1)`'d, masked to a top-fading gradient, and set to 0.7 opacity. For flat screenshot source images that need the frame supplied. No fake screen content, icons, or UI chrome is drawn inside the face; it is a pure abstracted material object.
+- **Mockup mode** (`mockup` prop; project-card covers, 254×460, filling most of the card): renders a pre-rendered, transparent-background photorealistic device-in-hand photo directly via `object-fit: contain`, with no synthetic face, border, or CSS reflection layered on top — the source image already carries its own device frame and soft contact shadow, so adding the framed mode's chrome would double it.
+
+Reused as the honest empty-state silhouette (dashed outline, no fill, scaled to match the mockup-mode device at 216×391) when a project has no content yet.
+
+### Project-panel morph (the one authored focal transition)
+Site-wide `<ClientRouter />` (Astro View Transitions, `src/layouts/Layout.astro`) is active on every page. The single deliberate focal moment: each real project's gradient panel carries `transition:name="project-panel-<slug>"` on both ends — the card's `.panel` (`ProjectCard.astro`, only when not `comingSoon` and a `slug` is passed) and the case-study's `.hero-panel` (`CaseStudy.astro`, via a required `slug` prop). Clicking "View case study" morphs that exact colored panel from its card position/size directly into the hero-panel position/size on the destination page, while the rest of the page cross-fades under Astro's default. Global timing override in `src/styles/global.css` (`::view-transition-group/old/new`) swaps the browser's default easing for the site's own `var(--ease-out)` at `0.5s`, guarded by `prefers-reduced-motion: reduce` (disables the animation entirely, falls back to an instant swap). No other element on the site carries a `transition:name` — one authored moment, not a page-wide transition system.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** keep the page ground flat warm cream (`--ground`) everywhere, including the hero — reserve the warm gradient family strictly for card/hero-panel fields.
+- **Do** keep the page ground flat warm cream (`--ground`) everywhere as the literal background-color — the landing hero carries two soft, heavily blurred radial-gradient blobs (`Hero.astro`, `::before`/`::after`, peach→coral top-right and violet→rose bottom-left, 0.4–0.55 opacity) as atmosphere over that cream ground, not a hard gradient fill; the solid multi-stop gradient fill itself stays confined to card and hero-panel fields.
 - **Do** write case-study section headings as full sentences that carry their own framing.
 - **Do** use the floating-device pattern (face + real mirrored reflection) as the system's one signature material rather than inventing new hero devices.
 - **Do** keep placeholder project cards honest: dashed silhouette, muted italic "coming soon" caption, no invented titles/tags/metrics/clients.

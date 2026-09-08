@@ -46,6 +46,7 @@
 
   --radius-card: 1.75rem;
   --radius-control: 0.6rem;
+  --radius-media: 1rem;
 }
 
 *,
@@ -185,6 +186,36 @@ p {
   text-transform: none;
 }
 
+.cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.85rem 1.5rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--ground);
+  text-decoration: none;
+  font-size: 0.9375rem;
+  white-space: nowrap;
+  transition: background 0.2s var(--ease-out), transform 0.2s var(--ease-out);
+}
+
+.cta:hover {
+  background: var(--ink);
+  color: var(--ground);
+  transform: translateY(-0.1rem);
+}
+
+.cta--ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--ground-deep);
+}
+
+.cta--ghost:hover {
+  border-color: var(--ink);
+  background: transparent;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -192,6 +223,25 @@ p {
   overflow: hidden;
   clip: rect(0 0 0 0);
   white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute;
+  top: -3rem;
+  left: var(--space-3);
+  z-index: 100;
+  padding: 0.7rem 1.25rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--ground);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  text-decoration: none;
+  transition: top 0.2s var(--ease-out);
+}
+
+.skip-link:focus-visible {
+  top: var(--space-2);
 }
 
 .wrap {
@@ -202,5 +252,23 @@ p {
 @media (max-width: 640px) {
   .wrap {
     width: min(100% - 2.5rem, 74rem);
+  }
+}
+
+/* Cross-document view transition: the project-panel morph (card -> case-study
+   hero) is the one authored focal moment; give it the site's own confident
+   ease-out instead of the browser default. */
+::view-transition-group(*),
+::view-transition-old(*),
+::view-transition-new(*) {
+  animation-duration: 0.5s;
+  animation-timing-function: var(--ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
   }
 }

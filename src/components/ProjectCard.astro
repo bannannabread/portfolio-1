@@ -4,6 +4,7 @@ import type { ImageMetadata } from 'astro';
 
 interface Props {
   href?: string;
+  slug?: string;
   gradient?: 'peach' | 'coral' | 'rose' | 'violet';
   title?: string;
   caption?: string;
@@ -16,6 +17,7 @@ interface Props {
 
 const {
   href,
+  slug,
   gradient = 'coral',
   title,
   caption,
@@ -27,19 +29,29 @@ const {
 } = Astro.props;
 
 const comingSoonText = title ? `${title} — coming soon.` : 'New case study — coming soon.';
+const panelTransitionName = !comingSoon && slug ? `project-panel-${slug}` : undefined;
 ---
 
 <li class="card-item">
-  <div class={`panel panel--${gradient} ${comingSoon ? 'panel--empty' : ''}`}>
+  <div class={`panel panel--${gradient} ${comingSoon ? 'panel--empty' : ''}`} transition:name={panelTransitionName}>
     {
       comingSoon ? (
-        <svg class="device-ghost" width="128" height="220" viewBox="0 0 128 220" fill="none" aria-hidden="true">
-          <rect x="4" y="4" width="120" height="212" rx="20" stroke="currentColor" stroke-width="2" stroke-dasharray="4 6" />
+        <svg class="device-ghost" width="216" height="391" viewBox="0 0 216 391" fill="none" aria-hidden="true">
+          <rect x="4" y="4" width="208" height="383" rx="32" stroke="currentColor" stroke-width="2" stroke-dasharray="4 6" />
         </svg>
       ) : (
-        <div class="device-wrap">
-          <FloatingDevice width={150} height={260} image={image} alt={imageAlt} priority={priority} />
-        </div>
+        <>
+          <ul class="tag-scatter" aria-hidden="true">
+            {tags.slice(0, 4).map((tag, i) => (
+              <li class={`tag-pill tag-pill--${i}`} style={`--stagger: ${i}`}>
+                {tag}
+              </li>
+            ))}
+          </ul>
+          <div class="device-wrap">
+            <FloatingDevice width={254} height={460} image={image} alt={imageAlt} priority={priority} mockup />
+          </div>
+        </>
       )
     }
   </div>
@@ -74,13 +86,14 @@ const comingSoonText = title ? `${title} — coming soon.` : 'New case study —
 
   .panel {
     border-radius: var(--radius-card);
-    padding: var(--space-5) var(--space-4);
+    padding: var(--space-4) var(--space-3);
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 22rem;
+    min-height: 33rem;
     box-shadow: var(--shadow-card);
     position: relative;
+    z-index: 0;
     overflow: hidden;
     margin-bottom: var(--space-3);
   }
@@ -108,11 +121,93 @@ const comingSoonText = title ? `${title} — coming soon.` : 'New case study —
   }
 
   .device-wrap {
+    position: relative;
+    z-index: 2;
+    min-width: 0;
+    max-width: 100%;
     transition: transform 0.4s var(--ease-out);
   }
 
   .card-item:hover .device-wrap {
     transform: translateY(-0.35rem);
+  }
+
+  .tag-scatter {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    pointer-events: none;
+  }
+
+  .tag-pill {
+    position: absolute;
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    letter-spacing: 0.02em;
+    box-shadow: var(--shadow-lift);
+    white-space: nowrap;
+    opacity: 0;
+    transform: translate(var(--tuck-x), var(--tuck-y)) scale(0.75) rotate(0deg);
+    transition: opacity 0.2s var(--ease-out), transform 0.2s var(--ease-out);
+  }
+
+  .card-item:hover .tag-pill {
+    opacity: 1;
+    transform: translate(0, 0) scale(1) rotate(var(--rest-rotate, 0deg));
+    transition: opacity 0.35s var(--ease-out), transform 0.35s var(--ease-out);
+    transition-delay: calc(var(--stagger, 0) * 50ms);
+    will-change: transform, opacity;
+  }
+
+  .tag-pill--0 {
+    top: 1.75rem;
+    left: 1.5rem;
+    --tuck-x: 3rem;
+    --tuck-y: 3.5rem;
+    --rest-rotate: -7deg;
+  }
+
+  .tag-pill--1 {
+    top: 2.75rem;
+    right: 1.25rem;
+    --tuck-x: -3rem;
+    --tuck-y: 4rem;
+    --rest-rotate: 5deg;
+  }
+
+  .tag-pill--2 {
+    bottom: 3.5rem;
+    left: 1rem;
+    --tuck-x: 2.5rem;
+    --tuck-y: -4rem;
+    --rest-rotate: 4deg;
+  }
+
+  .tag-pill--3 {
+    bottom: 2rem;
+    right: 1.75rem;
+    --tuck-x: -3rem;
+    --tuck-y: -3rem;
+    --rest-rotate: -5deg;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tag-pill {
+      transition: opacity 0.15s linear;
+      transform: none;
+    }
+
+    .card-item:hover .tag-pill {
+      transform: none;
+      transition-delay: 0ms;
+    }
   }
 
   .panel--empty {

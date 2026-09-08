@@ -1,14 +1,24 @@
 ---
+import { Image } from 'astro:assets';
 import '@fontsource/homemade-apple';
 import Layout from '../layouts/Layout.astro';
 import SiteNav from '../components/SiteNav.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 
+import art1 from '../assets/about/art-photos/art-1.jpg';
+import art2 from '../assets/about/art-photos/art-2.jpg';
+import art3 from '../assets/about/art-photos/art-3.jpg';
+import mentorship1 from '../assets/about/mentorship-photos/mentorship-1.jpg';
+import mentorship2 from '../assets/about/mentorship-photos/mentorship-2.jpg';
+import mentorship3 from '../assets/about/mentorship-photos/mentorship-3.png';
+import sports1 from '../assets/about/sportsphoto/sports-1.jpg';
+import sports2 from '../assets/about/sportsphoto/sports-2.jpg';
+import sports3 from '../assets/about/sportsphoto/sports-3.jpg';
+
 const funCategories = [
-  { label: 'Art', slots: 3 },
-  { label: 'Mentorship & Teaching', slots: 3 },
-  { label: 'Sports & Weightlifting', slots: 3 },
-  { label: 'Travel', slots: 3 },
+  { label: 'Art', photos: [art1, art2, art3] },
+  { label: 'Mentorship & Teaching', photos: [mentorship1, mentorship2, mentorship3] },
+  { label: 'Sports & Weightlifting', photos: [sports1, sports2, sports3] },
 ];
 ---
 
@@ -18,22 +28,22 @@ const funCategories = [
 >
   <SiteNav />
 
-  <main>
+  <main id="main-content">
     <section class="intro">
       <div class="wrap">
         <h1>
-          I design the whole path from problem to shipped product<span class="period">.</span>
-          <span class="hand" aria-hidden="true">for real</span>
+          I bridge the gap between human-centered design and the code that brings it to life<span class="period">.</span>
+          <span class="hand" aria-hidden="true">built with care</span>
         </h1>
         <p class="lede">
-          I'm a product designer who also writes the code that ships my
-          designs. That means every decision I make already has to survive
-          contact with a real interface, real data, and real constraints
-          &mdash; not just a comp.
+          I'm a CS major at UIUC bridging the gap between design intuition
+          and technical execution. I bring both Figma files and codebases to
+          life, making sure every design survives real-world engineering
+          constraints.
         </p>
         <p class="status">
           <span class="status__dot" aria-hidden="true"></span>
-          Currently a Student Ambassador for Google, working to bring Gemini to campus.
+          Currently representing Google as a Student Ambassador, bringing Gemini and AI initiatives to campus.
         </p>
       </div>
     </section>
@@ -43,27 +53,28 @@ const funCategories = [
         <h2 class="visually-hidden">How I work</h2>
         <ol class="principle-list">
           <li>
-            <h3>Start from the reasoning, not the layout.</h3>
+            <h3>Architecture Before Aesthetics</h3>
             <p>
-              A screen is the last artifact of a decision, not the decision
-              itself. I'd rather show the messy middle &mdash; the constraint
-              that ruled something out, the option that lost on evidence
-              &mdash; than only the polished result.
+              Visual polish means very little without strong underlying
+              structure. I prioritize mapping intuitive user flows,
+              stripping away complexity, and solving core logic before
+              focusing on visual UI styling.
             </p>
           </li>
           <li>
-            <h3>Ship it, don't just spec it.</h3>
+            <h3>Clarity Through Teaching</h3>
             <p>
-              Being able to build what I design keeps my ideas honest. It
-              also means handoff isn't a translation step where nuance gets
-              lost.
+              If you can't explain a design decision simply, it isn't
+              ready. Leading UI workshops and mentoring students keeps my
+              communication sharp and my design thinking intentional.
             </p>
           </li>
           <li>
-            <h3>Evidence over opinion.</h3>
+            <h3>Continuous Learning</h3>
             <p>
-              Research and real usage settle arguments that taste
-              can't. When I don't have evidence yet, I say so.
+              Whether I'm teaching a design workshop or diving into HCI
+              research, I'm always refining how humans interact with
+              technology.
             </p>
           </li>
         </ol>
@@ -74,9 +85,8 @@ const funCategories = [
       <div class="wrap">
         <h2>Outside of code</h2>
         <p class="fun-lede italic-serif">
-          I make art, mentor and teach, lift and play sports, and travel
-          whenever I can. Real photos going here as I add them &mdash; for
-          now, these are the slots waiting to be filled.
+          Volleyball player, digital artist, avid baker, boba enthusiast,
+          and travel explorer.
         </p>
         <div class="fun-grid">
           {
@@ -84,8 +94,10 @@ const funCategories = [
               <div class="fun-category">
                 <h3>{category.label}</h3>
                 <div class="fun-slots">
-                  {Array.from({ length: category.slots }).map(() => (
-                    <div class="fun-slot" aria-hidden="true" />
+                  {category.photos.map((photo) => (
+                    <div class="fun-slot">
+                      <Image src={photo} alt="" width={480} class="fun-photo" />
+                    </div>
                   ))}
                 </div>
               </div>
@@ -214,9 +226,14 @@ const funCategories = [
   .fun-slot {
     aspect-ratio: 1;
     border-radius: 0.75rem;
-    border: 1.5px dashed var(--ink-faint);
-    background: transparent;
-    opacity: 0.55;
+    overflow: hidden;
+    background: var(--ground-alt);
+  }
+
+  .fun-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .cta-band {
@@ -235,24 +252,6 @@ const funCategories = [
 
   .cta-band p {
     font-size: 1.375rem;
-  }
-
-  .cta {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.85rem 1.5rem;
-    border-radius: 999px;
-    background: var(--accent);
-    color: var(--ground);
-    text-decoration: none;
-    font-size: 0.9375rem;
-    white-space: nowrap;
-    transition: background 0.2s var(--ease-out), transform 0.2s var(--ease-out);
-  }
-
-  .cta:hover {
-    background: var(--ink);
-    transform: translateY(-0.1rem);
   }
 
   @media (min-width: 900px) {

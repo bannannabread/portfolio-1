@@ -1,6 +1,6 @@
 import type { ImageMetadata } from 'astro';
-import iStudyHomepage from '../assets/work/i-study/homepage-hifi.png';
-import catInspectWalkaround from '../assets/work/cat-inspect/walkaround-hifi.png';
+import iStudyCover from '../assets/work/i-study/device-mockup.png';
+import catInspectCover from '../assets/work/cat-inspect/device-mockup.png';
 
 export interface Project {
   slug: string;
@@ -23,8 +23,8 @@ export const projects: Project[] = [
       'I designed a peer study matchmaking platform to eliminate social friction and level the academic playing field for college students.',
     tags: ['EdTech', 'UI/UX Design', 'Mobile App', 'Figma'],
     gradient: 'violet',
-    image: iStudyHomepage,
-    imageAlt: 'I-Study home screen showing a quick-match action and suggested study partners',
+    image: iStudyCover,
+    imageAlt: 'iPhone showing the I-Study match profile screen, with an 87% schedule overlap and shared classes with a study partner',
   },
   {
     slug: 'cat-inspect',
@@ -33,8 +33,8 @@ export const projects: Project[] = [
       'I rebuilt my own earlier equipment-inspection app concept with AI-assisted, glove-friendly workflows for field technicians.',
     tags: ['Industrial UX', 'AI-Integrated Design', 'HackIllinois 2026', 'Figma'],
     gradient: 'coral',
-    image: catInspectWalkaround,
-    imageAlt: 'Guided walk-around inspection step for a CAT D8T Dozer with a color-coded status selector',
+    image: catInspectCover,
+    imageAlt: 'iPhone showing the Cat Inspect pre-inspection checklist for a CAT D8T Dozer, with required fields and a Start Inspection button',
   },
   {
     slug: 'fact-conference',

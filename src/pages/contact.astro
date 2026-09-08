@@ -12,6 +12,8 @@ const channels = [
   },
   { label: 'GitHub', value: 'github.com/bannannabread', href: 'https://github.com/bannannabread' },
 ];
+
+const [primary, ...secondary] = channels;
 ---
 
 <Layout
@@ -20,10 +22,10 @@ const channels = [
 >
   <SiteNav />
 
-  <main>
+  <main id="main-content">
     <section class="intro">
       <div class="wrap">
-        <h1>Let&rsquo;s talk about the role.</h1>
+        <h1>Let&rsquo;s talk about the <span class="accent-word">role</span>.</h1>
         <p class="lede">
           The fastest way to reach me is email &mdash; I read and reply to
           every message.
@@ -33,13 +35,22 @@ const channels = [
 
     <section class="channels">
       <div class="wrap">
-        <ul>
+        <a class="primary-channel" href={primary.href}>
+          <span class="primary-channel__text">
+            <span class="primary-channel__label">{primary.label}</span>
+            <span class="primary-channel__value">{primary.value}</span>
+          </span>
+          <span class="primary-channel__arrow" aria-hidden="true">&rarr;</span>
+        </a>
+
+        <ul class="secondary-channels">
           {
-            channels.map((channel) => (
+            secondary.map((channel) => (
               <li>
-                <a href={channel.href} rel={channel.href.startsWith('http') ? 'me noopener' : undefined} target={channel.href.startsWith('http') ? '_blank' : undefined}>
+                <a href={channel.href} rel="me noopener" target="_blank">
                   <span class="label">{channel.label}</span>
                   <span class="value">{channel.value}</span>
+                  <span class="arrow" aria-hidden="true">&rarr;</span>
                 </a>
               </li>
             ))
@@ -57,6 +68,10 @@ const channels = [
     padding-block: var(--space-6) var(--space-5);
   }
 
+  .accent-word {
+    color: var(--accent);
+  }
+
   .lede {
     margin-top: var(--space-3);
     font-size: 1.1875rem;
@@ -68,31 +83,75 @@ const channels = [
     padding-block: var(--space-5) var(--space-6);
   }
 
-  .channels ul {
+  .primary-channel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    width: 100%;
+    max-width: 40rem;
+    padding: 1.5rem 2rem;
+    border-radius: 999px;
+    background: var(--accent);
+    color: var(--ground);
+    text-decoration: none;
+    transition: background 0.2s var(--ease-out), transform 0.2s var(--ease-out);
+  }
+
+  .primary-channel:hover {
+    background: var(--ink);
+    color: var(--ground);
+    transform: translateY(-0.1rem);
+  }
+
+  .primary-channel__text {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+  }
+
+  .primary-channel__label {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-variation-settings: 'opsz' 40, 'SOFT' 35;
+  }
+
+  .primary-channel__value {
+    font-size: 0.9375rem;
+    color: var(--accent-tint);
+  }
+
+  .primary-channel__arrow {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    transition: transform 0.2s var(--ease-out);
+  }
+
+  .primary-channel:hover .primary-channel__arrow {
+    transform: translateX(0.25em);
+  }
+
+  .secondary-channels {
     list-style: none;
-    margin: 0;
+    margin: var(--space-3) 0 0;
     padding: 0;
     display: grid;
     max-width: 40rem;
   }
 
-  .channels a {
+  .secondary-channels a {
     display: flex;
     align-items: baseline;
     justify-content: space-between;
     gap: var(--space-3);
-    padding-block: var(--space-3);
-    border-top: 1px solid var(--ground-deep);
+    padding-block: var(--space-2);
     text-decoration: none;
-    color: var(--ink);
+    color: var(--ink-faint);
     transition: color 0.2s var(--ease-out);
   }
 
-  .channels li:last-child a {
-    border-bottom: 1px solid var(--ground-deep);
-  }
-
-  .channels a:hover {
+  .secondary-channels a:hover {
     color: var(--accent);
   }
 
@@ -104,10 +163,26 @@ const channels = [
 
   .value {
     font-size: 0.9375rem;
-    color: var(--ink-faint);
+    flex-shrink: 0;
   }
 
-  .channels a:hover .value {
-    color: var(--accent-soft);
+  .secondary-channels .arrow {
+    font-size: 1rem;
+    flex-shrink: 0;
+    transition: transform 0.2s var(--ease-out);
+  }
+
+  .secondary-channels a:hover .arrow {
+    transform: translateX(0.2em);
+  }
+
+  @media (max-width: 640px) {
+    .primary-channel {
+      padding: 1.25rem 1.5rem;
+    }
+
+    .primary-channel__label {
+      font-size: 1.5rem;
+    }
   }
 </style>

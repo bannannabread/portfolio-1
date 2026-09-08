@@ -2,50 +2,120 @@
 import CaseStudy from '../../layouts/CaseStudy.astro';
 import walkaroundHifi from '../../assets/work/cat-inspect/walkaround-hifi.png';
 import dashboardHifi from '../../assets/work/cat-inspect/dashboard-hifi.png';
+import walkaroundScreen from '../../assets/work/cat-inspect/walkaround-screen.png';
+import colors from '../../assets/work/cat-inspect/colors-yellow.png';
+import buttons from '../../assets/work/cat-inspect/buttons-yellow-v2.png';
 
 const sections = [
   {
     id: 'problem',
     navLabel: 'Problem',
-    heading: 'Revisiting an earlier version of this app surfaced how much friction still lived in dense manual checklists.',
+    heading: 'Dense, paper-style forms fail when your hands are full.',
     body: [
-      'Cat Inspect is a field tool for technicians, service engineers, and fleet managers running daily walk-arounds, preventive maintenance checks, and diagnostic visual assessments on heavy equipment. I had designed an earlier version of this app before; going back to it during HackIllinois 2026 with fresh eyes made the gaps obvious. Multi-step paper-style forms demanded repetitive manual entry in outdoor, gloved-hand conditions. Diagnostic notes varied wildly by technician experience, and nothing in the flow helped a tech prioritize what to check first when time and connectivity were both limited.',
+      'Cat Inspect supports technicians and fleet managers running daily walk-arounds and safety checks on heavy machinery. Returning to an earlier version of the app at HackIllinois 2026 made its central problem obvious: it was built for a desk, not an active job site.',
+      'Technicians had to pinch-to-zoom tiny inputs, retype equipment IDs outdoors in heavy gloves, and guess what to inspect first when cellular service dropped. Diagnostic accuracy relied almost entirely on an individual’s experience level rather than structured software guidance.',
     ],
-    pullQuote: '“The first version worked. It just didn’t respect the fact that someone would be using it one-handed, in the rain, with a machine idling next to them.”',
+    pullQuote: '“A workflow that works fine in an office breaks down the moment you’re in the rain with one hand on a machine.”',
   },
   {
     id: 'process',
     navLabel: 'Process',
-    heading: 'Rebuilding the flow around field conditions first, AI assistance second.',
+    heading: 'Designing for field constraints first, AI features second.',
     body: [
-      'Working with a three-person team at HackIllinois 2026, I led the design direction: re-examining the original inspection flow against the actual constraints of field work — gloved hands, bright outdoor light, intermittent connectivity, and technicians at very different experience levels. Rather than starting from the AI features, I started from the checklist itself: what has to happen in what order, what can be inferred automatically, and what a technician should never have to type twice.',
-      'From there, we scoped which AI-assisted pieces were worth prototyping in the time we had. Computer vision defect detection and voice-to-text diagnostic annotation both got working prototypes; predictive maintenance suggestions and fully adaptive checklist sequencing stayed at the design-concept stage — real ideas in the flow, not features we could demo.',
+      'Leading design across a 36-hour sprint, I anchored our 3-person team around environmental realities: sunlight glare, thick gloves, offline connectivity, and high time pressure.',
+      'Before touching AI, we audited the baseline checklist to eliminate duplicate data entry and establish clear offline states. We then strictly scoped features around tangible friction:',
+    ],
+    groups: [
+      {
+        items: [
+          {
+            lead: 'Built as functional prototypes',
+            text: 'Hold-to-speak voice notes and on-device computer vision that drafts defect severity.',
+          },
+          {
+            lead: 'Scoped to the roadmap',
+            text: 'Predictive failure alerts and dynamic, sensor-driven checklist ordering.',
+          },
+        ],
+      },
     ],
   },
   {
     id: 'decision',
     navLabel: 'Decision',
-    heading: 'One structured entry point, then a guided step-by-step walk-around instead of a flat form.',
-    body: [
-      'The redesign splits the experience in two. A single asset dashboard replaces free-form intake: QR-scan auto-fill for asset ID, an explicit "Synced" state so offline work is never ambiguous, and pre-inspection steps that block progress until required fields are actually filled — no more submitting an inspection with silently missing data.',
-      'From there, the walk-around itself became a guided, one-item-at-a-time flow: large high-contrast touch targets sized for gloves, a color-coded status selector (Normal / Monitor / Action Required / N/A) instead of free text, and hands-free capture built directly into each step — hold to speak a note, or attach a photo without leaving the checklist. The computer-vision prototype pre-fills a draft severity rating from that photo for the technician to confirm or override, rather than deciding for them.',
+    heading: 'From sprawling forms to a high-contrast, step-by-step walk-around.',
+    body: [],
+    leadWithGroups: true,
+    groups: [
+      {
+        items: [
+          {
+            lead: 'Frictionless Intake & Offline Clarity',
+            text: 'A single machine dashboard replaces open-ended forms. Technicians scan a QR code to pull asset IDs, and a prominent sync indicator removes ambiguity around local storage. Pre-inspection gates prevent submission until safety-critical fields are complete.',
+          },
+          {
+            lead: 'Glove-Calibrated Controls',
+            text: 'Inspections now advance one component at a time. Oversized, high-contrast touch targets and a 4-state selector (Normal, Monitor, Action Required, N/A) replace tedious text input.',
+          },
+          {
+            lead: 'Human-in-the-Loop Logging',
+            text: 'Technicians can dictate notes or snap photos inline without leaving the checklist. The computer-vision integration pre-selects a defect rating, but always requires explicit technician confirmation before saving.',
+          },
+        ],
+      },
     ],
-    pullQuote: '“Every AI suggestion in the flow is a draft the technician confirms, never an answer they have to trust blind.”',
+    pullQuote: '“AI suggests the severity rating; the technician always makes the final call.”',
     images: [
       {
         src: dashboardHifi,
         alt: 'Daily Inspection dashboard for a CAT D8T Dozer showing sync status, a pre-inspection setup checklist with QR auto-fill, and walk-around progress',
-        caption: 'The redesigned entry point: structured pre-inspection steps and explicit offline-sync state, before the walk-around begins.',
+        caption: 'Asset onboarding with QR auto-fill, required field gates, and clear offline sync status.',
+      },
+      {
+        src: walkaroundScreen,
+        alt: 'Guided walk-around step for a CAT D8T Dozer showing a fluid systems check, a Normal/Monitor/Action Required/N/A status selector, and hold-to-speak note and photo capture controls',
+        caption: 'Single-step view featuring glove-friendly status targets and inline voice/photo capture.',
       },
     ],
   },
   {
     id: 'outcome',
     navLabel: 'Outcome',
-    heading: 'A rebuilt, AI-assisted inspection flow — untested outside the team so far.',
+    heading: 'A rebuilt inspection flow — untested outside the team, so far.',
     body: [
-      'By the end of HackIllinois 2026, the redesigned flow existed as a high-fidelity interactive prototype: the guided walk-around, the restructured asset dashboard, and working prototypes of computer-vision defect detection and voice-to-text annotation.',
-      'We didn’t end up presenting it at the event, so there’s no judge or user feedback to report yet — this is a personal redesign iteration, not a validated result. Predictive maintenance suggestions and fully adaptive checklist ordering remain concepts in the design, not built.',
+      'By the end of HackIllinois 2026, the redesign moved from concept to a working high-fidelity prototype — combining the guided walk-around, structured asset dashboard, and functional prototypes for computer-vision defect drafting and voice-to-text notes.',
+      'While the 36-hour sprint focused on core interaction architecture over formal user testing, the foundation is deliberately production-ready. Design tokens, high-contrast state colors, and glove-calibrated touch targets were built to standard for seamless engineering handoff.',
+    ],
+    images: [
+      {
+        src: colors,
+        alt: 'Cat Inspect brand color palette: Caterpillar Yellow and Navy as brand colors, plus state colors for success, warning, and alert, and a neutral grayscale ramp',
+        caption: 'Production tokens covering high-visibility contrast ratios and brand colors.',
+      },
+      {
+        src: buttons,
+        alt: 'Cat Inspect button component specification in Caterpillar Yellow and Navy, showing primary and secondary color styles, plus default, hover, and disabled variants',
+        caption: 'Production component tokens covering interaction states.',
+      },
+    ],
+    groups: [
+      {
+        title: 'Next Steps & Validation Priorities',
+        items: [
+          {
+            lead: 'Field Ergonomics',
+            text: 'Run usability sessions with technicians wearing heavy work gloves to evaluate tap accuracy on the status selector.',
+          },
+          {
+            lead: 'Ambient Audio Testing',
+            text: 'Benchmark voice-to-text capture against active job-site engine noise.',
+          },
+          {
+            lead: 'Roadmap Concepts',
+            text: 'Scope predictive maintenance triggers and dynamic, conditional checklists into future releases once baseline telemetry is active.',
+          },
+        ],
+      },
     ],
   },
 ];
@@ -53,14 +123,16 @@ const sections = [
 
 <CaseStudy
   title="Cat Inspect"
-  dek="Redesigning Caterpillar's field equipment inspection app around glove-friendly, AI-assisted workflows for technicians working outdoors with limited connectivity."
+  slug="cat-inspect"
+  dek="Redesigning Caterpillar's field inspection app for the reality of outdoor work: gloved hands, bad signal, no time to spare."
   role="Lead Product Designer"
   timeline="HackIllinois 2026"
   team="3-person team"
   skills="Field UX Design · AI-Integrated Workflows · Rapid Prototyping · Accessibility (High-Contrast, Glove-Friendly)"
   gradient="coral"
   heroImage={walkaroundHifi}
-  heroImageAlt="Guided walk-around inspection step for a CAT D8T Dozer showing a fluid systems check with a color-coded status selector and voice/photo capture"
+  heroImageAlt="iPhone showing the Cat Inspect pre-inspection checklist for a CAT D8T Dozer, with required fields and a Start Inspection button"
+  heroMockup
   sections={sections}
   prev={{ slug: 'i-study', title: 'I-Study' }}
 />

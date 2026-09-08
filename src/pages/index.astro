@@ -13,10 +13,10 @@ import { projects } from '../data/projects';
 >
   <SiteNav />
 
-  <main>
+  <main id="main-content">
     <Hero />
 
-    <section class="work-index">
+    <section class="work-index" id="work">
       <div class="wrap">
         <h2>Selected work</h2>
         <ul class="grid">
@@ -24,6 +24,7 @@ import { projects } from '../data/projects';
             projects.map((project, index) => (
               <ProjectCard
                 href={project.comingSoon ? undefined : `/work/${project.slug}`}
+                slug={project.slug}
                 gradient={project.gradient}
                 title={project.title}
                 caption={project.caption}
@@ -41,12 +42,16 @@ import { projects } from '../data/projects';
 
     <section class="about-teaser">
       <div class="wrap about-teaser__inner">
-        <p class="italic-serif">
-          I care most about the decisions behind the pixels &mdash; why a flow
-          works, what it costs to build, and whether it actually helps the
-          person using it.
-        </p>
+        <p class="italic-serif">&ldquo;Good design is obvious. Great design is transparent.&rdquo;</p>
+        <p class="attribution">&mdash; Joe Sparano</p>
         <a class="view-link" href="/about">More about how I work &rarr;</a>
+      </div>
+    </section>
+
+    <section class="closing-cta">
+      <div class="wrap closing-cta__inner">
+        <h2>Have a role worth designing for? Let&rsquo;s talk.</h2>
+        <a class="cta" href="/contact">Get in touch</a>
       </div>
     </section>
   </main>
@@ -80,6 +85,14 @@ import { projects } from '../data/projects';
     font-size: 1.5rem;
   }
 
+  .about-teaser .attribution {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    letter-spacing: 0.02em;
+    color: var(--ink-faint);
+    margin-top: var(--space-1);
+  }
+
   .about-teaser .view-link {
     display: inline-block;
     margin-top: var(--space-3);
@@ -92,6 +105,21 @@ import { projects } from '../data/projects';
   .about-teaser .view-link:hover {
     color: var(--ink);
     border-color: var(--ink);
+  }
+
+  .closing-cta {
+    padding-block: var(--space-6);
+    border-top: 1px solid var(--ground-deep);
+    text-align: center;
+  }
+
+  .closing-cta__inner {
+    max-width: 40rem;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
   }
 
   @media (max-width: 900px) {

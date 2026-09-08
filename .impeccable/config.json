@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "design-system-color",
+        "value": "rgba(0, 0, 0, 0.25)",
+        "createdAt": "2026-09-08T03:47:08.392Z",
+        "reason": "Mask-image gradient alpha stop, not a visible color or box-shadow - mask-image only reads the alpha channel, RGB is inert. FloatingDevice.astro:68-69 reflection fade."
+      }
+    ]
+  }
+}

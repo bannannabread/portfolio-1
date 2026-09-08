@@ -12,6 +12,11 @@ export interface CaseStudyImage {
   caption?: string;
 }
 
+export interface CaseStudyBulletGroup {
+  title?: string;
+  items: { lead: string; text: string }[];
+}
+
 export interface CaseStudySection {
   id: string;
   navLabel: string;
@@ -19,10 +24,15 @@ export interface CaseStudySection {
   body: string[];
   pullQuote?: string;
   images?: CaseStudyImage[];
+  groups?: CaseStudyBulletGroup[];
+  /** Render groups right after body copy (as the section's main content) instead
+   *  of after the pull quote and images (as a closing list). */
+  leadWithGroups?: boolean;
 }
 
 interface Props {
   title: string;
+  slug: string;
   dek: string;
   role: string;
   timeline: string;
@@ -31,6 +41,7 @@ interface Props {
   gradient?: 'peach' | 'coral' | 'rose' | 'violet';
   heroImage?: ImageMetadata;
   heroImageAlt?: string;
+  heroMockup?: boolean;
   sections: CaseStudySection[];
   prev?: { slug: string; title: string };
   next?: { slug: string; title: string };
@@ -38,6 +49,7 @@ interface Props {
 
 const {
   title,
+  slug,
   dek,
   role,
   timeline,
@@ -46,6 +58,7 @@ const {
   gradient = 'coral',
   heroImage,
   heroImageAlt = '',
+  heroMockup = false,
   sections,
   prev,
   next,
@@ -57,15 +70,22 @@ const meta = [
   ...(team ? [{ label: 'Team', value: team }] : []),
   { label: 'Skills', value: skills },
 ];
+
+// CSS-only current-section indicator: :target reflects the section the reader
+// last jumped to via the sticky nav, styled through :has() rather than a
+// scroll-spy script (the site ships zero client JS by default).
+const sectionNavActiveCSS = sections
+  .map((s) => `body:has(#${s.id}:target) .section-nav a[href="#${s.id}"] { color: var(--accent); }`)
+  .join('\n');
 ---
 
 <Layout title={`${title} — Megan`} description={dek}>
   <SiteNav />
 
-  <main>
+  <main id="main-content">
     <header class="case-header">
       <div class="wrap">
-        <a class="back-link" href="/work">&larr; All work</a>
+        <a class="back-link cta cta--ghost" href="/work">&larr; All work</a>
         <h1>{title}</h1>
         <p class="dek">{dek}</p>
         <dl class="meta">
@@ -81,11 +101,19 @@ const meta = [
       </div>
     </header>
 
-    <div class={`hero-panel hero-panel--${gradient}`}>
+    <div class={`hero-panel hero-panel--${gradient}`} transition:name={`project-panel-${slug}`}>
       <div class="wrap hero-panel__inner">
-        <FloatingDevice width={200} height={320} image={heroImage} alt={heroImageAlt} priority />
+        {
+          heroMockup ? (
+            <FloatingDevice width={300} height={545} image={heroImage} alt={heroImageAlt} priority mockup />
+          ) : (
+            <FloatingDevice width={200} height={320} image={heroImage} alt={heroImageAlt} priority />
+          )
+        }
       </div>
     </div>
+
+    <style set:html={sectionNavActiveCSS}></style>
 
     <div class="wrap body-grid">
       <nav class="section-nav" aria-label="Case study sections">
@@ -102,25 +130,66 @@ const meta = [
 
       <div class="sections">
         {
-          sections.map((section) => (
-            <section id={section.id} class="case-section">
-              <h2>{section.heading}</h2>
-              {section.body.map((paragraph) => (
-                <p>{paragraph}</p>
-              ))}
-              {section.pullQuote && <p class="pull-quote italic-serif">{section.pullQuote}</p>}
-              {section.images && section.images.length > 0 && (
-                <div class="evidence-figures">
-                  {section.images.map((img) => (
-                    <figure class="evidence-figure">
-                      <Image src={img.src} alt={img.alt} width={1200} />
-                      {img.caption && <figcaption class="italic-serif">{img.caption}</figcaption>}
-                    </figure>
-                  ))}
-                </div>
-              )}
-            </section>
-          ))
+          sections.map((section) => {
+            const ratios = section.images?.map((img) => img.src.width / img.src.height) ?? [];
+            const hasExtremeRatio = ratios.some((r) => r < 0.5 || r > 2);
+            const mismatchedPair =
+              (ratios.length > 1 && Math.max(...ratios) / Math.min(...ratios) > 1.8) ||
+              (ratios.length === 1 && hasExtremeRatio);
+            return (
+              <section id={section.id} class="case-section">
+                <h2>{section.heading}</h2>
+                {section.body.map((paragraph) => (
+                  <p>{paragraph}</p>
+                ))}
+                {section.leadWithGroups && section.groups && section.groups.length > 0 && (
+                  <div class="section-groups">
+                    {section.groups.map((group) => (
+                      <div class="section-group">
+                        {group.title && <h3>{group.title}</h3>}
+                        <ul class="group-list">
+                          {group.items.map((item) => (
+                            <li><strong>{item.lead}:</strong> {item.text}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {section.pullQuote && <blockquote class="pull-quote italic-serif">{section.pullQuote}</blockquote>}
+                {section.images && section.images.length > 0 && (
+                  <div class={section.images.length === 1 ? 'evidence-figures evidence-figures--single' : 'evidence-figures'}>
+                    {section.images.map((img) => (
+                      <figure class="evidence-figure" data-fit={mismatchedPair ? 'contain' : undefined}>
+                        <Image
+                          src={img.src}
+                          alt={img.alt}
+                          width={1200}
+                          widths={[480, 800, 1200]}
+                          sizes="(max-width: 800px) 100vw, 32rem"
+                        />
+                        {img.caption && <figcaption class="italic-serif">{img.caption}</figcaption>}
+                      </figure>
+                    ))}
+                  </div>
+                )}
+                {!section.leadWithGroups && section.groups && section.groups.length > 0 && (
+                  <div class="section-groups">
+                    {section.groups.map((group) => (
+                      <div class="section-group">
+                        {group.title && <h3>{group.title}</h3>}
+                        <ul class="group-list">
+                          {group.items.map((item) => (
+                            <li><strong>{item.lead}:</strong> {item.text}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </section>
+            );
+          })
         }
       </div>
     </div>
@@ -129,8 +198,8 @@ const meta = [
       (prev || next) && (
         <nav class="project-pagination" aria-label="Other projects">
           <div class="wrap pagination-row">
-            {prev ? <a href={`/work/${prev.slug}`}>&larr; {prev.title}</a> : <span />}
-            {next ? <a href={`/work/${next.slug}`}>{next.title} &rarr;</a> : <span />}
+            {prev ? <a class="cta cta--ghost" href={`/work/${prev.slug}`}>&larr; {prev.title}</a> : <span />}
+            {next ? <a class="cta" href={`/work/${next.slug}`}>{next.title} &rarr;</a> : <span />}
           </div>
         </nav>
       )
@@ -146,15 +215,9 @@ const meta = [
   }
 
   .back-link {
-    display: inline-block;
+    padding: 0.7rem 1rem;
     font-size: 0.875rem;
-    color: var(--ink-soft);
-    text-decoration: none;
     margin-bottom: var(--space-3);
-  }
-
-  .back-link:hover {
-    color: var(--accent);
   }
 
   .dek {
@@ -247,7 +310,6 @@ const meta = [
   .sections {
     display: grid;
     gap: var(--space-6);
-    max-width: 44rem;
   }
 
   .case-section p {
@@ -258,15 +320,61 @@ const meta = [
   .pull-quote {
     font-size: 1.5rem;
     color: var(--ink);
-    margin-top: var(--space-3);
+    margin: var(--space-3) 0 0;
     padding-top: var(--space-2);
     border-top: 1px solid var(--ground-deep);
   }
 
+  .section-groups {
+    display: grid;
+    gap: var(--space-3);
+    margin-top: var(--space-4);
+  }
+
+  .section-group h3 {
+    max-width: none;
+  }
+
+  .group-list {
+    max-width: var(--measure);
+    margin: var(--space-2) 0 0;
+    padding-left: 1.25rem;
+    display: grid;
+    gap: var(--space-1);
+    color: var(--ink-soft);
+  }
+
+  .group-list li::marker {
+    color: var(--ink-faint);
+  }
+
+  .group-list strong {
+    color: var(--ink);
+  }
+
   .evidence-figures {
     display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-4);
     margin-top: var(--space-4);
+  }
+
+  @media (max-width: 640px) {
+    .evidence-figures {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* A section with only one piece of evidence has no partner to fill the
+     second grid column — stretching it to a lone left-aligned cell leaves a
+     dead gap beside it, so it drops to one column and centers instead. */
+  .evidence-figures--single {
+    grid-template-columns: 1fr;
+  }
+
+  .evidence-figures--single .evidence-figure {
+    max-width: 28rem;
+    margin-inline: auto;
   }
 
   .evidence-figure {
@@ -277,9 +385,33 @@ const meta = [
     width: 100%;
     height: auto;
     display: block;
-    border-radius: 1rem;
-    border: 1px solid var(--ground-deep);
+    border-radius: var(--radius-media);
     box-shadow: var(--shadow-lift);
+  }
+
+  /* A pair whose source images differ too much in aspect ratio (e.g. a
+     near-square storyboard next to a full-length phone wireframe), or a lone
+     image with an extreme ratio on its own (e.g. a full-length phone
+     screenshot), aligns by height instead of stretching to the column width —
+     otherwise a tall image renders many times taller than is readable. */
+  .evidence-figure[data-fit='contain'] {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .evidence-figure[data-fit='contain'] :global(img) {
+    align-self: center;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 34rem;
+  }
+
+  @media (max-width: 640px) {
+    .evidence-figure[data-fit='contain'] :global(img) {
+      max-height: none;
+      width: 100%;
+    }
   }
 
   .evidence-figure figcaption {
@@ -300,16 +432,9 @@ const meta = [
     flex-wrap: wrap;
   }
 
-  .pagination-row a {
-    color: var(--ink);
-    text-decoration: none;
+  .pagination-row .cta {
     font-family: var(--font-display);
-    font-size: 1.125rem;
     font-variation-settings: 'opsz' 30, 'SOFT' 35;
-  }
-
-  .pagination-row a:hover {
-    color: var(--accent);
   }
 
   @media (max-width: 800px) {

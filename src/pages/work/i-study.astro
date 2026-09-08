@@ -1,28 +1,32 @@
 ---
 import CaseStudy from '../../layouts/CaseStudy.astro';
-import homepageHifi from '../../assets/work/i-study/homepage-hifi.png';
+import coverDevice from '../../assets/work/i-study/device-mockup.png';
 import matchHifi from '../../assets/work/i-study/match-hifi.png';
 import matchLofi from '../../assets/work/i-study/match-lofi.png';
 import storyboard from '../../assets/work/i-study/storyboard.png';
+import buttons from '../../assets/work/i-study/buttons-illini.png';
+import colors from '../../assets/work/i-study/colors-illini.png';
+import homepageHifi from '../../assets/work/i-study/homepage-hifi.png';
 
 const sections = [
   {
     id: 'problem',
     navLabel: 'Problem',
-    heading:
-      'Traditional campus study groups rely on existing social networks, leaving transfer and commuter students behind.',
+    heading: 'Academic collaboration shouldn’t depend on who you already know.',
     body: [
-      'Finding effective study partners in higher education often depends on pre-existing social ties or awkward, unstructured group chats. For transfer, commuter, and underrepresented students who lack built-in campus networks, finding compatible peers for academic support creates significant social friction and isolation. Existing tools or class forums prioritize academic metrics like GPA or leave partner matching entirely random, failing to account for how and when students actually learn best together.',
+      'Finding effective study partners in higher education currently relies on pre-existing social ties and messy, unstructured group chats — leaving transfer, commuter, and non-traditional students at a clear disadvantage.',
+      'Existing class forums treat matching as either completely random or grade-driven, ignoring the two factors that actually dictate successful collaboration: schedule alignment and compatible working styles.',
     ],
     pullQuote:
-      '“Finding a study partner shouldn’t depend on who you already know in class or who posts first on a 300-person discussion board.”',
+      '“Great study groups aren’t formed by luck — they’re built on matching schedules and working styles.”',
   },
   {
     id: 'process',
     navLabel: 'Process',
     heading: 'Grounding the user experience in qualitative research, storyboards, and iterative wireframing.',
     body: [
-      'To design an equitable solution, I conducted user research with undergraduate students to identify the key friction points in peer collaboration. The synthesis revealed that scheduling alignment and study habits (e.g., quiet focus vs. active dialogue) were far more critical to successful collaboration than academic standing. I translated these insights into user flows and storyboards to map out intuitive onboarding and matchmaking interactions. From there, I developed low-fidelity wireframes in Figma to test core layouts before establishing component specifications and interactive high-fidelity prototypes.',
+      'To design an equitable solution, I conducted user research with undergraduate students to identify the key friction points in peer collaboration. The synthesis revealed that scheduling alignment and study habits (e.g., quiet focus vs. active dialogue) were far more critical to successful collaboration than academic standing.',
+      'I translated these insights into user flows and storyboards to map out intuitive onboarding and matchmaking interactions. From there, I developed low-fidelity wireframes in Figma to test core layouts before establishing component specifications and interactive high-fidelity prototypes.',
     ],
     pullQuote:
       '“Students don’t fail to study together because of skill gaps—they fail because of scheduling clashes and mismatched working styles.”',
@@ -42,12 +46,18 @@ const sections = [
   {
     id: 'decision',
     navLabel: 'Decision',
-    heading: 'Matching by schedule and learning preferences rather than GPA or social status.',
+    heading: 'Matching on shared availability, not academic rank.',
     body: [
-      'A pivotal design decision was shifting the matching criteria entirely toward logistically and behaviorally compatible attributes: recurring schedule availability and preferred study styles (such as silent focus, practice problem solving, or concept discussion). By removing GPA, profile ranks, and popularity signals from the primary matchmaking interface, the platform reduces social anxiety and prevents academic elitism while facilitating fast, high-confidence study pairing.',
+      'The matching interface focuses entirely on logistics and learning habits: matching recurring free time with preferred study dynamics (like quiet focus vs. active discussion).',
+      'Omitting GPA, class rank, or social status from the main view lowers the barrier to entry and ensures every student can find a compatible study partner quickly.',
     ],
-    pullQuote: '“Stripping away academic ego signals transformed matchmaking into an approachable, utility-first experience.”',
+    pullQuote: '“Matchmaking built on shared schedules and learning styles — so finding help is always simple and accessible.”',
     images: [
+      {
+        src: homepageHifi,
+        alt: 'High-fidelity I-Study home screen showing a quick-match call to action, the next scheduled study session, and new suggested matches with schedule-overlap percentages',
+        caption: 'The home screen — quick match, next session, and top matches surfaced the moment you open the app.',
+      },
       {
         src: matchHifi,
         alt: 'High-fidelity match profile screen for Ava Smith showing 87% schedule overlap, 3 shared classes, and a Request Session action',
@@ -58,10 +68,59 @@ const sections = [
   {
     id: 'outcome',
     navLabel: 'Outcome',
-    heading: 'Delivering a complete end-to-end design system and interactive prototype for student connection.',
+    heading: 'A scalable design system and engineering-ready mobile prototype.',
     body: [
-      'I delivered a comprehensive high-fidelity Figma prototype and UI component specification for I-Study, establishing a structured problem brief, validated user flows, and a complete design rationale for peer academic matchmaking.',
-      'Course project completed in April 2026; validated through qualitative student usability walkthroughs and peer review. Interactive prototype and UI specifications ready for engineering handoff (quantitative production metrics not yet measured).',
+      'Delivered a comprehensive high-fidelity Figma prototype and UI component specification for I-Study. The final handoff package includes validated user flows, edge-case interaction specs, and a structured design system built to streamline front-end implementation.',
+      'Validated through qualitative student usability walkthroughs and peer reviews, confirming an intuitive onboarding flow and effortless schedule-matching experience.',
+    ],
+    images: [
+      {
+        src: colors,
+        alt: 'I-Study brand color palette: Illini Orange and Deep Navy as brand colors, plus state colors for success, warning, and error, and a neutral grayscale ramp',
+        caption: 'Brand and state color tokens defined for engineering handoff.',
+      },
+      {
+        src: buttons,
+        alt: 'I-Study button component specification showing primary and secondary color styles, plus default, hover, and disabled variants for normal and icon buttons',
+        caption: 'Button component spec covering primary/secondary styles and interaction states.',
+      },
+    ],
+  },
+  {
+    id: 'reflection',
+    navLabel: 'Reflection',
+    heading: 'Designing for equity and practical student needs.',
+    body: [
+      'Building I-Study reinforced the importance of designing for the practical realities of student life.',
+      'Because peer academic collaboration often relies on existing social networks, the core challenge was lowering social barriers for transfer, commuter, and international students who lack built-in campus connections.',
+    ],
+    groups: [
+      {
+        title: 'Key Design Learnings',
+        items: [
+          {
+            lead: 'Prioritizing Inclusivity',
+            text: 'Omitting GPA, popularity signals, and academic rank shifts the focus entirely toward practical compatibility — aligning schedule availability and study preferences.',
+          },
+          {
+            lead: 'Balancing Security & Friction',
+            text: 'Integrating safety measures like illinois.edu authentication and ICard verification ensures meeting strangers feels structured and low-risk without cluttering the user experience.',
+          },
+        ],
+      },
+      {
+        title: 'What’s Next for I-Study',
+        items: [
+          {
+            lead: 'Automated System Integration',
+            text: 'Incorporating UIUC enrollment system APIs to automatically import course schedules and reduce manual onboarding steps.',
+          },
+          {
+            lead: 'Expanded Testing',
+            text: 'Conducting usability testing with larger cohorts of undergraduate and graduate students to validate matching conversion rates across different study dynamics.',
+          },
+        ],
+      },
     ],
   },
 ];
@@ -69,14 +128,16 @@ const sections = [
 
 <CaseStudy
   title="I-Study"
-  dek="An end-to-end mobile matchmaking platform connecting college students for peer academic support based on schedule availability and learning styles."
-  role="Lead Product Designer"
+  slug="i-study"
+  dek="An end-to-end UI/UX case study for a mobile application connecting college students for peer academic support based on schedule availability, shared courses, and learning styles."
+  role="Product Designer"
   timeline="April 2026 (4 weeks)"
   team="Solo project (coursework)"
   skills="User Research · User Flows & Storyboarding · Wireframing · High-Fidelity Prototyping · Component Specifications"
   gradient="violet"
-  heroImage={homepageHifi}
-  heroImageAlt="I-Study home screen showing a quick-match action, next study session, and suggested study partners"
+  heroImage={coverDevice}
+  heroImageAlt="I-Study match profile screen for a sample student, Ava Smith, shown in a phone mockup with 87% schedule overlap and shared classes highlighted"
+  heroMockup
   sections={sections}
   next={{ slug: 'cat-inspect', title: 'Cat Inspect' }}
 />

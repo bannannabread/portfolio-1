@@ -8,21 +8,30 @@ interface Props {
   image?: ImageMetadata;
   alt?: string;
   priority?: boolean;
+  mockup?: boolean;
 }
 
-const { width = 150, height = 260, image, alt = '', priority = false } = Astro.props;
+const { width = 150, height = 260, image, alt = '', priority = false, mockup = false } = Astro.props;
 const loading = priority ? 'eager' : 'lazy';
 const fetchpriority = priority ? 'high' : 'auto';
 ---
 
-<div class="floating-device" style={`--w:${width}px; --h:${height}px`}>
-  <div class="device-face" aria-hidden={!image}>
-    {image && <Image src={image} alt={alt} width={width * 2} loading={loading} fetchpriority={fetchpriority} class="device-img" />}
-  </div>
-  <div class="device-face reflection" aria-hidden="true">
-    {image && <Image src={image} alt="" width={width * 2} loading={loading} fetchpriority={fetchpriority} class="device-img" />}
-  </div>
-</div>
+{
+  mockup ? (
+    <div class="floating-device floating-device--mockup" style={`--w:${width}px; --h:${height}px`}>
+      {image && <Image src={image} alt={alt} width={width * 2} loading={loading} fetchpriority={fetchpriority} class="device-img" />}
+    </div>
+  ) : (
+    <div class="floating-device" style={`--w:${width}px; --h:${height}px`}>
+      <div class="device-face" aria-hidden={!image}>
+        {image && <Image src={image} alt={alt} width={width * 2} loading={loading} fetchpriority={fetchpriority} class="device-img" />}
+      </div>
+      <div class="device-face reflection" aria-hidden="true">
+        {image && <Image src={image} alt="" width={width * 2} loading={loading} fetchpriority={fetchpriority} class="device-img" />}
+      </div>
+    </div>
+  )
+}
 
 <style>
   .floating-device {
@@ -42,7 +51,7 @@ const fetchpriority = priority ? 'high' : 'auto';
     overflow: hidden;
   }
 
-  .device-img {
+  .device-face .device-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -51,12 +60,30 @@ const fetchpriority = priority ? 'high' : 'auto';
 
   .reflection {
     margin-top: 0.4rem;
-    height: calc(var(--h) * 0.55);
+    height: calc(var(--h) * 0.22);
     transform: scaleY(-1);
     box-shadow: none;
     border-bottom: none;
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.32), transparent 85%);
-    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.32), transparent 85%);
-    opacity: 0.7;
+    filter: blur(3px);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.25), transparent 60%);
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.25), transparent 60%);
+    opacity: 0.45;
+  }
+
+  .floating-device--mockup {
+    width: var(--w);
+    max-width: 100%;
+    aspect-ratio: var(--w) / var(--h);
+    height: auto;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .floating-device--mockup .device-img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
   }
 </style>

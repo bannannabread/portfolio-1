@@ -1,12 +1,12 @@
 <section class="hero">
   <div class="wrap">
-    <h1 class="reveal" style="--delay: 0s">Megan &mdash; a product designer who engineers.</h1>
+    <h1 class="reveal" style="--delay: 0s">Megan &mdash; a product designer who <span class="accent-word">engineers</span>.</h1>
     <p class="lede reveal" style="--delay: 0.08s">
-      I design and ship product experiences end to end &mdash; from the research
-      and interaction decisions to the code that carries them into production.
+      I build products end to end, connecting deep UX research with modern AI
+      workflows to turn complex ideas into production-ready software.
     </p>
     <div class="cta-row reveal" style="--delay: 0.16s">
-      <a class="cta" href="/work">See the work</a>
+      <a class="cta" href="#work">See the work</a>
       <a class="cta cta--ghost" href="/contact">Get in touch</a>
     </div>
   </div>
@@ -14,11 +14,46 @@
 
 <style>
   .hero {
+    position: relative;
+    z-index: 0;
+    overflow: hidden;
     padding-block: var(--space-6) var(--space-6);
+  }
+
+  .hero::before,
+  .hero::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    border-radius: 50%;
+    filter: blur(4.5rem);
+    pointer-events: none;
+  }
+
+  .hero::before {
+    width: 28rem;
+    height: 28rem;
+    top: -10rem;
+    right: -6rem;
+    background: radial-gradient(closest-side, var(--card-peach), var(--card-coral) 70%, transparent 100%);
+    opacity: 0.55;
+  }
+
+  .hero::after {
+    width: 20rem;
+    height: 20rem;
+    bottom: -8rem;
+    left: -4rem;
+    background: radial-gradient(closest-side, var(--card-violet), var(--card-rose) 70%, transparent 100%);
+    opacity: 0.4;
   }
 
   h1 {
     max-width: 18ch;
+  }
+
+  .accent-word {
+    color: var(--accent);
   }
 
   .lede {
@@ -56,35 +91,6 @@
     .reveal {
       animation: none;
     }
-  }
-
-  .cta {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.85rem 1.5rem;
-    border-radius: 999px;
-    background: var(--accent);
-    color: var(--ground);
-    text-decoration: none;
-    font-size: 0.9375rem;
-    transition: background 0.2s var(--ease-out), transform 0.2s var(--ease-out);
-  }
-
-  .cta:hover {
-    background: var(--ink);
-    color: var(--ground);
-    transform: translateY(-0.1rem);
-  }
-
-  .cta--ghost {
-    background: transparent;
-    color: var(--ink);
-    border: 1px solid var(--ground-deep);
-  }
-
-  .cta--ghost:hover {
-    border-color: var(--ink);
-    background: transparent;
   }
 
   @media (max-width: 640px) {
