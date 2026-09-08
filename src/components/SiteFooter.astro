@@ -4,7 +4,16 @@ const year = new Date().getFullYear();
 
 <footer class="site-footer">
   <div class="wrap bar">
-    <p class="credit">Designed + coded by Megan &middot; {year}</p>
+    <p class="credit">
+      Made with
+      <svg class="heart" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+        <path
+          d="M8 13.5C4.5 11 1.5 8.6 1.5 5.75 1.5 3.68 3.13 2 5.15 2c1.16 0 2.27.55 2.85 1.42C8.58 2.55 9.69 2 10.85 2 12.87 2 14.5 3.68 14.5 5.75c0 2.85-3 5.25-6.5 7.75Z"
+        />
+      </svg>
+      <span class="visually-hidden">love</span>
+      by Megan &middot; {year}
+    </p>
     <ul class="links">
       <li><a href="mailto:meganmae.jacob@gmail.com">Email</a></li>
       <li>
@@ -31,9 +40,19 @@ const year = new Date().getFullYear();
   }
 
   .credit {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3em;
     font-size: 0.875rem;
     color: var(--ink-faint);
     max-width: none;
+  }
+
+  .heart {
+    width: 0.85em;
+    height: 0.85em;
+    fill: var(--accent);
+    flex-shrink: 0;
   }
 
   .links {
